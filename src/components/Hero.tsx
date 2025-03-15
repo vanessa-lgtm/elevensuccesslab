@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Bell } from 'lucide-react';
 import AssessMaturityWidget from '@/components/AssessMaturityWidget';
 
 const Hero = () => {
@@ -59,13 +59,20 @@ const Hero = () => {
             Begin your AI implementation journey with expert guidance, comprehensive resources, and personalized support at every step.
           </p>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Button size="lg" className="px-6 py-6 text-md button-hover-effect group">
               Start Onboarding
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             
             <AssessMaturityWidget />
+          </div>
+          
+          <div className="mt-6">
+            <Button variant="outline" size="lg" className="group">
+              <Bell className="mr-2 h-4 w-4" />
+              Sign up for Product Updates and Company News
+            </Button>
           </div>
         </div>
       </div>
