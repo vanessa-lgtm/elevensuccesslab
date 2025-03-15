@@ -47,20 +47,20 @@ const Hero = () => {
           className="max-w-4xl mx-auto text-center opacity-0 translate-y-10 transition-all duration-1000 ease-out"
         >
           <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
-            Elevate Your Customer Success Strategy
+            Welcome to Your AI Journey
           </div>
           
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-balance leading-tight">
-            All the resources you need for <span className="text-primary">scaled customer success</span>
+            All the resources you need for your AI journey with <span className="text-primary">NexusAI</span>
           </h1>
           
           <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto">
-            Access world-class support, resources, and tools to help you implement and scale your customer success strategy effectively.
+            Begin your AI implementation journey with expert guidance, comprehensive resources, and personalized support at every step.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="px-6 py-6 text-md button-hover-effect group">
-              Get Started
+              Start Onboarding
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             
