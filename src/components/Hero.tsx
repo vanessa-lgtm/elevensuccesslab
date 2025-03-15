@@ -33,15 +33,12 @@ const Hero = () => {
 
   return (
     <section 
-      className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden"
-      style={{
-        background: 'linear-gradient(to bottom right, rgb(248, 250, 252), rgb(241, 245, 249))',
-      }}
+      className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden bg-background"
     >
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-[10%] w-64 h-64 rounded-full bg-primary/5 blur-3xl"></div>
-        <div className="absolute bottom-20 right-[5%] w-72 h-72 rounded-full bg-primary/10 blur-3xl"></div>
+        <div className="absolute bottom-20 right-[5%] w-72 h-72 rounded-full bg-primary/5 blur-3xl"></div>
       </div>
       
       <div className="container mx-auto px-4">
@@ -74,8 +71,8 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Abstract "wave" shape at the bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-background" style={{ 
+      {/* Abstract shape at the bottom */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-secondary" style={{ 
         clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)',
         opacity: 0.5,
       }}></div>
