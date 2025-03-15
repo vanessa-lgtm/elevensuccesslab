@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import AssessMaturityWidget from '@/components/AssessMaturityWidget';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -64,9 +65,7 @@ const Hero = () => {
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
             
-            <Button size="lg" variant="outline" className="px-6 py-6 text-md button-hover-effect">
-              Explore Resources
-            </Button>
+            <AssessMaturityWidget />
           </div>
         </div>
       </div>
