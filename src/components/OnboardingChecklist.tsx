@@ -82,7 +82,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ onProgressUpd
     {
       id: '8',
       title: 'Schedule your first training session',
-      description: 'Book a session with our experts to get the most out of NexusAI.',
+      description: 'Book a session with our experts to get the most out of ElevenLabs.',
       timeEstimate: '10 min',
       completed: false,
     },
@@ -182,7 +182,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ onProgressUpd
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">Onboarding Checklist</h2>
       <p className="text-muted-foreground mb-6">
-        Complete these steps to fully set up your NexusAI implementation. Each step includes an estimated time to complete.
+        Complete these steps to fully set up your ElevenLabs implementation. Each step includes an estimated time to complete.
       </p>
       
       {/* Render sectioned items first */}

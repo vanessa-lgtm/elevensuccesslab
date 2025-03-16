@@ -41,7 +41,7 @@ const Onboarding = () => {
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Welcome to Your Onboarding Journey</h1>
           <p className="text-muted-foreground text-lg mb-6">
-            Complete these steps to get the most out of your NexusAI experience.
+            Complete these steps to get the most out of your ElevenLabs experience.
           </p>
           
           <div className="mb-6">
@@ -71,11 +71,11 @@ const Onboarding = () => {
                 <div className="grid gap-6">
                   <Card>
                     <CardHeader>
-                      <CardTitle>Getting Started with NexusAI</CardTitle>
+                      <CardTitle>Getting Started with ElevenLabs</CardTitle>
                       <CardDescription>Essential setup and configuration</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">This guide will walk you through the essential first steps to set up your NexusAI environment.</p>
+                      <p className="mb-4">This guide will walk you through the essential first steps to set up your ElevenLabs environment.</p>
                       <Button size="sm">View Guide</Button>
                     </CardContent>
                   </Card>
@@ -94,10 +94,10 @@ const Onboarding = () => {
                   <Card>
                     <CardHeader>
                       <CardTitle>Advanced Configuration Options</CardTitle>
-                      <CardDescription>Customize NexusAI for your specific needs</CardDescription>
+                      <CardDescription>Customize ElevenLabs for your specific needs</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">Explore advanced configuration options to tailor NexusAI to your organization's requirements.</p>
+                      <p className="mb-4">Explore advanced configuration options to tailor ElevenLabs to your organization's requirements.</p>
                       <Button size="sm">View Guide</Button>
                     </CardContent>
                   </Card>
@@ -112,7 +112,7 @@ const Onboarding = () => {
                       <CardDescription>Comprehensive product documentation</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">Access our detailed product documentation covering all aspects of NexusAI.</p>
+                      <p className="mb-4">Access our detailed product documentation covering all aspects of ElevenLabs.</p>
                       <Button size="sm">View Documentation</Button>
                     </CardContent>
                   </Card>
@@ -134,7 +134,7 @@ const Onboarding = () => {
                       <CardDescription>Visual learning resources</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">Watch step-by-step video tutorials to help you master NexusAI features quickly.</p>
+                      <p className="mb-4">Watch step-by-step video tutorials to help you master ElevenLabs features quickly.</p>
                       <Button size="sm">Watch Tutorials</Button>
                     </CardContent>
                   </Card>
@@ -160,7 +160,7 @@ const Onboarding = () => {
                       <CardDescription>Leverage AI for business intelligence</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">Discover how to extract meaningful insights from your data using NexusAI's powerful analysis tools.</p>
+                      <p className="mb-4">Discover how to extract meaningful insights from your data using ElevenLabs's powerful analysis tools.</p>
                       <Button size="sm">Explore Use Case</Button>
                     </CardContent>
                   </Card>
@@ -171,7 +171,7 @@ const Onboarding = () => {
                       <CardDescription>Streamline workflows with intelligent automation</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">See how organizations are using NexusAI to automate repetitive tasks and improve efficiency.</p>
+                      <p className="mb-4">See how organizations are using ElevenLabs to automate repetitive tasks and improve efficiency.</p>
                       <Button size="sm">Explore Use Case</Button>
                     </CardContent>
                   </Card>
