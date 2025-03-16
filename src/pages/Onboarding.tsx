@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -15,7 +14,6 @@ const Onboarding = () => {
   const [activeTab, setActiveTab] = useState("checklist");
   const [progress, setProgress] = useState(0);
   
-  // Update the progress when the checklist items are completed
   const handleProgressUpdate = (completedCount: number, totalCount: number) => {
     const newProgress = Math.round((completedCount / totalCount) * 100);
     setProgress(newProgress);
@@ -44,7 +42,6 @@ const Onboarding = () => {
             Complete these steps to get the most out of your ElevenLabs experience.
           </p>
           
-          {/* Video Section */}
           <div className="mb-8 bg-slate-50 p-6 rounded-lg border border-slate-200">
             <div className="flex items-center gap-2 mb-4">
               <Play className="h-5 w-5 text-primary" />
@@ -57,7 +54,6 @@ const Onboarding = () => {
                   Watch introduction
                 </Button>
               </div>
-              {/* Video will be embedded here - this is a placeholder */}
               <div className="w-full h-full">
                 {/* Replace with actual video embed code when available */}
               </div>
@@ -214,9 +210,9 @@ const Onboarding = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <Button variant="outline" className="w-full justify-start">Live Chat Support</Button>
+                    <Button variant="outline" className="w-full justify-start">Chat with Alexis</Button>
                     <Button variant="outline" className="w-full justify-start">Email Support Team</Button>
-                    <Button variant="outline" className="w-full justify-start">Schedule a Call</Button>
+                    <Button variant="outline" className="w-full justify-start">Schedule a Call with Customer Success</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -231,7 +227,6 @@ const Onboarding = () => {
                 <CardContent>
                   <div className="space-y-4">
                     <Button variant="outline" className="w-full justify-start">FAQs</Button>
-                    <Button variant="outline" className="w-full justify-start">Community Forum</Button>
                     <Button variant="outline" className="w-full justify-start">Upcoming Webinars</Button>
                   </div>
                 </CardContent>
