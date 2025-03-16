@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Lightbulb } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,6 +47,10 @@ const Navbar = () => {
           <a href="#testimonials" className="text-foreground/80 hover:text-primary transition-colors">
             Success Stories
           </a>
+          <Link to="/use-case-inspiration" className="text-foreground/80 hover:text-primary transition-colors flex items-center gap-1">
+            <Lightbulb className="h-4 w-4" />
+            Use Case Inspiration
+          </Link>
           <Button asChild className="button-hover-effect ml-4">
             <a href="#contact">Get Started</a>
           </Button>
@@ -90,6 +95,14 @@ const Navbar = () => {
           >
             Success Stories
           </a>
+          <Link 
+            to="/use-case-inspiration" 
+            className="text-foreground/80 text-lg font-medium flex items-center gap-1"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Lightbulb className="h-4 w-4" />
+            Use Case Inspiration
+          </Link>
           <Button 
             asChild 
             className="w-full mt-4"

@@ -1,8 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Bell, Lightbulb } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, Bell } from 'lucide-react';
 import AssessMaturityWidget from '@/components/AssessMaturityWidget';
 
 const Hero = () => {
@@ -67,14 +66,6 @@ const Hero = () => {
             </Button>
             
             <AssessMaturityWidget />
-            
-            <Link to="/use-case-inspiration">
-              <Button variant="outline" size="lg" className="px-6 py-6 text-md group">
-                <Lightbulb className="mr-2 h-4 w-4" />
-                Use Case Inspiration
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
           </div>
           
           <div className="mt-6">
