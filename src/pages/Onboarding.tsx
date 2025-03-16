@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -101,11 +102,11 @@ const Onboarding = () => {
                   
                   <Card>
                     <CardHeader>
-                      <CardTitle>Implementing Your First AI Model</CardTitle>
+                      <CardTitle>Learn About AI Models</CardTitle>
                       <CardDescription>Step-by-step tutorial for beginners</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">Learn how to implement and deploy your first AI model with our easy-to-follow tutorial.</p>
+                      <p className="mb-4">Learn about AI models and which one is best to leverage for your unique use case.</p>
                       <Button size="sm">View Guide</Button>
                     </CardContent>
                   </Card>
