@@ -49,15 +49,15 @@ const Hero = () => {
           className="max-w-4xl mx-auto text-center opacity-0 translate-y-10 transition-all duration-1000 ease-out"
         >
           <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
-            Welcome to Your AI Journey
+            Welcome to Your ElevenLabs Journey
           </div>
           
           <h1 className="text-4xl md:text-6xl font-display font-bold mb-6 text-balance leading-tight">
-            All the resources you need for your AI journey with <span className="text-primary">NexusAI</span>
+            All the resources you need for your voice AI journey with <span className="text-primary">ElevenLabs</span>
           </h1>
           
           <p className="text-lg md:text-xl text-foreground/80 mb-10 max-w-2xl mx-auto">
-            Begin your AI implementation journey with expert guidance, comprehensive resources, and personalized support at every step.
+            Begin your voice AI implementation journey with expert guidance, comprehensive resources, and personalized support at every step.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
