@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { ArrowLeft, HelpCircle, BookOpen, ThumbsUp } from 'lucide-react';
+import { ArrowLeft, HelpCircle, BookOpen, ThumbsUp, Play } from 'lucide-react';
 
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -43,6 +43,29 @@ const Onboarding = () => {
           <p className="text-muted-foreground text-lg mb-6">
             Complete these steps to get the most out of your ElevenLabs experience.
           </p>
+          
+          {/* Video Section */}
+          <div className="mb-8 bg-slate-50 p-6 rounded-lg border border-slate-200">
+            <div className="flex items-center gap-2 mb-4">
+              <Play className="h-5 w-5 text-primary" />
+              <h2 className="text-xl font-semibold">Quick Introduction Video</h2>
+            </div>
+            <div className="aspect-video bg-slate-200 rounded-lg overflow-hidden relative">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Button className="flex items-center gap-2">
+                  <Play className="h-5 w-5" />
+                  Watch introduction
+                </Button>
+              </div>
+              {/* Video will be embedded here - this is a placeholder */}
+              <div className="w-full h-full">
+                {/* Replace with actual video embed code when available */}
+              </div>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              This short video will help you understand the key features and get started with ElevenLabs.
+            </p>
+          </div>
           
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
