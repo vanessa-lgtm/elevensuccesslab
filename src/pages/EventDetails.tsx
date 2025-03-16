@@ -1,121 +1,255 @@
 
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, MapPin, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { ArrowLeft, Calendar, MapPin, Users, ExternalLink } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 type Event = {
   id: string;
   title: string;
   date: string;
+  time: string;
+  location: string;
   type: 'webinar' | 'workshop' | 'conference';
   description: string;
-  location: string;
-  time: string;
-  url?: string;
+  agenda: string[];
+  speakers: {
+    name: string;
+    role: string;
+  }[];
+  registrationUrl: string;
 };
 
-const eventsData: Record<string, Event> = {
-  '1': {
+// Mock data for events
+const eventsData: Event[] = [
+  {
     id: '1',
     title: 'Getting Started with Voice AI',
     date: 'June 15, 2023',
+    time: '10:00 AM - 11:30 AM PST',
+    location: 'Online Webinar',
     type: 'webinar',
-    description: 'Join us for an introductory session on Voice AI technology. Learn the basics of voice recognition, natural language processing, and how to implement simple voice commands in your applications.',
-    location: 'Online',
-    time: '1:00 PM - 2:30 PM EST',
-    url: '#',
+    description: 'Join us for an introductory session on Voice AI technology. Learn the basics of how voice AI works, current applications, and how to start implementing it in your projects.',
+    agenda: [
+      'Introduction to Voice AI technology',
+      'Understanding the voice synthesis pipeline',
+      'Common use cases and applications',
+      'Hands-on demonstration with basic implementation',
+      'Q&A session'
+    ],
+    speakers: [
+      {
+        name: 'Sarah Johnson',
+        role: 'AI Product Manager'
+      },
+      {
+        name: 'Michael Chen',
+        role: 'Voice AI Engineer'
+      }
+    ],
+    registrationUrl: 'https://example.com/register'
   },
-  '2': {
+  {
     id: '2',
     title: 'Advanced AI Implementation Workshop',
     date: 'June 22, 2023',
-    type: 'workshop',
-    description: 'This hands-on workshop will guide you through implementing advanced AI features in your products. Topics include multimodal AI, context awareness, and optimizing for performance.',
-    location: 'Tech Hub, San Francisco',
     time: '9:00 AM - 4:00 PM PST',
-    url: '#',
+    location: 'Tech Hub Conference Center, San Francisco',
+    type: 'workshop',
+    description: 'This hands-on workshop will guide you through advanced implementation techniques for AI voice technology. Bring your laptop and prepare to code along as we build sophisticated voice applications.',
+    agenda: [
+      'Advanced voice customization techniques',
+      'Building conversational interfaces',
+      'Integration with existing applications',
+      'Performance optimization and scaling',
+      'Hands-on implementation exercises'
+    ],
+    speakers: [
+      {
+        name: 'Dr. Alicia Rodriguez',
+        role: 'Chief AI Scientist'
+      },
+      {
+        name: 'Thomas Wright',
+        role: 'Senior Developer Advocate'
+      }
+    ],
+    registrationUrl: 'https://example.com/workshop'
   },
-  '3': {
+  {
     id: '3',
     title: 'Annual AI Summit',
     date: 'July 10-12, 2023',
+    time: 'All day event',
+    location: 'Grand Convention Center, New York City',
     type: 'conference',
-    description: 'Our flagship conference featuring keynotes from industry leaders, technical workshops, and networking opportunities. Discover the latest trends and innovations in AI technology.',
-    location: 'Convention Center, New York',
-    time: 'All day',
-    url: '#',
-  },
+    description: 'The Annual AI Summit brings together industry leaders, researchers, and practitioners for three days of insightful presentations, panels, and networking opportunities focused on the future of artificial intelligence.',
+    agenda: [
+      'Day 1: Future of Voice AI Technology',
+      'Day 2: Industry Applications and Case Studies',
+      'Day 3: Ethical Considerations and Responsible AI',
+      'Evening networking events',
+      'Startup showcase and demos'
+    ],
+    speakers: [
+      {
+        name: 'Prof. Emily Chang',
+        role: 'AI Ethics Researcher'
+      },
+      {
+        name: 'Mark Davidson',
+        role: 'CTO, FutureVoice Inc.'
+      },
+      {
+        name: 'Sophia Williams',
+        role: 'Director of Innovation'
+      }
+    ],
+    registrationUrl: 'https://example.com/summit'
+  }
+];
+
+const getEventTypeColor = (type: Event['type']) => {
+  switch (type) {
+    case 'webinar':
+      return 'bg-primary/10 text-primary';
+    case 'workshop':
+      return 'bg-orange-500/10 text-orange-500';
+    case 'conference':
+      return 'bg-blue-500/10 text-blue-500';
+    default:
+      return 'bg-slate-500/10 text-slate-500';
+  }
 };
 
 const EventDetails = () => {
   const { eventId } = useParams<{ eventId: string }>();
-  const event = eventId ? eventsData[eventId] : null;
+  const event = eventsData.find(e => e.id === eventId);
 
   if (!event) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold mb-4">Event Not Found</h1>
-        <p className="mb-8">The event you're looking for doesn't exist or has been removed.</p>
-        <Button asChild>
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 py-16 text-center">
+          <h1 className="text-3xl font-bold mb-4">Event Not Found</h1>
+          <p className="mb-8">The event you're looking for doesn't exist or has been removed.</p>
           <Link to="/">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
+            <Button>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Home
+            </Button>
           </Link>
-        </Button>
+        </div>
+        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="bg-primary/5 py-8">
-        <div className="container mx-auto px-4">
-          <Link to="/" className="inline-flex items-center text-sm text-primary mb-6 hover:underline">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Home
-          </Link>
-          
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">{event.title}</h1>
-          
-          <div className="flex flex-wrap gap-4 mb-8">
-            <div className="flex items-center text-sm text-muted-foreground">
-              <Calendar className="mr-2 h-4 w-4" />
-              {event.date}
+      <Navbar />
+      
+      <div className="container mx-auto px-4 py-12">
+        <Link to="/" className="inline-flex items-center text-sm font-medium mb-6 hover:text-primary transition-colors">
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Back to Home
+        </Link>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <div className="mb-8">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <span className={`px-3 py-1 text-xs rounded-full font-medium ${getEventTypeColor(event.type)}`}>
+                  {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+                </span>
+                <span className="flex items-center text-sm text-muted-foreground">
+                  <Calendar className="mr-1 h-4 w-4" />
+                  {event.date}
+                </span>
+                <span className="flex items-center text-sm text-muted-foreground">
+                  <MapPin className="mr-1 h-4 w-4" />
+                  {event.location}
+                </span>
+              </div>
+              
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">{event.title}</h1>
+              <p className="text-lg text-muted-foreground">{event.description}</p>
             </div>
-            <div className="flex items-center text-sm text-muted-foreground">
-              <Clock className="mr-2 h-4 w-4" />
-              {event.time}
+            
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold mb-4">Event Agenda</h2>
+              <ul className="space-y-2">
+                {event.agenda.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="inline-flex items-center justify-center rounded-full bg-primary/10 text-primary w-6 h-6 text-sm mr-3 mt-0.5">
+                      {index + 1}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="flex items-center text-sm text-muted-foreground">
-              <MapPin className="mr-2 h-4 w-4" />
-              {event.location}
+            
+            <div>
+              <h2 className="text-xl font-semibold mb-4">Speakers</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {event.speakers.map((speaker, index) => (
+                  <Card key={index} className="p-4 flex items-center">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-4">
+                      {speaker.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h3 className="font-medium">{speaker.name}</h3>
+                      <p className="text-sm text-muted-foreground">{speaker.role}</p>
+                    </div>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
           
-          <div className="inline-block bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
-            {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+          <div className="lg:col-span-1">
+            <Card className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Registration</h2>
+              <div className="space-y-4 mb-6">
+                <div>
+                  <h3 className="text-sm font-medium mb-1">Date & Time</h3>
+                  <p className="text-sm flex items-center text-muted-foreground">
+                    <Calendar className="mr-2 h-4 w-4" />
+                    {event.date}, {event.time}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium mb-1">Location</h3>
+                  <p className="text-sm flex items-center text-muted-foreground">
+                    <MapPin className="mr-2 h-4 w-4" />
+                    {event.location}
+                  </p>
+                </div>
+                <div>
+                  <h3 className="text-sm font-medium mb-1">Event Type</h3>
+                  <p className="text-sm flex items-center text-muted-foreground">
+                    <Users className="mr-2 h-4 w-4" />
+                    {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+                  </p>
+                </div>
+              </div>
+              
+              <a href={event.registrationUrl} target="_blank" rel="noopener noreferrer">
+                <Button className="w-full">
+                  Register Now
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Button>
+              </a>
+            </Card>
           </div>
         </div>
       </div>
       
-      <div className="container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto">
-          <div className="prose prose-slate mx-auto">
-            <h2 className="text-xl font-semibold mb-4">About This Event</h2>
-            <p className="mb-8">{event.description}</p>
-            
-            {event.url && (
-              <Button className="mt-6" asChild>
-                <a href={event.url} target="_blank" rel="noopener noreferrer">
-                  Register Now
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            )}
-          </div>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 };
