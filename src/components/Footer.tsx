@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
@@ -9,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="col-span-1 md:col-span-1">
             <a href="#" className="text-primary font-display font-bold text-2xl inline-block mb-4">
-              SuccessHub
+              SuccessLab
             </a>
             <p className="text-foreground/70 mb-6">
               Providing the resources and support you need to scale your customer success strategy effectively.
@@ -65,7 +64,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-border mt-12 pt-8 text-center text-foreground/60 text-sm">
-          <p>&copy; {new Date().getFullYear()} SuccessHub. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} SuccessLab. All rights reserved.</p>
         </div>
       </div>
     </footer>

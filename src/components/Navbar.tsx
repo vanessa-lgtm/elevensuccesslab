@@ -32,7 +32,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center">
           <a href="#" className="text-primary font-display font-bold text-2xl">
-            SuccessHub
+            SuccessLab
           </a>
         </div>
 
