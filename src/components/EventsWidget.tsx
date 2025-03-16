@@ -4,6 +4,7 @@ import { Calendar, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 type Event = {
   id: string;
@@ -62,29 +63,27 @@ const EventsWidget = () => {
           
           <div className="flex gap-4 overflow-x-auto pb-2 max-w-full">
             {upcomingEvents.map((event) => (
-              <Card key={event.id} className="min-w-[220px] max-w-[300px] border-0 shadow-sm bg-background/50 backdrop-blur-sm">
-                <CardHeader className="p-3 pb-0">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <CardTitle className="text-sm font-medium">{event.title}</CardTitle>
-                      <CardDescription className="text-xs mt-1">{event.date}</CardDescription>
+              <Link to={`/events/${event.id}`} key={event.id} className="group min-w-[220px] max-w-[300px]">
+                <Card className="h-full border-0 shadow-sm bg-background/50 backdrop-blur-sm transition-all duration-200 group-hover:shadow-md group-hover:translate-y-[-2px]">
+                  <CardHeader className="p-3 pb-0">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="text-sm font-medium">{event.title}</CardTitle>
+                        <CardDescription className="text-xs mt-1">{event.date}</CardDescription>
+                      </div>
+                      <span className={cn('text-[10px] px-2 py-1 rounded-full font-medium', getEventBadgeClasses(event.type))}>
+                        {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+                      </span>
                     </div>
-                    <span className={cn('text-[10px] px-2 py-1 rounded-full font-medium', getEventBadgeClasses(event.type))}>
-                      {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
-                    </span>
-                  </div>
-                </CardHeader>
-                <CardContent className="p-3 pt-2">
-                  {event.url && (
-                    <Button variant="ghost" size="sm" className="w-full h-7 text-xs" asChild>
-                      <a href={event.url} target="_blank" rel="noopener noreferrer">
-                        <span>Register</span>
-                        <ExternalLink className="ml-1 h-3 w-3" />
-                      </a>
+                  </CardHeader>
+                  <CardContent className="p-3 pt-2">
+                    <Button variant="ghost" size="sm" className="w-full h-7 text-xs">
+                      <span>View Details</span>
+                      <ExternalLink className="ml-1 h-3 w-3" />
                     </Button>
-                  )}
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
