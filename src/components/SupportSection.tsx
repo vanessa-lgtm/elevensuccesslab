@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { MessageSquare, Mail, Calendar, Clock } from 'lucide-react';
+import { MessageSquare, Mail, Calendar, Clock, Headset } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -137,13 +137,19 @@ const SupportSection = () => {
     {
       icon: <Calendar size={20} />,
       title: "Strategy Session",
-      description: "Book a dedicated strategy session to develop or refine your customer success approach.",
+      description: "Book a complementary strategy session to develop or refine your use of voice AI technology.",
       buttonText: "Book Session",
+    },
+    {
+      icon: <Headset size={20} />,
+      title: "Real Time Product Support",
+      description: "Get immediate assistance with our real-time product support for urgent technical issues.",
+      buttonText: "Get Support",
     },
     {
       icon: <Clock size={20} />,
       title: "On-Demand Webinars",
-      description: "Access our library of webinars covering various aspects of customer success.",
+      description: "Access our library of internal and customer webinars to enhance your knowledge of our product or get inspired!",
       buttonText: "Watch Now",
     },
   ];
