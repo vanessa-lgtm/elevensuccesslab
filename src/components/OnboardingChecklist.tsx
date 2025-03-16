@@ -12,6 +12,7 @@ interface ChecklistItem {
   description: string;
   timeEstimate: string;
   completed: boolean;
+  section?: string;
 }
 
 interface OnboardingChecklistProps {
@@ -26,6 +27,15 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ onProgressUpd
       description: 'Set up your personal profile and customize your account settings.',
       timeEstimate: '5 min',
       completed: false,
+      section: 'basics',
+    },
+    {
+      id: '9',
+      title: 'Verify billing information',
+      description: 'Make sure your billing is set up with the correct payment method and your billing contact on file is correct (you can verify this with customer support).',
+      timeEstimate: '5 min',
+      completed: false,
+      section: 'basics',
     },
     {
       id: '2',
@@ -92,6 +102,82 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ onProgressUpd
     );
   };
 
+  // Get unique sections for rendering headers
+  const sections = checklistItems.reduce<string[]>((acc, item) => {
+    if (item.section && !acc.includes(item.section)) {
+      acc.push(item.section);
+    }
+    return acc;
+  }, []);
+
+  const renderSection = (section: string) => {
+    const sectionTitle = section === 'basics' ? 'The Basics' : section;
+    return (
+      <div key={section} className="mb-6">
+        <h3 className="text-xl font-semibold mb-4">{sectionTitle}</h3>
+        {checklistItems
+          .filter(item => item.section === section)
+          .map((item, index, filteredItems) => (
+            <Card 
+              key={item.id}
+              className={cn(
+                "p-4 transition-all duration-200 mb-4",
+                item.completed ? "border-primary/50 bg-primary/5" : ""
+              )}
+            >
+              <div className="flex items-start gap-4">
+                <div className="pt-1">
+                  <Checkbox 
+                    id={`checklist-item-${item.id}`} 
+                    checked={item.completed}
+                    onCheckedChange={() => toggleItemCompletion(item.id)}
+                    className={cn(item.completed ? "text-primary" : "")}
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="flex justify-between items-start">
+                    <label 
+                      htmlFor={`checklist-item-${item.id}`}
+                      className={cn(
+                        "font-medium text-lg cursor-pointer",
+                        item.completed ? "line-through text-muted-foreground" : ""
+                      )}
+                    >
+                      {item.title}
+                    </label>
+                    <div className="flex items-center text-muted-foreground text-sm">
+                      <Clock className="h-3.5 w-3.5 mr-1" />
+                      {item.timeEstimate}
+                    </div>
+                  </div>
+                  <p className={cn(
+                    "text-muted-foreground mt-1",
+                    item.completed ? "line-through" : ""
+                  )}>
+                    {item.description}
+                  </p>
+                  
+                  {item.completed && (
+                    <div className="mt-3 text-sm text-primary flex items-center">
+                      <CheckCircle className="h-4 w-4 mr-1" />
+                      Completed
+                    </div>
+                  )}
+                </div>
+              </div>
+              
+              {index < filteredItems.length - 1 && (
+                <Separator className="mt-4" />
+              )}
+            </Card>
+          ))}
+      </div>
+    );
+  };
+
+  // Separate non-sectioned items
+  const nonSectionedItems = checklistItems.filter(item => !item.section);
+
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">Onboarding Checklist</h2>
@@ -99,7 +185,11 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ onProgressUpd
         Complete these steps to fully set up your NexusAI implementation. Each step includes an estimated time to complete.
       </p>
       
-      {checklistItems.map((item, index) => (
+      {/* Render sectioned items first */}
+      {sections.map(section => renderSection(section))}
+      
+      {/* Render non-sectioned items */}
+      {nonSectionedItems.map((item, index) => (
         <Card 
           key={item.id}
           className={cn(
@@ -148,7 +238,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ onProgressUpd
             </div>
           </div>
           
-          {index < checklistItems.length - 1 && (
+          {index < nonSectionedItems.length - 1 && (
             <Separator className="mt-4" />
           )}
         </Card>
