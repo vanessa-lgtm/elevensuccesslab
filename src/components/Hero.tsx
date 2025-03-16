@@ -2,6 +2,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Bell } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import AssessMaturityWidget from '@/components/AssessMaturityWidget';
 
 const Hero = () => {
@@ -60,9 +61,11 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Button size="lg" className="px-6 py-6 text-md button-hover-effect group">
-              Start Onboarding
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <Button size="lg" className="px-6 py-6 text-md button-hover-effect group" asChild>
+              <Link to="/onboarding">
+                Start Onboarding
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
             </Button>
             
             <AssessMaturityWidget />
