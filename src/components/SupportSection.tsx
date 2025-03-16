@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { MessageSquare, Phone, Calendar, Mail, Users, Clock } from 'lucide-react';
+import { MessageSquare, Mail, Calendar, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -122,35 +122,23 @@ const SupportSection = () => {
 
   const supportOptions = [
     {
-      icon: <MessageSquare size={20} />,
-      title: "Live Chat Support",
-      description: "Get real-time assistance from our customer success experts via our live chat platform.",
-      buttonText: "Start Chat",
+      icon: <Mail size={20} />,
+      title: "Contact Customer Support",
+      description: "Send us your questions on technical or product issues, bugs, etc.",
+      buttonText: "Contact Support",
       isPrimary: true,
     },
     {
-      icon: <Phone size={20} />,
-      title: "Phone Consultation",
-      description: "Schedule a call with our team to discuss your specific customer success challenges.",
-      buttonText: "Request Call",
+      icon: <MessageSquare size={20} />,
+      title: "Contact Customer Success",
+      description: "Contact the ElevenLabs CS team on any product related questions, account related questions, contract details, use case inquiries, etc.",
+      buttonText: "Contact Success Team",
     },
     {
       icon: <Calendar size={20} />,
       title: "Strategy Session",
       description: "Book a dedicated strategy session to develop or refine your customer success approach.",
       buttonText: "Book Session",
-    },
-    {
-      icon: <Users size={20} />,
-      title: "Community Forum",
-      description: "Connect with peers and experts in our community to share ideas and best practices.",
-      buttonText: "Join Community",
-    },
-    {
-      icon: <Mail size={20} />,
-      title: "Email Support",
-      description: "Send us your questions or concerns and receive detailed responses from our team.",
-      buttonText: "Email Us",
     },
     {
       icon: <Clock size={20} />,
@@ -179,7 +167,7 @@ const SupportSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {supportOptions.map((option, index) => (
             <SupportOption 
               key={index} 
