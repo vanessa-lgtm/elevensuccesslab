@@ -6,20 +6,29 @@ import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
+const POPUP_DISPLAY_LIMIT = 2;
+const LOCAL_STORAGE_KEY = 'webinarPopupShownCount';
+
 const WebinarPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBeenShown, setHasBeenShown] = useState(false);
   
   useEffect(() => {
-    // Show popup after 3 seconds if it hasn't been shown yet
-    const timer = setTimeout(() => {
-      if (!hasBeenShown) {
+    // Get current number of times the popup has been shown
+    const popupShownCount = parseInt(localStorage.getItem(LOCAL_STORAGE_KEY) || '0');
+    
+    // Only show popup if it hasn't been shown the maximum number of times
+    if (popupShownCount < POPUP_DISPLAY_LIMIT && !hasBeenShown) {
+      const timer = setTimeout(() => {
         setIsOpen(true);
         setHasBeenShown(true);
-      }
-    }, 3000);
-    
-    return () => clearTimeout(timer);
+        
+        // Increment and save the shown count
+        localStorage.setItem(LOCAL_STORAGE_KEY, (popupShownCount + 1).toString());
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
   }, [hasBeenShown]);
 
   return (
