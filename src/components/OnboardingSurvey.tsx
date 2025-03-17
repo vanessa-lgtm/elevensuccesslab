@@ -179,16 +179,21 @@ const onboardingPlans = [
   }
 ];
 
+const mediaIndustries = [
+  'localization', 'broadcasting', 'streaming', 'film', 
+  'marketing', 'gaming', 'digital_media', 'audio_production'
+];
+
 const determineOnboardingPlan = (formData: any) => {
   const knowledgeLevel = formData.knowledge_level;
   const primaryUseCase = formData.primary_use_case;
   const industry = formData.industry;
   const integrations = formData.integrations || [];
   
-  if (industry === 'healthcare') {
-    return 'healthcare';
-  } else if (industry === 'media') {
+  if (mediaIndustries.includes(industry)) {
     return 'media';
+  } else if (industry === 'healthcare') {
+    return 'healthcare';
   }
   
   if (knowledgeLevel === 'low') {
