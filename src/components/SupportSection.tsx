@@ -11,6 +11,7 @@ interface SupportOptionProps {
   buttonText: string;
   delay: number;
   isPrimary?: boolean;
+  url?: string;
 }
 
 const SupportOption = ({ 
@@ -19,7 +20,8 @@ const SupportOption = ({
   description, 
   buttonText, 
   delay,
-  isPrimary = false 
+  isPrimary = false,
+  url
 }: SupportOptionProps) => {
   const optionRef = useRef<HTMLDivElement>(null);
   
@@ -85,6 +87,7 @@ const SupportOption = ({
           "mt-auto button-hover-effect",
           isPrimary && "bg-white text-primary hover:bg-white/90"
         )}
+        onClick={() => url && window.open(url, '_blank')}
       >
         {buttonText}
       </Button>
@@ -151,6 +154,7 @@ const SupportSection = () => {
       title: "On-Demand Webinars",
       description: "Access our library of internal and customer webinars to enhance your knowledge of our product or get inspired!",
       buttonText: "Watch Now",
+      url: "https://www.youtube.com/watch?v=0vyUwVR0vx0",
     },
   ];
 
@@ -183,6 +187,7 @@ const SupportSection = () => {
               buttonText={option.buttonText} 
               delay={index * 100}
               isPrimary={option.isPrimary}
+              url={option.url}
             />
           ))}
         </div>
