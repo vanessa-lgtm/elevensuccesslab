@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import AssessMaturityWidget from '@/components/AssessMaturityWidget';
+import OnboardingSurvey from '@/components/OnboardingSurvey';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -61,14 +61,15 @@ const Hero = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Button size="lg" className="px-6 py-6 text-md button-hover-effect group" asChild>
+            <OnboardingSurvey />
+            
+            {/* Regular link button as a secondary action */}
+            <Button variant="outline" size="lg" className="group button-hover-effect" asChild>
               <Link to="/onboarding">
-                Start Onboarding
+                Explore Resources
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
-            
-            <AssessMaturityWidget />
           </div>
           
           <div className="mt-6">
