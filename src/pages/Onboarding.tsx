@@ -1,19 +1,10 @@
+
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import OnboardingChecklist from '@/components/OnboardingChecklist';
 import OnboardingSurvey from '@/components/OnboardingSurvey';
 import WebinarPopup from '@/components/WebinarPopup';
-
-const steps = [
-  "Create an account",
-  "Set up your workspace",
-  "Configure your voice settings",
-  "Explore the text-to-speech feature",
-  "Try out voice cloning",
-  "Integrate with your favorite tools",
-  "Join our community forum",
-];
 
 const Onboarding = () => {
   const [currentStep, setCurrentStep] = React.useState(0);
@@ -28,7 +19,7 @@ const Onboarding = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <OnboardingChecklist steps={steps} currentStep={currentStep} />
+            <OnboardingChecklist currentStep={currentStep} />
           </div>
           <div>
             <OnboardingSurvey />

@@ -1,8 +1,12 @@
+
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { ArrowLeft, Calendar, MapPin, Users, ExternalLink } from 'lucide-react';
 
 type Event = {
   id: string;

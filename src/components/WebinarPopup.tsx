@@ -76,9 +76,14 @@ const WebinarPopup = () => {
                   <div>
                     <h4 className="font-medium text-sm">Upcoming Webinar</h4>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Join us for an exclusive webinar on how to leverage ElevenLabs for your business needs.
+                      Scaling Learning Experiences with Innovation. Join us for a deep dive into how AI is transforming education technology.
                     </p>
-                    <Button size="sm" variant="outline" className="mt-2 w-full text-xs h-8">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="mt-2 w-full text-xs h-8"
+                      onClick={() => window.open("https://app.livestorm.co/elevenlabs/elevenlabs-ai-in-edtech-scaling-learning-experiences-with-innovation", "_blank")}
+                    >
                       Register Now
                     </Button>
                   </div>
