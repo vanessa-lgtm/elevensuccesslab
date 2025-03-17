@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import OnboardingChecklist from '@/components/OnboardingChecklist';
+import MediaUseCasesInspiration from '@/components/MediaUseCasesInspiration';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -177,40 +178,44 @@ const Onboarding = () => {
               </TabsContent>
               
               <TabsContent value="usecases" className="mt-6">
-                <div className="grid gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Customer Service Enhancement</CardTitle>
-                      <CardDescription>Improve customer interactions with AI</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="mb-4">Learn how to implement AI-driven solutions to enhance customer service experiences.</p>
-                      <Button size="sm">Explore Use Case</Button>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Data Analysis & Insights</CardTitle>
-                      <CardDescription>Leverage AI for business intelligence</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="mb-4">Discover how to extract meaningful insights from your data using ElevenLabs's powerful analysis tools.</p>
-                      <Button size="sm">Explore Use Case</Button>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Process Automation</CardTitle>
-                      <CardDescription>Streamline workflows with intelligent automation</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="mb-4">See how organizations are using ElevenLabs to automate repetitive tasks and improve efficiency.</p>
-                      <Button size="sm">Explore Use Case</Button>
-                    </CardContent>
-                  </Card>
-                </div>
+                {industry === "media" ? (
+                  <MediaUseCasesInspiration />
+                ) : (
+                  <div className="grid gap-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Customer Service Enhancement</CardTitle>
+                        <CardDescription>Improve customer interactions with AI</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Learn how to implement AI-driven solutions to enhance customer service experiences.</p>
+                        <Button size="sm">Explore Use Case</Button>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Data Analysis & Insights</CardTitle>
+                        <CardDescription>Leverage AI for business intelligence</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Discover how to extract meaningful insights from your data using ElevenLabs's powerful analysis tools.</p>
+                        <Button size="sm">Explore Use Case</Button>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Process Automation</CardTitle>
+                        <CardDescription>Streamline workflows with intelligent automation</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">See how organizations are using ElevenLabs to automate repetitive tasks and improve efficiency.</p>
+                        <Button size="sm">Explore Use Case</Button>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
               </TabsContent>
             </Tabs>
           </div>
