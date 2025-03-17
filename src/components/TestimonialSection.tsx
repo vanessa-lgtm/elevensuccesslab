@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, Quote, ExternalLink } from 'lucide-react';
@@ -13,22 +12,16 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote: "The resources provided helped us restructure our entire customer success program, leading to a 35% increase in customer retention within just six months.",
-    name: "Sarah Johnson",
-    role: "VP of Customer Success",
-    company: "TechVision Inc."
+    quote: "For our clients, customer support isn't an afterthought. Every interaction is a chance to provide value and win customer loyalty. When we explored AI voice solutions, we saw that the most lifelike and emotionally resonant voices were powered by ElevenLabs. Their ability to deliver natural, human-like conversations gave us and our partners the confidence to scale AI voice support without sacrificing quality.",
+    name: "Jesse Zhang",
+    role: "CEO & Co-founder",
+    company: "Decagon"
   },
   {
-    quote: "The strategic frameworks and measurement tools allowed us to scale our customer success operations efficiently while maintaining high quality interactions.",
-    name: "Michael Chen",
-    role: "Chief Customer Officer",
-    company: "GrowthWave"
-  },
-  {
-    quote: "Access to the training materials and expert consultation transformed how we approach customer success. Our NPS score has increased by 28 points.",
-    name: "Elena Rodriguez",
-    role: "Customer Success Director",
-    company: "Innovate Solutions"
+    quote: "With Bertelsmann's Tech & Data Alliance, and its recently founded AI Hub, we have been at the forefront of applying new technologies across our businesses and building partnerships to accelerate the adoption of GenAI solutions in our businesses. ElevenLabs' sophisticated AI solutions are cutting-edge, ensuring high quality and multi-language audio experiences,",
+    name: "Rhys Nölke",
+    role: "Chief Data Officer",
+    company: "Bertelsmann"
   },
 ];
 
