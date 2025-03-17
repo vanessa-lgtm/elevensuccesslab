@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import OnboardingChecklist from '@/components/OnboardingChecklist';
-import OnboardingSurvey from '@/components/OnboardingSurvey';
 import WebinarPopup from '@/components/WebinarPopup';
 import VideoEmbed from '@/components/VideoEmbed';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -322,16 +321,8 @@ const Onboarding = () => {
             </TabsList>
             
             <TabsContent value="checklist" className="mt-4 space-y-4 animate-fade-in">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="bg-card p-6 rounded-lg shadow-sm border border-muted">
-                  <h2 className="text-2xl font-bold mb-6 text-primary">Onboarding Steps</h2>
-                  <OnboardingChecklist onProgressUpdate={handleProgressUpdate} industry="media" />
-                </div>
-                <div className="bg-card p-6 rounded-lg shadow-sm border border-muted">
-                  <h2 className="text-2xl font-bold mb-6 text-primary">Help Us Customize</h2>
-                  <p className="mb-4 text-muted-foreground">Tell us more about your needs so we can provide a more personalized experience.</p>
-                  <OnboardingSurvey />
-                </div>
+              <div className="bg-card p-6 rounded-lg shadow-sm border border-muted">
+                <OnboardingChecklist onProgressUpdate={handleProgressUpdate} industry="media" />
               </div>
             </TabsContent>
             

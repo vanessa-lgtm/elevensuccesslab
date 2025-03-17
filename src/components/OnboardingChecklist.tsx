@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -39,8 +40,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
         setChecklistItems([
           {
             id: '1',
-            title: 'Set up your account and billing',
-            description: 'Configure your workspace settings, user profile, and billing information.',
+            title: 'Set up your account',
+            description: 'Configure your workspace settings and user profile information.',
             timeEstimate: '10 min',
             completed: false,
             section: 'admin',
