@@ -241,7 +241,7 @@ const OnboardingSurvey = () => {
     }
   });
 
-  const totalSteps = 5;
+  const totalSteps = 4;
   const progress = ((currentStep + 1) / totalSteps) * 100;
   
   const handleNext = () => {
@@ -370,7 +370,7 @@ const OnboardingSurvey = () => {
               <div className="bg-primary/10 p-4 rounded-md mt-4">
                 <h4 className="text-sm font-medium flex items-center">
                   <BookOpen className="h-4 w-4 mr-2" />
-                  Recommended Resources
+                  Recommended Resource
                 </h4>
                 <p className="text-sm mt-2">
                   Based on your experience level, we recommend checking out our 
@@ -538,8 +538,8 @@ const OnboardingSurvey = () => {
       
       case 3:
         return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Your Goals & Definition of Success</h3>
+          <div className="space-y-6">
+            <h3 className="text-lg font-medium">Goals & Implementation Details</h3>
             
             <FormField
               control={form.control}
@@ -574,13 +574,6 @@ const OnboardingSurvey = () => {
                 </FormItem>
               )}
             />
-          </div>
-        );
-      
-      case 4:
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Additional Information</h3>
             
             <FormField
               control={form.control}
