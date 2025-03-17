@@ -53,7 +53,9 @@ import {
   BookOpen,
   Brain,
   Building,
-  Code
+  Code,
+  Stethoscope,
+  Film
 } from 'lucide-react';
 
 // Industry options
@@ -147,6 +149,30 @@ const onboardingPlans = [
       'Content creation workflows',
       'Storytelling and narration best practices'
     ]
+  },
+  {
+    id: 'healthcare',
+    title: 'Healthcare Voice AI Solutions',
+    description: 'Specialized onboarding for healthcare organizations implementing voice AI technologies.',
+    icon: <Stethoscope className="h-12 w-12 text-primary" />,
+    features: [
+      'HIPAA compliance guidance',
+      'Patient engagement workflows',
+      'Medical documentation solutions',
+      'Healthcare-specific use cases and examples'
+    ]
+  },
+  {
+    id: 'media',
+    title: 'Media & Entertainment Voice AI',
+    description: 'Tailored onboarding for media companies looking to leverage voice AI for content creation.',
+    icon: <Film className="h-12 w-12 text-primary" />,
+    features: [
+      'Voice cloning best practices',
+      'Audiobook production workflows',
+      'Character voice development',
+      'Content localization strategies'
+    ]
   }
 ];
 
@@ -158,6 +184,13 @@ const determineOnboardingPlan = (formData: any) => {
   const industry = formData.industry;
   const integrations = formData.integrations || [];
   
+  // Check for industry-specific plans
+  if (industry === 'healthcare') {
+    return 'healthcare';
+  } else if (industry === 'media') {
+    return 'media';
+  }
+  
   // Logic to determine the best plan
   if (knowledgeLevel === 'low') {
     return 'beginner';
@@ -165,7 +198,7 @@ const determineOnboardingPlan = (formData: any) => {
     return 'creative';
   } else if (industry === 'technology' || integrations.includes('custom')) {
     return 'technical';
-  } else if (industry === 'financial' || industry === 'healthcare' || industry === 'telecom') {
+  } else if (industry === 'financial' || industry === 'telecom') {
     return 'enterprise';
   }
   
