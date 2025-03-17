@@ -182,17 +182,17 @@ const VoiceAIBasicsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChan
           <TabsContent value="websites" className="space-y-4">
             <Card>
               <CardContent className="pt-6">
-                <h3 className="text-lg font-semibold mb-2">Voicebot.ai</h3>
-                <p className="text-muted-foreground mb-4">A comprehensive source for news, research, and analysis on the voice AI industry. It includes reports, blog posts, and case studies.</p>
-                <Button size="sm" variant="outline" className="mt-2" onClick={() => window.open('https://www.voicebot.ai', '_blank')}>Visit Website</Button>
+                <h3 className="text-lg font-semibold mb-2">ElevenLabs Blog</h3>
+                <p className="text-muted-foreground mb-4">The official ElevenLabs blog featuring the latest updates on voice AI technology, use cases, and industry insights.</p>
+                <Button size="sm" variant="outline" className="mt-2" onClick={() => window.open('https://elevenlabs.io/blog', '_blank')}>Visit Website</Button>
               </CardContent>
             </Card>
             
             <Card>
               <CardContent className="pt-6">
-                <h3 className="text-lg font-semibold mb-2">The Verge - Voice AI Section</h3>
-                <p className="text-muted-foreground mb-4">Offers up-to-date information on advancements in voice AI technology and its impact on industries.</p>
-                <Button size="sm" variant="outline" className="mt-2" onClick={() => window.open('https://www.theverge.com/voice-ai', '_blank')}>Visit Website</Button>
+                <h3 className="text-lg font-semibold mb-2">Voicebot.ai</h3>
+                <p className="text-muted-foreground mb-4">A comprehensive source for news, research, and analysis on the voice AI industry. It includes reports, blog posts, and case studies.</p>
+                <Button size="sm" variant="outline" className="mt-2" onClick={() => window.open('https://www.voicebot.ai', '_blank')}>Visit Website</Button>
               </CardContent>
             </Card>
           </TabsContent>
