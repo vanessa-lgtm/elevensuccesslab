@@ -5,9 +5,9 @@ import Hero from '@/components/Hero';
 import ResourceSection from '@/components/ResourceSection';
 import SupportSection from '@/components/SupportSection';
 import TestimonialSection from '@/components/TestimonialSection';
-import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import EventsWidget from '@/components/EventsWidget';
+import WebinarPopup from '@/components/WebinarPopup';
 
 const Index = () => {
   useEffect(() => {
@@ -43,8 +43,8 @@ const Index = () => {
       <ResourceSection />
       <SupportSection />
       <TestimonialSection />
-      <ContactSection />
       <Footer />
+      <WebinarPopup />
     </div>
   );
 };

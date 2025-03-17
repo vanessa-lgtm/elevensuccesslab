@@ -4,6 +4,7 @@ import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import WebinarPopup from '@/components/WebinarPopup';
 
 type UseCase = {
   id: string;
@@ -159,6 +160,7 @@ const UseCaseInspiration = () => {
       </div>
       
       <Footer />
+      <WebinarPopup />
     </div>
   );
 };
