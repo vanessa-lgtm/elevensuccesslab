@@ -283,21 +283,21 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
 const SuccessStoriesDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => {
   const testimonials = [
     {
-      quote: "The resources provided helped us restructure our entire customer success program, leading to a 35% increase in customer retention within just six months.",
+      quote: "The resources provided helped us restructure our entire voice AI strategy, leading to a 35% increase in customer retention within just six months.",
       name: "Sarah Johnson",
-      role: "VP of Customer Success",
+      role: "VP of Voice Innovation",
       company: "TechVision Inc."
     },
     {
-      quote: "The strategic frameworks and measurement tools allowed us to scale our customer success operations efficiently while maintaining high quality interactions.",
+      quote: "The strategic frameworks and measurement tools allowed us to scale our voice AI operations efficiently while maintaining high quality interactions.",
       name: "Michael Chen",
-      role: "Chief Customer Officer",
+      role: "Chief Voice Officer",
       company: "GrowthWave"
     },
     {
-      quote: "Access to the training materials and expert consultation transformed how we approach customer success. Our NPS score has increased by 28 points.",
+      quote: "Access to the training materials and expert consultation transformed how we approach voice AI. Our NPS score has increased by 28 points.",
       name: "Elena Rodriguez",
-      role: "Customer Success Director",
+      role: "Voice AI Director",
       company: "Innovate Solutions"
     },
   ];
@@ -391,7 +391,7 @@ const ResourceSection = () => {
     {
       icon: <GraduationCap size={20} />,
       title: "Training Materials",
-      description: "Training resources to help your team master customer success principles and techniques.",
+      description: "Training resources to help your team master voice AI principles and techniques.",
     },
     {
       icon: <Video size={20} />,
@@ -408,13 +408,13 @@ const ResourceSection = () => {
     {
       icon: <BarChart size={20} />,
       title: "Measurement Frameworks",
-      description: "Tools and templates to measure the impact of your customer success initiatives.",
+      description: "Tools and templates to measure the impact of your voice AI initiatives.",
       comingSoon: true
     },
     {
       icon: <RefreshCw size={20} />,
       title: "Process Templates",
-      description: "Ready-to-use process templates to streamline your customer success workflows.",
+      description: "Ready-to-use process templates to streamline your voice AI workflows.",
       comingSoon: true
     },
   ];
@@ -428,11 +428,11 @@ const ResourceSection = () => {
             ref={titleRef}
             className="text-3xl md:text-4xl font-display font-bold mb-6 opacity-0 translate-y-10 transition-all duration-700 ease-out"
           >
-            Resources for Customer Success Excellence
+            Resources for Voice AI Excellence
           </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto">
             Access our comprehensive library of resources designed to help you implement
-            and scale your customer success strategy effectively.
+            and scale your voice AI strategy effectively.
           </p>
         </div>
         

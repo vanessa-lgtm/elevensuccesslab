@@ -235,7 +235,7 @@ const SupportSection = () => {
           </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto">
             Choose from multiple support channels to get the assistance you need,
-            when you need it, to ensure your customer success strategy delivers results.
+            when you need it, to ensure your voice AI strategy delivers results.
           </p>
         </div>
         

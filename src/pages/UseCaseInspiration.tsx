@@ -68,6 +68,36 @@ const useCases: UseCase[] = [
     results: "Campaign conversion rates increased by 65% while production costs decreased by 80%.",
     customerName: "NextGen Marketing"
   },
+  {
+    id: "6",
+    title: "Voice-Enabled Virtual Assistants",
+    industry: "Technology",
+    description: "How a tech company created more natural and engaging virtual assistants.",
+    challenge: "Existing virtual assistants sounded robotic and failed to create authentic user experiences.",
+    solution: "Integrated ElevenLabs' voice AI to create lifelike, emotionally responsive virtual assistants.",
+    results: "User engagement with virtual assistants increased by 120% with 93% of users rating the experience as 'natural'.",
+    customerName: "InnoTech Solutions"
+  },
+  {
+    id: "7",
+    title: "Multilingual Video Dubbing",
+    industry: "Entertainment",
+    description: "How a streaming platform expanded global reach with AI voice dubbing.",
+    challenge: "Traditional dubbing was expensive and time-consuming, limiting international content availability.",
+    solution: "Used ElevenLabs to create multilingual voice dubbing that preserved emotional nuance in 20+ languages.",
+    results: "International viewership increased by 200% with 85% of viewers rating the dubbing quality as 'excellent'.",
+    customerName: "Global Stream Network"
+  },
+  {
+    id: "8",
+    title: "Accessible News Content",
+    industry: "Media",
+    description: "How a news organization made content accessible to more audiences.",
+    challenge: "Written news content excluded audiences with reading difficulties or visual impairments.",
+    solution: "Implemented ElevenLabs to automatically convert news articles to natural-sounding audio in multiple languages.",
+    results: "Audience reach increased by 35% with 15% of all content now consumed in audio format.",
+    customerName: "World News Network"
+  }
 ];
 
 const UseCaseInspiration = () => {
@@ -125,8 +155,10 @@ const UseCaseInspiration = () => {
             Contact our team to discuss your specific use case and discover how our AI voice technology
             can help you achieve your goals.
           </p>
-          <Button size="lg" className="px-8">
-            Contact Us <ArrowRight className="ml-2 h-4 w-4" />
+          <Button size="lg" className="px-8" asChild>
+            <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">
+              Go To ElevenLabs <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </Button>
         </div>
       </div>

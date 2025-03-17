@@ -1,12 +1,31 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Bell } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import OnboardingSurvey from '@/components/OnboardingSurvey';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useForm } from 'react-hook-form';
+import { useToast } from '@/components/ui/use-toast';
+
+interface FormValues {
+  name: string;
+  email: string;
+}
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [openNewsletterDialog, setOpenNewsletterDialog] = useState(false);
+  const { toast } = useToast();
+  
+  const newsletterForm = useForm<FormValues>({
+    defaultValues: {
+      name: '',
+      email: ''
+    }
+  });
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,6 +51,25 @@ const Hero = () => {
       }
     };
   }, []);
+
+  const onNewsletterSubmit = (data: FormValues) => {
+    // In a real implementation, this would send an email to success@elevenlabs.io
+    console.log('Sending newsletter signup to success@elevenlabs.io with data:', data);
+    toast({
+      title: "Success!",
+      description: "Your information has been sent to our team.",
+    });
+    setOpenNewsletterDialog(false);
+    newsletterForm.reset();
+  };
+
+  const scrollToResources = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const resourcesSection = document.getElementById('resources');
+    if (resourcesSection) {
+      resourcesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section 
@@ -64,22 +102,68 @@ const Hero = () => {
             <OnboardingSurvey />
             
             {/* Regular link button as a secondary action */}
-            <Button variant="outline" size="lg" className="group button-hover-effect" asChild>
-              <Link to="/onboarding">
-                Explore Resources
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+            <Button variant="outline" size="lg" className="group button-hover-effect" onClick={scrollToResources}>
+              Explore Resources
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
           </div>
           
           <div className="mt-6">
-            <Button variant="outline" size="lg" className="group">
+            <Button variant="outline" size="lg" className="group" onClick={() => setOpenNewsletterDialog(true)}>
               <Bell className="mr-2 h-4 w-4" />
               Sign up for Product Updates and Company News
             </Button>
           </div>
         </div>
       </div>
+      
+      {/* Newsletter Dialog */}
+      <Dialog open={openNewsletterDialog} onOpenChange={setOpenNewsletterDialog}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Sign up for Updates</DialogTitle>
+            <DialogDescription>
+              Please provide your information to sign up for ElevenLabs product updates and company news.
+            </DialogDescription>
+          </DialogHeader>
+          <Form {...newsletterForm}>
+            <form onSubmit={newsletterForm.handleSubmit(onNewsletterSubmit)} className="space-y-4">
+              <FormField
+                control={newsletterForm.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={newsletterForm.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email Address Associated with your ElevenLabs Account</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your email" type="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter>
+                <Button type="submit" className="w-full">
+                  <Bell className="mr-2 h-4 w-4" />
+                  Subscribe
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
       
       {/* Abstract shape at the bottom */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-secondary" style={{ 

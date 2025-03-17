@@ -52,7 +52,7 @@ const Navbar = () => {
             Use Case Inspiration
           </Link>
           <Button asChild className="button-hover-effect ml-4">
-            <a href="#contact">Get Started</a>
+            <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">Go To ElevenLabs</a>
           </Button>
         </nav>
 
@@ -110,7 +110,7 @@ const Navbar = () => {
             className="w-full mt-4"
             onClick={() => setMobileMenuOpen(false)}
           >
-            <a href="#contact">Get Started</a>
+            <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">Go To ElevenLabs</a>
           </Button>
         </nav>
       </div>
