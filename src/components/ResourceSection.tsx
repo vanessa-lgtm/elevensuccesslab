@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -418,6 +417,9 @@ const ResourceSection = () => {
       comingSoon: true
     },
   ];
+
+  // Remove Templates
+  resources.pop();
 
   return (
     <section id="resources" className="section-padding bg-background relative">
