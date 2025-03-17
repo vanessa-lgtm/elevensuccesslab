@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, ExternalLink } from 'lucide-react';
@@ -150,11 +149,7 @@ const UseCaseInspiration = () => {
         </div>
         
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-4">Ready to explore how ElevenLabs can transform your business?</h2>
-          <p className="mb-6 text-muted-foreground">
-            Contact our team to discuss your specific use case and discover how our AI voice technology
-            can help you achieve your goals.
-          </p>
+          <h2 className="text-2xl font-bold mb-4">Ready to put your knowledge to the test?</h2>
           <Button size="lg" className="px-8" asChild>
             <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer">
               Go To ElevenLabs <ArrowRight className="ml-2 h-4 w-4" />
