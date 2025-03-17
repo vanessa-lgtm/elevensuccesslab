@@ -1,7 +1,6 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -102,13 +101,37 @@ const useCases: UseCase[] = [
   }
 ];
 
+const blogStories = [
+  {
+    id: "blog1",
+    title: "How Voice AI Is Transforming Language Learning: A Case Study with Lingopie",
+    summary: "Lingopie, a language learning platform, integrated ElevenLabs' voice AI to create more engaging and effective learning experiences, resulting in a 40% increase in user engagement.",
+    imageUrl: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2671&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/lingopie-case-study"
+  },
+  {
+    id: "blog2",
+    title: "Creating Authentic Voices for Healthcare: Emmi's Story",
+    summary: "Emmi, a healthcare communication platform, used ElevenLabs' voice technology to create personalized health education content, making complex medical information more accessible to patients.",
+    imageUrl: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=2670&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/healthcare-voice-ai"
+  },
+  {
+    id: "blog3",
+    title: "How Indie Game Developer Increased Player Engagement with Voice AI",
+    summary: "An independent game studio implemented ElevenLabs to voice over 200+ NPCs with distinct personalities, leading to a 65% increase in positive player reviews and longer gameplay sessions.",
+    imageUrl: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2671&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/game-development-voice-ai"
+  }
+];
+
 const UseCaseInspiration = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
       <div className="container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto mb-12 text-center">
+        <div className="max-w-3xl mx-auto mb-12 text-center mt-16 pb-8 border-b border-primary/20">
           <h1 className="text-4xl font-bold mb-4">Use Case Inspiration</h1>
           <p className="text-lg text-muted-foreground">
             Discover how organizations across industries are leveraging ElevenLabs
@@ -116,7 +139,6 @@ const UseCaseInspiration = () => {
           </p>
         </div>
         
-        {/* Media Use Cases Section */}
         <div className="mb-16">
           <MediaUseCasesInspiration />
         </div>
@@ -155,6 +177,34 @@ const UseCaseInspiration = () => {
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        <div className="mb-16">
+          <h3 className="text-2xl font-semibold mb-6 text-center">Featured Customer Stories from Our Blog</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {blogStories.map((story) => (
+              <Card key={story.id} className="overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+                <div className="aspect-video w-full overflow-hidden">
+                  <img 
+                    src={story.imageUrl} 
+                    alt={story.title} 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">{story.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">{story.summary}</p>
+                  <Button variant="outline" size="sm" className="w-full" asChild>
+                    <a href={story.link} target="_blank" rel="noopener noreferrer">
+                      Read Full Story <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
         
         <div className="max-w-2xl mx-auto text-center">
