@@ -1,33 +1,287 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import OnboardingChecklist from '@/components/OnboardingChecklist';
 import OnboardingSurvey from '@/components/OnboardingSurvey';
 import WebinarPopup from '@/components/WebinarPopup';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
+import { ChevronDown, ChevronRight, Phone, Shield, BookOpen, Film, Download, MicVocal, Music, Globe } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+// Media & Entertainment industry IDs
+const mediaIndustries = [
+  'localization', 'broadcasting', 'streaming', 'film', 
+  'marketing', 'gaming', 'digital_media', 'audio_production'
+];
 
 const Onboarding = () => {
-  const [currentStep, setCurrentStep] = React.useState(0);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [activeTab, setActiveTab] = useState("checklist");
+  const [industry, setIndustry] = useState<string>("media");
   
-  const handleProgressUpdate = (progress: number) => {
-    setCurrentStep(progress);
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Check if the industry is specified in the URL
+    const params = new URLSearchParams(location.search);
+    const industryParam = params.get('industry');
+    
+    if (industryParam && mediaIndustries.includes(industryParam)) {
+      setIndustry('media');
+    }
+    
+    // Check if a specific tab is specified
+    const tabParam = params.get('tab');
+    if (tabParam && ['checklist', 'quick-start', 'resources'].includes(tabParam)) {
+      setActiveTab(tabParam);
+    }
+  }, [location]);
+  
+  const handleProgressUpdate = (completed: number, total: number) => {
+    setCurrentStep(Math.round((completed / total) * 100));
   };
   
+  const handleTabChange = (value: string) => {
+    setActiveTab(value);
+    navigate(`/onboarding?industry=${industry}&tab=${value}`, { replace: true });
+  };
+  
+  // Quick Start Steps for Media & Entertainment
+  const quickStartSteps = [
+    {
+      id: 'generate-tts',
+      title: 'Generate Your First TTS Audio',
+      description: 'Create your first AI-generated voice clip in just a few minutes.',
+      icon: <MicVocal className="h-8 w-8 text-primary" />,
+      steps: [
+        'Log in to your ElevenLabs account',
+        'Navigate to the Speech Synthesis page',
+        'Select a pre-made voice from the dropdown',
+        'Type or paste your script in the text area',
+        'Click "Generate" to create your audio',
+        'Listen to the result and download if satisfied'
+      ],
+      link: 'https://elevenlabs.io/speech-synthesis'
+    },
+    {
+      id: 'add-voice',
+      title: 'Add a Voice to Your Library',
+      description: 'Choose from our diverse catalog of pre-made voices for your productions.',
+      icon: <Download className="h-8 w-8 text-primary" />,
+      steps: [
+        'Visit the Voice Library page',
+        'Browse the available voices by category, language, or style',
+        'Preview voices by clicking the play button next to each one',
+        'Click "Add to My Voices" for any voice you want to use',
+        'Find your selected voices in the "My Voices" section'
+      ],
+      link: 'https://elevenlabs.io/voice-library'
+    },
+    {
+      id: 'create-clone',
+      title: 'Create Your First Voice Clone',
+      description: 'Clone a voice for consistent branding or character development.',
+      icon: <Globe className="h-8 w-8 text-primary" />,
+      steps: [
+        'Go to the Voice Cloning page',
+        'Click "Add Voice" to start the cloning process',
+        'Choose "Instant Voice Cloning" for quick results',
+        'Upload 1-3 minutes of clean audio samples',
+        'Name your voice and add a description',
+        'Create your voice clone and test it'
+      ],
+      link: 'https://elevenlabs.io/voice-cloning'
+    },
+    {
+      id: 'sound-effects',
+      title: 'Generate AI Sound Effects',
+      description: 'Create custom sound effects to enhance your media productions.',
+      icon: <Music className="h-8 w-8 text-primary" />,
+      steps: [
+        'Navigate to the Sound Effects page',
+        'Describe the sound effect you want to generate',
+        'Adjust duration and other parameters as needed',
+        'Click "Generate" to create your sound effect',
+        'Preview and download the generated audio file'
+      ],
+      link: 'https://elevenlabs.io/sound-effects'
+    }
+  ];
+  
+  // Resources for Media & Entertainment
+  const resources = [
+    {
+      title: 'Media & Entertainment Implementation Guide',
+      description: 'Comprehensive guide for implementing ElevenLabs in media production workflows.',
+      icon: <Film className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/guides/media'
+    },
+    {
+      title: 'Voice Cloning Best Practices',
+      description: 'Learn techniques for getting the best results with voice cloning technology.',
+      icon: <MicVocal className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/product-guides/voices/voice-cloning'
+    },
+    {
+      title: 'API Integration for Media Applications',
+      description: 'Technical documentation for integrating with the ElevenLabs API.',
+      icon: <BookOpen className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/api-reference/overview'
+    },
+    {
+      title: 'Security & Compliance Guide',
+      description: 'Information about our security features and compliance certifications.',
+      icon: <Shield className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/guides/security'
+    },
+    {
+      title: 'Schedule a Consultation',
+      description: 'Book a one-on-one call with our media solutions specialists.',
+      icon: <Phone className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/contact'
+    }
+  ];
+  
+  // Expandable section for Quick Start
+  const QuickStartItem = ({ step }: { step: typeof quickStartSteps[0] }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    
+    return (
+      <Card className="mb-4 border-primary/20">
+        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <div className="flex items-start p-4">
+            <div className="mr-4">{step.icon}</div>
+            <div className="flex-1">
+              <h3 className="text-xl font-medium">{step.title}</h3>
+              <p className="text-muted-foreground">{step.description}</p>
+            </div>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
+                {isOpen ? 
+                  <ChevronDown className="h-5 w-5" /> : 
+                  <ChevronRight className="h-5 w-5" />
+                }
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+          <CollapsibleContent>
+            <CardContent className="pt-0">
+              <ol className="list-decimal pl-10 space-y-2 mb-4">
+                {step.steps.map((text, index) => (
+                  <li key={index}>{text}</li>
+                ))}
+              </ol>
+              <Button asChild className="mt-2">
+                <a href={step.link} target="_blank" rel="noopener noreferrer">
+                  Get Started
+                </a>
+              </Button>
+            </CardContent>
+          </CollapsibleContent>
+        </Collapsible>
+      </Card>
+    );
+  };
+  
+  // Render resources cards
+  const ResourceCard = ({ resource }: { resource: typeof resources[0] }) => (
+    <Card className="overflow-hidden transition-all duration-200 hover:shadow-md">
+      <CardContent className="p-6">
+        <div className="flex items-start">
+          <div className="rounded-full bg-primary/10 p-3 mr-4">
+            {resource.icon}
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg mb-2">{resource.title}</h3>
+            <p className="text-muted-foreground text-sm mb-4">{resource.description}</p>
+            <Button asChild variant="outline" size="sm" className="mt-2">
+              <a href={resource.link} target="_blank" rel="noopener noreferrer">
+                View Resource
+              </a>
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-12">
-        <h1 className="text-3xl font-bold mb-4">Welcome to SuccessLab!</h1>
-        <p className="text-gray-600 mb-8">Let's get you set up for success.</p>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <OnboardingChecklist onProgressUpdate={handleProgressUpdate} />
+      <div className="container mx-auto px-4 py-16 pt-24">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-3xl font-bold mb-2">Media & Entertainment Onboarding</h1>
+          <p className="text-gray-600 mb-8">
+            Welcome to your personalized onboarding experience. We've tailored this guide to help media and entertainment professionals get the most out of ElevenLabs.
+          </p>
+          
+          <div className="mb-8">
+            <div className="w-full bg-secondary rounded-full h-2.5">
+              <div 
+                className={cn("bg-primary h-2.5 rounded-full transition-all duration-500")} 
+                style={{ width: `${currentStep}%` }}
+              />
+            </div>
+            <div className="flex justify-between mt-2 text-sm text-muted-foreground">
+              <span>Getting Started</span>
+              <span>{currentStep}% Complete</span>
+            </div>
           </div>
-          <div>
-            <OnboardingSurvey />
-          </div>
+          
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
+            <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsTrigger value="checklist">Onboarding Checklist</TabsTrigger>
+              <TabsTrigger value="quick-start">Quick Start Guide</TabsTrigger>
+              <TabsTrigger value="resources">Resources</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="checklist" className="mt-4 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <OnboardingChecklist onProgressUpdate={handleProgressUpdate} industry="media" />
+                </div>
+                <div>
+                  <OnboardingSurvey />
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="quick-start" className="mt-4">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold mb-4">Quick Start for Media & Entertainment</h2>
+                <p className="text-muted-foreground mb-6">
+                  Complete these steps to quickly get started with ElevenLabs for your media production needs. 
+                  Each guide includes step-by-step instructions.
+                </p>
+                
+                {quickStartSteps.map((step) => (
+                  <QuickStartItem key={step.id} step={step} />
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="resources" className="mt-4">
+              <div>
+                <h2 className="text-2xl font-bold mb-4">Resources for Media & Entertainment</h2>
+                <p className="text-muted-foreground mb-6">
+                  Explore these resources to deepen your understanding of ElevenLabs and optimize your implementation.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {resources.map((resource, index) => (
+                    <ResourceCard key={index} resource={resource} />
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
       
