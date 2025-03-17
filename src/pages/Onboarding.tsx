@@ -9,6 +9,10 @@ import WebinarPopup from '@/components/WebinarPopup';
 const Onboarding = () => {
   const [currentStep, setCurrentStep] = React.useState(0);
   
+  const handleProgressUpdate = (progress: number) => {
+    setCurrentStep(progress);
+  };
+  
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -19,7 +23,7 @@ const Onboarding = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <OnboardingChecklist />
+            <OnboardingChecklist onProgressUpdate={handleProgressUpdate} />
           </div>
           <div>
             <OnboardingSurvey />
