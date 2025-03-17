@@ -1,6 +1,6 @@
 
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import OnboardingChecklist from '@/components/OnboardingChecklist';
@@ -12,8 +12,20 @@ import { ArrowLeft, HelpCircle, BookOpen, ThumbsUp, Play } from 'lucide-react';
 
 const Onboarding = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("checklist");
   const [progress, setProgress] = useState(0);
+  const [industry, setIndustry] = useState<string | undefined>(undefined);
+  
+  // Parse query parameters to get industry or plan
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const planParam = queryParams.get('plan');
+    const industryParam = queryParams.get('industry');
+    
+    // Set industry based on query param or defaulting to "media" for now
+    setIndustry(industryParam || (planParam === 'media' ? 'media' : undefined));
+  }, [location]);
   
   const handleProgressUpdate = (completedCount: number, totalCount: number) => {
     const newProgress = Math.round((completedCount / totalCount) * 100);
@@ -84,7 +96,10 @@ const Onboarding = () => {
               </TabsList>
               
               <TabsContent value="checklist" className="mt-6">
-                <OnboardingChecklist onProgressUpdate={handleProgressUpdate} />
+                <OnboardingChecklist 
+                  onProgressUpdate={handleProgressUpdate} 
+                  industry={industry}
+                />
               </TabsContent>
               
               <TabsContent value="guides" className="mt-6">
@@ -102,22 +117,22 @@ const Onboarding = () => {
                   
                   <Card>
                     <CardHeader>
-                      <CardTitle>Learn About AI Models</CardTitle>
-                      <CardDescription>Step-by-step tutorial for beginners</CardDescription>
+                      <CardTitle>Media & Entertainment Voice AI Solutions</CardTitle>
+                      <CardDescription>Specialized guide for content creators</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">Learn about AI models and which one is best to leverage for your unique use case.</p>
+                      <p className="mb-4">Learn how to implement voice AI solutions specifically for media and entertainment applications.</p>
                       <Button size="sm">View Guide</Button>
                     </CardContent>
                   </Card>
                   
                   <Card>
                     <CardHeader>
-                      <CardTitle>Advanced Configuration Options</CardTitle>
-                      <CardDescription>Customize ElevenLabs for your specific needs</CardDescription>
+                      <CardTitle>Advanced Voice Customization</CardTitle>
+                      <CardDescription>Create unique voices for your characters and brands</CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <p className="mb-4">Explore advanced configuration options to tailor ElevenLabs to your organization's requirements.</p>
+                      <p className="mb-4">Explore advanced voice customization techniques to develop unique voices for your media productions.</p>
                       <Button size="sm">View Guide</Button>
                     </CardContent>
                   </Card>
@@ -213,7 +228,7 @@ const Onboarding = () => {
                   <div className="space-y-4">
                     <Button variant="outline" className="w-full justify-start">Chat with Alexis</Button>
                     <Button variant="outline" className="w-full justify-start">Email Support Team</Button>
-                    <Button variant="outline" className="w-full justify-start">Schedule a Call with Customer Success</Button>
+                    <Button variant="outline" className="w-full justify-start">Schedule a Voice AI Strategy Session</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -227,8 +242,20 @@ const Onboarding = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <Button variant="outline" className="w-full justify-start">FAQs</Button>
-                    <Button variant="outline" className="w-full justify-start">Upcoming Webinars</Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start"
+                      onClick={() => window.open('https://elevenlabs.io/docs/models', '_blank')}
+                    >
+                      Voice Models
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start"
+                      onClick={() => window.open('https://elevenlabs.io/voices', '_blank')}
+                    >
+                      Voice Library
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
