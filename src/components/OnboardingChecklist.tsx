@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -353,5 +354,17 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
         Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.
       </p>
       
-      {
+      {orderedSections.length > 0 ? (
+        <>
+          {orderedSections.map(section => renderSection(section))}
+        </>
+      ) : (
+        <Card className="p-6">
+          <p className="text-muted-foreground">No checklist items available for the selected industry.</p>
+        </Card>
+      )}
+    </div>
+  );
+};
 
+export default OnboardingChecklist;
