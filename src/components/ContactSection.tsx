@@ -87,48 +87,6 @@ const ContactSection = () => {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="text-sm font-medium text-primary mb-3">Get Started</div>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
-                Ready to transform your customer success strategy?
-              </h2>
-              <p className="text-foreground/70 mb-8">
-                Fill out the form and one of our customer success experts will get in touch to discuss how we can help you implement and scale your strategy.
-              </p>
-              
-              <div className="space-y-5">
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                    <CheckCircle size={20} />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="font-semibold">Personalized Guidance</h3>
-                    <p className="text-foreground/70">Get tailored advice specific to your industry and business needs.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                    <CheckCircle size={20} />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="font-semibold">Resource Assessment</h3>
-                    <p className="text-foreground/70">We'll help you identify which resources will be most valuable for your team.</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0 mt-1">
-                    <CheckCircle size={20} />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="font-semibold">Implementation Plan</h3>
-                    <p className="text-foreground/70">Receive a clear roadmap for implementing your customer success strategy.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div>
               <form 
                 ref={formRef}
                 onSubmit={handleSubmit} 
@@ -225,6 +183,15 @@ const ContactSection = () => {
                   </div>
                 )}
               </form>
+            </div>
+            
+            <div>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+                Contact Us
+              </h2>
+              <p className="text-foreground/70 mb-8">
+                Fill out the form and one of our customer success experts will get in touch to discuss how we can help you implement and scale your strategy.
+              </p>
             </div>
           </div>
         </div>

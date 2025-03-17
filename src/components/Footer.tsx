@@ -41,7 +41,7 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">Support</h3>
             <ul className="space-y-3">
               <li><a href="#" className="text-foreground/70 hover:text-primary transition-colors">Help Center</a></li>
-              <li><a href="#support" className="text-foreground/70 hover:text-primary transition-colors">Contact Us</a></li>
+              <li><a href="#contact" className="text-foreground/70 hover:text-primary transition-colors">Contact Us</a></li>
               <li><a href="https://status.elevenlabs.io/" target="_blank" rel="noopener noreferrer" className="text-foreground/70 hover:text-primary transition-colors">Status</a></li>
             </ul>
           </div>
