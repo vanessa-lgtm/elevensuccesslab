@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -191,6 +190,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           description: 'Answer a few questions to help us understand your current AI maturity level.',
           timeEstimate: '10 min',
           completed: false,
+          section: 'general',
         },
         {
           id: '3',
@@ -198,6 +198,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           description: 'Create your first AI project and define your objectives.',
           timeEstimate: '15 min',
           completed: false,
+          section: 'general',
         },
         {
           id: '4',
@@ -205,6 +206,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           description: 'Integrate your existing data sources to power your AI solutions.',
           timeEstimate: '20 min',
           completed: false,
+          section: 'implementation',
         },
         {
           id: '5',
@@ -212,6 +214,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           description: 'Select and configure an AI model that matches your business needs.',
           timeEstimate: '30 min',
           completed: false,
+          section: 'implementation',
         },
         {
           id: '6',
@@ -219,6 +222,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           description: 'Run initial tests to ensure your AI solution is working correctly.',
           timeEstimate: '15 min',
           completed: false,
+          section: 'implementation',
         },
         {
           id: '7',
@@ -226,6 +230,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           description: 'Add your colleagues to collaborate on your AI projects.',
           timeEstimate: '5 min',
           completed: false,
+          section: 'admin',
         },
         {
           id: '8',
@@ -233,6 +238,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           description: 'Book a session with our experts to get the most out of ElevenLabs.',
           timeEstimate: '10 min',
           completed: false,
+          section: 'admin',
         },
       ]);
     }
@@ -262,7 +268,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     'admin': 'Administration',
     'general': 'Product General Information',
     'usecase': 'Media & Entertainment Use Cases',
-    'basics': 'The Basics'
+    'basics': 'The Basics',
+    'implementation': 'Implementation Steps'
   };
 
   const renderSection = (section: string) => {
@@ -349,9 +356,13 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
 
   return (
     <div className="space-y-4">
-      <h2 className="text-2xl font-bold mb-4">Media & Entertainment Onboarding</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        {industry === "media" ? "Media & Entertainment Onboarding" : "Onboarding Checklist"}
+      </h2>
       <p className="text-muted-foreground mb-6">
-        Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.
+        {industry === "media" 
+          ? "Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation."
+          : "Complete these steps to get started with ElevenLabs. Each step includes an estimated time to complete."}
       </p>
       
       {orderedSections.length > 0 ? (
