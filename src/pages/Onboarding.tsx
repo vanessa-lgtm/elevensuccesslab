@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -6,6 +5,7 @@ import Footer from '@/components/Footer';
 import OnboardingChecklist from '@/components/OnboardingChecklist';
 import OnboardingSurvey from '@/components/OnboardingSurvey';
 import WebinarPopup from '@/components/WebinarPopup';
+import VideoEmbed from '@/components/VideoEmbed';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -14,7 +14,6 @@ import { ChevronDown, ChevronRight, Shield, BookOpen, Film, Globe, Download, Mic
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 
-// Media & Entertainment industry IDs
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
   'marketing', 'gaming', 'digital_media', 'audio_production'
@@ -30,7 +29,6 @@ const Onboarding = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    // Check if the industry is specified in the URL
     const params = new URLSearchParams(location.search);
     const industryParam = params.get('industry');
     
@@ -38,13 +36,11 @@ const Onboarding = () => {
       setIndustry('media');
     }
     
-    // Check if a specific tab is specified
     const tabParam = params.get('tab');
     if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
       setActiveTab(tabParam);
     }
 
-    // Load completed actions from localStorage
     const savedCompletedActions = localStorage.getItem('completedActions');
     if (savedCompletedActions) {
       setCompletedActions(JSON.parse(savedCompletedActions));
@@ -67,14 +63,12 @@ const Onboarding = () => {
         [id]: !prev[id] 
       };
       
-      // Save to localStorage
       localStorage.setItem('completedActions', JSON.stringify(newCompletedActions));
       
       return newCompletedActions;
     });
   };
   
-  // Key Actions Steps for Media & Entertainment (previously Quick Start)
   const keyActionSteps = [
     {
       id: 'api-request',
@@ -150,7 +144,6 @@ const Onboarding = () => {
     }
   ];
   
-  // Resources for Media & Entertainment (updated)
   const resources = [
     {
       title: 'Product Guide',
@@ -190,7 +183,6 @@ const Onboarding = () => {
     }
   ];
   
-  // Expandable section for Key Actions (previously Quick Start)
   const KeyActionItem = ({ step }: { step: typeof keyActionSteps[0] }) => {
     const [isOpen, setIsOpen] = useState(false);
     const isCompleted = completedActions[step.id] || false;
@@ -265,7 +257,6 @@ const Onboarding = () => {
     );
   };
   
-  // Render resources cards
   const ResourceCard = ({ resource }: { resource: typeof resources[0] }) => (
     <Card className="overflow-hidden transition-all duration-200 hover:shadow-md hover:border-primary/40 h-full">
       <CardContent className="p-6">
@@ -295,9 +286,16 @@ const Onboarding = () => {
         <div className="max-w-4xl mx-auto">
           <div className="mb-8 text-center">
             <h1 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">Media & Entertainment Onboarding</h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
               Welcome to your personalized onboarding experience. We've tailored this guide to help media and entertainment professionals get the most out of ElevenLabs.
             </p>
+            
+            <div className="mb-8">
+              <VideoEmbed 
+                videoId="z0sD2BvUfM0" 
+                title="ElevenLabs Onboarding Video" 
+              />
+            </div>
           </div>
           
           <div className="mb-10 bg-card rounded-lg p-4 shadow-sm border border-muted">
