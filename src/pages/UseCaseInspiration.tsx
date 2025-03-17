@@ -1,10 +1,12 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
+import MediaUseCasesInspiration from '@/components/MediaUseCasesInspiration';
 
 type UseCase = {
   id: string;
@@ -114,6 +116,12 @@ const UseCaseInspiration = () => {
           </p>
         </div>
         
+        {/* Media Use Cases Section */}
+        <div className="mb-16">
+          <MediaUseCasesInspiration />
+        </div>
+        
+        <h2 className="text-3xl font-bold mb-8 text-center">Success Stories</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {useCases.map((useCase) => (
             <Card key={useCase.id} className="h-full overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
