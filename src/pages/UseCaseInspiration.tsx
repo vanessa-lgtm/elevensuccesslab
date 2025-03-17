@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, ExternalLink } from 'lucide-react';
@@ -7,121 +8,41 @@ import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
 import MediaUseCasesInspiration from '@/components/MediaUseCasesInspiration';
 
-type UseCase = {
-  id: string;
-  title: string;
-  industry: string;
-  description: string;
-  challenge: string;
-  solution: string;
-  results: string;
-  customerName: string;
-};
-
-const useCases: UseCase[] = [
-  {
-    id: "1",
-    title: "Personalized Audiobook Narration",
-    industry: "Publishing",
-    description: "How a major publishing house transformed their audiobook experience with AI voice technology.",
-    challenge: "Traditional audiobook production was costly and time-consuming, limiting which books could receive audio versions.",
-    solution: "Implemented ElevenLabs to create realistic, emotionally resonant narrations with different voice profiles for characters.",
-    results: "Increased audiobook production by 300%, reduced costs by 70%, and improved customer satisfaction ratings.",
-    customerName: "Global Publishing Inc."
-  },
-  {
-    id: "2",
-    title: "Multilingual Customer Service",
-    industry: "E-commerce",
-    description: "How an international retailer broke language barriers with AI voice translation.",
-    challenge: "Supporting customers across 20+ countries with native-language support was prohibitively expensive.",
-    solution: "Deployed ElevenLabs to provide real-time voice translation for customer service calls, maintaining natural-sounding conversations.",
-    results: "Customer satisfaction increased 45% in non-English markets while reducing support costs by 60%.",
-    customerName: "WorldWide Retail"
-  },
-  {
-    id: "3",
-    title: "Accessible Learning Content",
-    industry: "Education",
-    description: "How an online learning platform made education more accessible with AI voice technology.",
-    challenge: "Students with reading difficulties or visual impairments struggled to access educational materials.",
-    solution: "Integrated ElevenLabs to convert text-based content into natural-sounding audio in multiple languages and voices.",
-    results: "Course completion rates for students with accessibility needs increased by 85%.",
-    customerName: "EduLearn Academy"
-  },
-  {
-    id: "4",
-    title: "Immersive Gaming Experience",
-    industry: "Gaming",
-    description: "How a game studio created dynamic voice acting for thousands of NPCs.",
-    challenge: "Limited budget for voice actors restricted the number of voiced characters in their open-world game.",
-    solution: "Used ElevenLabs to generate diverse, contextually appropriate dialogue for NPCs with emotional range.",
-    results: "Player engagement increased 40% with a 25% increase in average playtime.",
-    customerName: "Immersive Worlds Studios"
-  },
-  {
-    id: "5",
-    title: "Personalized Video Marketing",
-    industry: "Marketing",
-    description: "How a marketing agency scaled personalized video content with AI voices.",
-    challenge: "Creating personalized video content for thousands of customers was prohibitively expensive.",
-    solution: "Implemented ElevenLabs to dynamically generate personalized voice-overs for marketing videos.",
-    results: "Campaign conversion rates increased by 65% while production costs decreased by 80%.",
-    customerName: "NextGen Marketing"
-  },
-  {
-    id: "6",
-    title: "Voice-Enabled Virtual Assistants",
-    industry: "Technology",
-    description: "How a tech company created more natural and engaging virtual assistants.",
-    challenge: "Existing virtual assistants sounded robotic and failed to create authentic user experiences.",
-    solution: "Integrated ElevenLabs' voice AI to create lifelike, emotionally responsive virtual assistants.",
-    results: "User engagement with virtual assistants increased by 120% with 93% of users rating the experience as 'natural'.",
-    customerName: "InnoTech Solutions"
-  },
-  {
-    id: "7",
-    title: "Multilingual Video Dubbing",
-    industry: "Entertainment",
-    description: "How a streaming platform expanded global reach with AI voice dubbing.",
-    challenge: "Traditional dubbing was expensive and time-consuming, limiting international content availability.",
-    solution: "Used ElevenLabs to create multilingual voice dubbing that preserved emotional nuance in 20+ languages.",
-    results: "International viewership increased by 200% with 85% of viewers rating the dubbing quality as 'excellent'.",
-    customerName: "Global Stream Network"
-  },
-  {
-    id: "8",
-    title: "Accessible News Content",
-    industry: "Media",
-    description: "How a news organization made content accessible to more audiences.",
-    challenge: "Written news content excluded audiences with reading difficulties or visual impairments.",
-    solution: "Implemented ElevenLabs to automatically convert news articles to natural-sounding audio in multiple languages.",
-    results: "Audience reach increased by 35% with 15% of all content now consumed in audio format.",
-    customerName: "World News Network"
-  }
-];
-
 const blogStories = [
   {
     id: "blog1",
-    title: "How Voice AI Is Transforming Language Learning: A Case Study with Lingopie",
-    summary: "Lingopie, a language learning platform, integrated ElevenLabs' voice AI to create more engaging and effective learning experiences, resulting in a 40% increase in user engagement.",
-    imageUrl: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=2671&auto=format&fit=crop",
-    link: "https://elevenlabs.io/blog/lingopie-case-study"
+    title: "Convin: Revolutionizing B2B Sales with ElevenLabs' Voice AI",
+    summary: "Discover how Convin enhances customer experience and streamlines sales training with AI-powered call analytics, leveraging ElevenLabs technology for more effective sales conversations.",
+    imageUrl: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?q=80&w=2564&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/convin"
   },
   {
     id: "blog2",
-    title: "Creating Authentic Voices for Healthcare: Emmi's Story",
-    summary: "Emmi, a healthcare communication platform, used ElevenLabs' voice technology to create personalized health education content, making complex medical information more accessible to patients.",
-    imageUrl: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=2670&auto=format&fit=crop",
-    link: "https://elevenlabs.io/blog/healthcare-voice-ai"
+    title: "TIME: Bringing Conversational AI to Journalism",
+    summary: "Learn how TIME magazine uses ElevenLabs' voice AI to create interactive experiences that allow readers to engage with historical figures and contemporary leaders in a whole new way.",
+    imageUrl: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2670&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/time-brings-conversational-ai-to-journalism"
   },
   {
     id: "blog3",
-    title: "How Indie Game Developer Increased Player Engagement with Voice AI",
-    summary: "An independent game studio implemented ElevenLabs to voice over 200+ NPCs with distinct personalities, leading to a 65% increase in positive player reviews and longer gameplay sessions.",
-    imageUrl: "https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2671&auto=format&fit=crop",
-    link: "https://elevenlabs.io/blog/game-development-voice-ai"
+    title: "Solda AI: Making Books Accessible Through Voice Technology",
+    summary: "Explore how Solda AI partnered with ElevenLabs to transform written content into natural-sounding audiobooks, increasing accessibility and engagement for readers worldwide.",
+    imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=2574&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/solda-ai"
+  },
+  {
+    id: "blog4",
+    title: "SynthFlow: Creating Realistic Voice Overs for Training Videos",
+    summary: "See how SynthFlow uses ElevenLabs' voice technology to produce high-quality, multilingual training videos at scale, saving time and resources while maintaining natural-sounding narration.",
+    imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2670&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/synthflow"
+  },
+  {
+    id: "blog5",
+    title: "Hedra: Enhancing Compliance Training with Voice AI",
+    summary: "Discover how Hedra leverages ElevenLabs' technology to transform compliance training through personalized, engaging voice content that improves learning outcomes and retention.",
+    imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2670&auto=format&fit=crop",
+    link: "https://elevenlabs.io/blog/hedra"
   }
 ];
 
@@ -143,68 +64,30 @@ const UseCaseInspiration = () => {
           <MediaUseCasesInspiration />
         </div>
         
-        <h2 className="text-3xl font-bold mb-8 text-center">Success Stories</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {useCases.map((useCase) => (
-            <Card key={useCase.id} className="h-full overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+        <h2 className="text-3xl font-bold mb-8 text-center">Featured Customer Stories</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {blogStories.map((story) => (
+            <Card key={story.id} className="overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+              <div className="aspect-video w-full overflow-hidden">
+                <img 
+                  src={story.imageUrl} 
+                  alt={story.title} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <CardHeader className="pb-2">
-                <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-xl">{useCase.title}</CardTitle>
-                  <span className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary font-medium">
-                    {useCase.industry}
-                  </span>
-                </div>
-                <CardDescription className="text-base">{useCase.description}</CardDescription>
+                <CardTitle className="text-lg line-clamp-2">{story.title}</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="font-semibold mb-1">Challenge:</h3>
-                    <p className="text-sm text-muted-foreground">{useCase.challenge}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Solution:</h3>
-                    <p className="text-sm text-muted-foreground">{useCase.solution}</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-1">Results:</h3>
-                    <p className="text-sm text-muted-foreground">{useCase.results}</p>
-                  </div>
-                  <div className="pt-2 text-sm font-medium text-right">
-                    Customer: {useCase.customerName}
-                  </div>
-                </div>
+              <CardContent className="flex flex-col h-[calc(100%-theme(spacing.36))]">
+                <p className="text-sm text-muted-foreground mb-4 flex-grow line-clamp-3">{story.summary}</p>
+                <Button variant="outline" size="sm" className="w-full mt-auto" asChild>
+                  <a href={story.link} target="_blank" rel="noopener noreferrer">
+                    Read Case Study <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
               </CardContent>
             </Card>
           ))}
-        </div>
-        
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold mb-6 text-center">Featured Customer Stories from Our Blog</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {blogStories.map((story) => (
-              <Card key={story.id} className="overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img 
-                    src={story.imageUrl} 
-                    alt={story.title} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">{story.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">{story.summary}</p>
-                  <Button variant="outline" size="sm" className="w-full" asChild>
-                    <a href={story.link} target="_blank" rel="noopener noreferrer">
-                      Read Full Story <ExternalLink className="ml-2 h-4 w-4" />
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
         </div>
         
         <div className="max-w-2xl mx-auto text-center">
