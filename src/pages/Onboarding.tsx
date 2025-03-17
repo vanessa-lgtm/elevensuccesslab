@@ -10,7 +10,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
-import { ChevronDown, ChevronRight, Phone, Shield, BookOpen, Film, Download, MicVocal, Music, Globe } from 'lucide-react';
+import { ChevronDown, ChevronRight, Shield, BookOpen, Film, Globe, Download, MicVocal, Music, Code } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Media & Entertainment industry IDs
@@ -38,7 +38,7 @@ const Onboarding = () => {
     
     // Check if a specific tab is specified
     const tabParam = params.get('tab');
-    if (tabParam && ['checklist', 'quick-start', 'resources'].includes(tabParam)) {
+    if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [location]);
@@ -52,8 +52,8 @@ const Onboarding = () => {
     navigate(`/onboarding?industry=${industry}&tab=${value}`, { replace: true });
   };
   
-  // Quick Start Steps for Media & Entertainment
-  const quickStartSteps = [
+  // Key Actions Steps for Media & Entertainment (previously Quick Start)
+  const keyActionSteps = [
     {
       id: 'add-voice',
       title: 'Add a Voice to Your Library',
@@ -98,6 +98,20 @@ const Onboarding = () => {
       link: 'https://elevenlabs.io/sound-effects'
     },
     {
+      id: 'api-request',
+      title: 'Make Your First API Request',
+      description: 'Start integrating ElevenLabs into your applications and workflows.',
+      icon: <Code className="h-8 w-8 text-primary" />,
+      steps: [
+        'Generate your API key in your account settings',
+        'Install the API client library for your programming language',
+        'Make a simple text-to-speech API call',
+        'Set voice and model parameters',
+        'Receive and use the generated audio'
+      ],
+      link: 'https://elevenlabs.io/docs/quickstart'
+    },
+    {
       id: 'generate-tts',
       title: 'Generate Your First TTS Audio',
       description: 'Create your first AI-generated voice clip in just a few minutes.',
@@ -114,10 +128,10 @@ const Onboarding = () => {
     }
   ];
   
-  // Resources for Media & Entertainment
+  // Resources for Media & Entertainment (updated)
   const resources = [
     {
-      title: 'Media & Entertainment Implementation Guide',
+      title: 'Product Guide',
       description: 'Comprehensive guide for implementing ElevenLabs in media production workflows.',
       icon: <Film className="h-6 w-6 text-primary" />,
       link: 'https://elevenlabs.io/docs/guides/media'
@@ -141,15 +155,21 @@ const Onboarding = () => {
       link: 'https://elevenlabs.io/docs/guides/security'
     },
     {
-      title: 'Schedule a Consultation',
-      description: 'Book a one-on-one call with our media solutions specialists.',
-      icon: <Phone className="h-6 w-6 text-primary" />,
-      link: 'https://elevenlabs.io/contact'
+      title: 'Customer Story: Bertelsmann',
+      description: 'Learn how Bertelsmann is using ElevenLabs to transform their media business.',
+      icon: <BookOpen className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/blog/bertelsmann'
+    },
+    {
+      title: 'Customer Story: Star Sports',
+      description: 'See how Star Sports leverages AI voice technology for sports broadcasting.',
+      icon: <Film className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/blog/starsports'
     }
   ];
   
-  // Expandable section for Quick Start
-  const QuickStartItem = ({ step }: { step: typeof quickStartSteps[0] }) => {
+  // Expandable section for Key Actions (previously Quick Start)
+  const KeyActionItem = ({ step }: { step: typeof keyActionSteps[0] }) => {
     const [isOpen, setIsOpen] = useState(false);
     
     return (
@@ -243,7 +263,7 @@ const Onboarding = () => {
           <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="checklist" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">Onboarding Checklist</TabsTrigger>
-              <TabsTrigger value="quick-start" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">Quick Start Guide</TabsTrigger>
+              <TabsTrigger value="key-actions" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">Key Actions</TabsTrigger>
               <TabsTrigger value="resources" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">Resources</TabsTrigger>
             </TabsList>
             
@@ -261,16 +281,16 @@ const Onboarding = () => {
               </div>
             </TabsContent>
             
-            <TabsContent value="quick-start" className="mt-4 animate-fade-in">
+            <TabsContent value="key-actions" className="mt-4 animate-fade-in">
               <div className="mb-6 bg-card p-6 rounded-lg shadow-sm border border-muted">
-                <h2 className="text-2xl font-bold mb-4 text-primary">Quick Start for Media & Entertainment</h2>
+                <h2 className="text-2xl font-bold mb-4 text-primary">Key Actions for Media & Entertainment</h2>
                 <p className="text-muted-foreground mb-6">
                   Complete these steps to quickly get started with ElevenLabs for your media production needs. 
                   Each guide includes step-by-step instructions.
                 </p>
                 
-                {quickStartSteps.map((step) => (
-                  <QuickStartItem key={step.id} step={step} />
+                {keyActionSteps.map((step) => (
+                  <KeyActionItem key={step.id} step={step} />
                 ))}
               </div>
             </TabsContent>
