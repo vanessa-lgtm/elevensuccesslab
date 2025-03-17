@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Lightbulb } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +20,18 @@ const Navbar = () => {
   }, []);
 
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+
+  // Function to handle support link navigation
+  const handleSupportClick = (e: React.MouseEvent) => {
+    // If we're not on the home page, navigate to home page with support section hash
+    if (location.pathname !== '/') {
+      // Let the Link component handle the navigation
+    } else {
+      // If we're already on the home page, just scroll to the section
+      e.preventDefault();
+      document.getElementById('support')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <header 
@@ -41,9 +54,13 @@ const Navbar = () => {
           <a href="https://elevenlabs.io/webinars" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
             Upcoming Events
           </a>
-          <a href="#support" className="text-foreground/80 hover:text-primary transition-colors">
+          <Link 
+            to="/#support" 
+            onClick={handleSupportClick}
+            className="text-foreground/80 hover:text-primary transition-colors"
+          >
             Support
-          </a>
+          </Link>
           <a href="https://elevenlabs.io/blog?category=product" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
             Product Updates
           </a>
@@ -83,13 +100,19 @@ const Navbar = () => {
           >
             Upcoming Events
           </a>
-          <a 
-            href="#support" 
+          <Link 
+            to="/#support" 
             className="text-foreground/80 text-lg font-medium"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={(e) => {
+              setMobileMenuOpen(false);
+              if (location.pathname === '/') {
+                e.preventDefault();
+                document.getElementById('support')?.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
           >
             Support
-          </a>
+          </Link>
           <a 
             href="https://elevenlabs.io/blog?category=product" 
             target="_blank" 
