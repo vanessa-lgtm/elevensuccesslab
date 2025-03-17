@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -70,7 +69,7 @@ const ContactSection = () => {
   return (
     <section 
       id="contact" 
-      className="section-padding relative"
+      className="py-10 px-4 md:px-8 lg:px-12 relative"
       style={{
         background: 'linear-gradient(to bottom, rgb(241, 245, 249), rgb(248, 250, 252))',
       }}
@@ -85,7 +84,7 @@ const ContactSection = () => {
         className="container mx-auto opacity-0 translate-y-10 transition-all duration-700 ease-out"
       >
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div>
               <form 
                 ref={formRef}

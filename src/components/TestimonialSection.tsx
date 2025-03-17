@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronLeft, ChevronRight, Quote, ExternalLink } from 'lucide-react';
@@ -75,16 +76,16 @@ const TestimonialSection = () => {
   return (
     <section 
       id="testimonials" 
-      className="section-padding bg-background"
+      className="py-12 px-4 md:px-8 lg:px-12 bg-background"
       ref={sectionRef}
     >
       <div className="container mx-auto opacity-0 transition-opacity duration-1000">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="text-sm font-medium text-primary mb-3">Success Stories</div>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
             What Our Customers Say
           </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto mb-6">
+          <p className="text-foreground/70 max-w-2xl mx-auto mb-4">
             Hear from organizations that have transformed their customer success strategies using our resources and support.
           </p>
           <Button 
