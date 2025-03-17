@@ -10,8 +10,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
-import { ChevronDown, ChevronRight, Shield, BookOpen, Film, Globe, Download, MicVocal, Music, Code } from 'lucide-react';
+import { ChevronDown, ChevronRight, Shield, BookOpen, Film, Globe, Download, MicVocal, Music, Code, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Checkbox } from '@/components/ui/checkbox';
 
 // Media & Entertainment industry IDs
 const mediaIndustries = [
@@ -23,6 +24,7 @@ const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [activeTab, setActiveTab] = useState("checklist");
   const [industry, setIndustry] = useState<string>("media");
+  const [completedActions, setCompletedActions] = useState<Record<string, boolean>>({});
   
   const location = useLocation();
   const navigate = useNavigate();
@@ -41,6 +43,12 @@ const Onboarding = () => {
     if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
       setActiveTab(tabParam);
     }
+
+    // Load completed actions from localStorage
+    const savedCompletedActions = localStorage.getItem('completedActions');
+    if (savedCompletedActions) {
+      setCompletedActions(JSON.parse(savedCompletedActions));
+    }
   }, [location]);
   
   const handleProgressUpdate = (completed: number, total: number) => {
@@ -51,9 +59,37 @@ const Onboarding = () => {
     setActiveTab(value);
     navigate(`/onboarding?industry=${industry}&tab=${value}`, { replace: true });
   };
+
+  const toggleActionCompletion = (id: string) => {
+    setCompletedActions(prev => {
+      const newCompletedActions = { 
+        ...prev, 
+        [id]: !prev[id] 
+      };
+      
+      // Save to localStorage
+      localStorage.setItem('completedActions', JSON.stringify(newCompletedActions));
+      
+      return newCompletedActions;
+    });
+  };
   
   // Key Actions Steps for Media & Entertainment (previously Quick Start)
   const keyActionSteps = [
+    {
+      id: 'api-request',
+      title: 'Make Your First API Request',
+      description: 'Start integrating ElevenLabs into your applications and workflows.',
+      icon: <Code className="h-8 w-8 text-primary" />,
+      steps: [
+        'Generate your API key in your account settings',
+        'Install the API client library for your programming language',
+        'Make a simple text-to-speech API call',
+        'Set voice and model parameters',
+        'Receive and use the generated audio'
+      ],
+      link: 'https://elevenlabs.io/docs/quickstart'
+    },
     {
       id: 'add-voice',
       title: 'Add a Voice to Your Library',
@@ -96,20 +132,6 @@ const Onboarding = () => {
         'Preview and download the generated audio file'
       ],
       link: 'https://elevenlabs.io/sound-effects'
-    },
-    {
-      id: 'api-request',
-      title: 'Make Your First API Request',
-      description: 'Start integrating ElevenLabs into your applications and workflows.',
-      icon: <Code className="h-8 w-8 text-primary" />,
-      steps: [
-        'Generate your API key in your account settings',
-        'Install the API client library for your programming language',
-        'Make a simple text-to-speech API call',
-        'Set voice and model parameters',
-        'Receive and use the generated audio'
-      ],
-      link: 'https://elevenlabs.io/docs/quickstart'
     },
     {
       id: 'generate-tts',
@@ -171,15 +193,44 @@ const Onboarding = () => {
   // Expandable section for Key Actions (previously Quick Start)
   const KeyActionItem = ({ step }: { step: typeof keyActionSteps[0] }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const isCompleted = completedActions[step.id] || false;
     
     return (
-      <Card className="mb-4 border-primary/20 hover:border-primary/40 transition-all duration-200">
+      <Card className={cn(
+        "mb-4 border-primary/20 hover:border-primary/40 transition-all duration-200",
+        isCompleted ? "border-primary/50 bg-primary/5" : ""
+      )}>
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <div className="flex items-start p-4">
             <div className="mr-4 bg-primary/10 p-3 rounded-full">{step.icon}</div>
             <div className="flex-1">
-              <h3 className="text-xl font-medium">{step.title}</h3>
-              <p className="text-muted-foreground">{step.description}</p>
+              <div className="flex items-center gap-3">
+                <Checkbox 
+                  id={`action-${step.id}`}
+                  checked={isCompleted}
+                  onCheckedChange={() => toggleActionCompletion(step.id)}
+                  className={cn(isCompleted ? "text-primary" : "")}
+                />
+                <h3 className={cn(
+                  "text-xl font-medium",
+                  isCompleted ? "line-through text-muted-foreground" : ""
+                )}>
+                  {step.title}
+                </h3>
+              </div>
+              <p className={cn(
+                "text-muted-foreground ml-7",
+                isCompleted ? "line-through" : ""
+              )}>
+                {step.description}
+              </p>
+              
+              {isCompleted && (
+                <div className="ml-7 mt-2 text-sm text-primary flex items-center">
+                  <Check className="h-4 w-4 mr-1" />
+                  Completed
+                </div>
+              )}
             </div>
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="sm" className="p-0 h-8 w-8">
@@ -194,7 +245,12 @@ const Onboarding = () => {
             <CardContent className="pt-0 pb-4 bg-muted/30">
               <ol className="list-decimal pl-10 space-y-2 mb-4">
                 {step.steps.map((text, index) => (
-                  <li key={index} className="text-foreground/90">{text}</li>
+                  <li key={index} className={cn(
+                    "text-foreground/90",
+                    isCompleted ? "line-through text-muted-foreground" : ""
+                  )}>
+                    {text}
+                  </li>
                 ))}
               </ol>
               <Button asChild className="mt-2">
@@ -283,7 +339,7 @@ const Onboarding = () => {
             
             <TabsContent value="key-actions" className="mt-4 animate-fade-in">
               <div className="mb-6 bg-card p-6 rounded-lg shadow-sm border border-muted">
-                <h2 className="text-2xl font-bold mb-4 text-primary">Key Actions for Media & Entertainment</h2>
+                <h2 className="text-2xl font-bold mb-4 text-primary">Key Actions for Mastering ElevenLabs</h2>
                 <p className="text-muted-foreground mb-6">
                   Complete these steps to quickly get started with ElevenLabs for your media production needs. 
                   Each guide includes step-by-step instructions.
