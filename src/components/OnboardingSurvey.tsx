@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -58,21 +57,26 @@ import {
   Film
 } from 'lucide-react';
 
-// Industry options
 const industries = [
-  { value: 'media', label: 'Media & Entertainment' },
-  { value: 'technology', label: 'Technology' },
-  { value: 'education', label: 'Education' },
-  { value: 'healthcare', label: 'Healthcare' },
-  { value: 'financial', label: 'Financial Services' },
-  { value: 'retail', label: 'Retail & E-commerce' },
-  { value: 'gaming', label: 'Gaming' },
-  { value: 'telecom', label: 'Telecommunications' },
-  { value: 'automotive', label: 'Automotive' },
-  { value: 'other', label: 'Other' }
+  { value: 'localization', label: 'Localization and Translation Services' },
+  { value: 'broadcasting', label: 'Broadcasting and Media Production' },
+  { value: 'streaming', label: 'Streaming Services and OTT Platforms' },
+  { value: 'film', label: 'Film and Television Production' },
+  { value: 'marketing', label: 'Marketing and Advertising Services' },
+  { value: 'gaming', label: 'Video Game Development' },
+  { value: 'digital_media', label: 'Digital Media and Publishing' },
+  { value: 'audio_production', label: 'Audio Content Production and Publishing' },
+  { value: 'media_software', label: 'Media and Content Creation Software' },
+  { value: 'ai_assistants', label: 'Consumer AI and Virtual Assistants' },
+  { value: 'edtech', label: 'EdTech (Education Technology)' },
+  { value: 'software', label: 'Software Development and SaaS Providers' },
+  { value: 'customer_support', label: 'Customer Support and Call Center Operations' },
+  { value: 'call_center', label: 'Call Center Technology and Solutions Providers' },
+  { value: 'hardware', label: 'Hardware and Electronics Manufacturing' },
+  { value: 'consulting', label: 'Management Consulting and Advisory Services' },
+  { value: 'other', label: 'Miscellaneous / Other Industries' }
 ];
 
-// Use case options
 const useCases = [
   { value: 'content_creation', label: 'Content Creation' },
   { value: 'customer_service', label: 'Customer Service' },
@@ -82,11 +86,11 @@ const useCases = [
   { value: 'gaming', label: 'Gaming Characters' },
   { value: 'advertising', label: 'Advertising & Marketing' },
   { value: 'education', label: 'Educational Content' },
-  { value: 'assistant', label: 'Virtual Assistant' },
+  { value: 'conversational_ai', label: 'Conversational AI' },
+  { value: 'call_center', label: 'Call Center Automation' },
   { value: 'not_sure', label: 'I don\'t know yet' }
 ];
 
-// Integration platforms
 const integrationPlatforms = [
   { value: 'crm', label: 'CRM (e.g., Salesforce, HubSpot)' },
   { value: 'helpdesk', label: 'Helpdesk (e.g., Zendesk, Freshdesk)' },
@@ -100,7 +104,6 @@ const integrationPlatforms = [
   { value: 'not_sure', label: 'Not sure yet' }
 ];
 
-// Onboarding plans
 const onboardingPlans = [
   {
     id: 'beginner',
@@ -176,22 +179,18 @@ const onboardingPlans = [
   }
 ];
 
-// Helper function to determine the appropriate onboarding plan
 const determineOnboardingPlan = (formData: any) => {
-  // This is a simplified logic - in a real app, this would be more sophisticated
   const knowledgeLevel = formData.knowledge_level;
   const primaryUseCase = formData.primary_use_case;
   const industry = formData.industry;
   const integrations = formData.integrations || [];
   
-  // Check for industry-specific plans
   if (industry === 'healthcare') {
     return 'healthcare';
   } else if (industry === 'media') {
     return 'media';
   }
   
-  // Logic to determine the best plan
   if (knowledgeLevel === 'low') {
     return 'beginner';
   } else if (primaryUseCase === 'content_creation' || primaryUseCase === 'audiobooks' || primaryUseCase === 'advertising') {
@@ -202,7 +201,6 @@ const determineOnboardingPlan = (formData: any) => {
     return 'enterprise';
   }
   
-  // Default fallback
   return 'beginner';
 };
 
@@ -211,6 +209,7 @@ interface SurveyFormValues {
   email: string;
   knowledge_level: 'low' | 'medium' | 'high';
   industry: string;
+  other_industry?: string;
   primary_use_case: string;
   additional_use_cases: string[];
   subscribe: boolean;
@@ -232,6 +231,7 @@ const OnboardingSurvey = () => {
       email: '',
       knowledge_level: 'medium',
       industry: '',
+      other_industry: '',
       primary_use_case: '',
       additional_use_cases: [],
       subscribe: false,
@@ -241,11 +241,11 @@ const OnboardingSurvey = () => {
     }
   });
 
-  const totalSteps = 6; // Total number of steps in the survey
+  const totalSteps = 5;
   const progress = ((currentStep + 1) / totalSteps) * 100;
   
   const handleNext = () => {
-    if (currentStep === 1 && (form.getValues('knowledge_level') === 'low' || form.getValues('knowledge_level') === 'medium')) {
+    if (currentStep === 1 && form.getValues('knowledge_level') === 'low') {
       setSuggestResources(true);
     } else {
       setSuggestResources(false);
@@ -254,7 +254,6 @@ const OnboardingSurvey = () => {
     if (currentStep < totalSteps - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Process final submission
       const formData = form.getValues();
       const planId = determineOnboardingPlan(formData);
       setSelectedPlan(planId);
@@ -269,7 +268,6 @@ const OnboardingSurvey = () => {
   };
 
   const handleComplete = () => {
-    // Navigate to the onboarding page with the selected plan as a parameter
     navigate(`/onboarding?plan=${selectedPlan}`);
   };
 
@@ -368,18 +366,18 @@ const OnboardingSurvey = () => {
               )}
             />
             
-            {suggestResources && (
+            {form.watch('knowledge_level') === 'low' && (
               <div className="bg-primary/10 p-4 rounded-md mt-4">
                 <h4 className="text-sm font-medium flex items-center">
                   <BookOpen className="h-4 w-4 mr-2" />
                   Recommended Resources
                 </h4>
                 <p className="text-sm mt-2">
-                  Based on your experience level, we suggest starting with our 
-                  "Voice AI Basics" guide and intro tutorials.
+                  Based on your experience level, we recommend checking out our 
+                  "Voice AI Basics" guide to help you get started.
                 </p>
                 <Button variant="outline" size="sm" className="mt-2">
-                  View Resources
+                  View Voice AI Basics
                 </Button>
               </div>
             )}
@@ -388,8 +386,8 @@ const OnboardingSurvey = () => {
       
       case 2:
         return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Tell us about your industry</h3>
+          <div className="space-y-6">
+            <h3 className="text-lg font-medium">Your Industry & Use Cases</h3>
             
             <FormField
               control={form.control}
@@ -397,7 +395,15 @@ const OnboardingSurvey = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Your Industry</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select 
+                    onValueChange={(value) => {
+                      field.onChange(value);
+                      if (value !== 'other') {
+                        form.setValue('other_industry', '');
+                      }
+                    }} 
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select your industry" />
@@ -415,22 +421,32 @@ const OnboardingSurvey = () => {
                 </FormItem>
               )}
             />
-          </div>
-        );
-      
-      case 3:
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Primary use case</h3>
-            <p className="text-sm text-muted-foreground">
-              Which use case do you plan to implement first?
-            </p>
+            
+            {form.watch('industry') === 'other' && (
+              <FormField
+                control={form.control}
+                name="other_industry"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Please specify your industry</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your industry" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
             
             <FormField
               control={form.control}
               name="primary_use_case"
               render={({ field }) => (
                 <FormItem>
+                  <FormLabel>Primary use case</FormLabel>
+                  <FormDescription>
+                    Which use case do you plan to implement first?
+                  </FormDescription>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
@@ -466,13 +482,6 @@ const OnboardingSurvey = () => {
                 </Button>
               </div>
             )}
-          </div>
-        );
-      
-      case 4:
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Future use cases & preferences</h3>
             
             <FormField
               control={form.control}
@@ -524,36 +533,13 @@ const OnboardingSurvey = () => {
                 </FormItem>
               )}
             />
-            
-            <FormField
-              control={form.control}
-              name="subscribe"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 mt-6">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      Subscribe to news and product updates
-                    </FormLabel>
-                    <FormDescription>
-                      Stay up to date with the latest features and improvements
-                    </FormDescription>
-                  </div>
-                </FormItem>
-              )}
-            />
           </div>
         );
       
-      case 5:
+      case 3:
         return (
           <div className="space-y-4">
-            <h3 className="text-lg font-medium">Additional Information</h3>
+            <h3 className="text-lg font-medium">Your Goals & Definition of Success</h3>
             
             <FormField
               control={form.control}
@@ -571,6 +557,30 @@ const OnboardingSurvey = () => {
                 </FormItem>
               )}
             />
+            
+            <FormField
+              control={form.control}
+              name="success_definition"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>How would you define success with voice AI?</FormLabel>
+                  <FormControl>
+                    <Textarea 
+                      placeholder="e.g., Higher conversion rates, positive user feedback..."
+                      {...field} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        );
+      
+      case 4:
+        return (
+          <div className="space-y-4">
+            <h3 className="text-lg font-medium">Additional Information</h3>
             
             <FormField
               control={form.control}
@@ -625,17 +635,23 @@ const OnboardingSurvey = () => {
             
             <FormField
               control={form.control}
-              name="success_definition"
+              name="subscribe"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>How would you define success with voice AI?</FormLabel>
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 mt-6">
                   <FormControl>
-                    <Textarea 
-                      placeholder="e.g., Higher conversion rates, positive user feedback..."
-                      {...field} 
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>
+                      Subscribe to news and product updates
+                    </FormLabel>
+                    <FormDescription>
+                      Stay up to date with the latest features and improvements
+                    </FormDescription>
+                  </div>
                 </FormItem>
               )}
             />
