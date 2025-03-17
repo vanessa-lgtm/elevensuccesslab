@@ -1,8 +1,13 @@
 
-import React, { useEffect, useRef } from 'react';
-import { MessageSquare, Mail, Calendar, Clock, Headset } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { MessageSquare, Mail, Calendar, Clock, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { useForm } from 'react-hook-form';
+import { useToast } from '@/components/ui/use-toast';
 
 interface SupportOptionProps {
   icon: React.ReactNode;
@@ -12,6 +17,7 @@ interface SupportOptionProps {
   delay: number;
   isPrimary?: boolean;
   url?: string;
+  onClick?: () => void;
 }
 
 const SupportOption = ({ 
@@ -21,7 +27,8 @@ const SupportOption = ({
   buttonText, 
   delay,
   isPrimary = false,
-  url
+  url,
+  onClick
 }: SupportOptionProps) => {
   const optionRef = useRef<HTMLDivElement>(null);
   
@@ -52,6 +59,14 @@ const SupportOption = ({
       }
     };
   }, [delay]);
+
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    } else if (url) {
+      window.open(url, '_blank');
+    }
+  };
 
   return (
     <div 
@@ -87,7 +102,7 @@ const SupportOption = ({
           "mt-auto button-hover-effect",
           isPrimary && "bg-white text-primary hover:bg-white/90"
         )}
-        onClick={() => url && window.open(url, '_blank')}
+        onClick={handleClick}
       >
         {buttonText}
       </Button>
@@ -95,8 +110,30 @@ const SupportOption = ({
   );
 };
 
+interface FormValues {
+  name: string;
+  email: string;
+}
+
 const SupportSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
+  const [openStrategyDialog, setOpenStrategyDialog] = useState(false);
+  const { toast } = useToast();
+  
+  const successForm = useForm<FormValues>({
+    defaultValues: {
+      name: '',
+      email: ''
+    }
+  });
+
+  const strategyForm = useForm<FormValues>({
+    defaultValues: {
+      name: '',
+      email: ''
+    }
+  });
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -123,6 +160,28 @@ const SupportSection = () => {
     };
   }, []);
 
+  const onSuccessSubmit = (data: FormValues) => {
+    // In a real implementation, this would send an email to success@elevenlabs.io
+    console.log('Sending email to success@elevenlabs.io with data:', data);
+    toast({
+      title: "Success!",
+      description: "Your information has been sent to our Customer Success team.",
+    });
+    setOpenSuccessDialog(false);
+    successForm.reset();
+  };
+
+  const onStrategySubmit = (data: FormValues) => {
+    // In a real implementation, this would send an email to success@elevenlabs.io
+    console.log('Sending email to success@elevenlabs.io with data:', data);
+    toast({
+      title: "Success!",
+      description: "Your strategy session request has been sent.",
+    });
+    setOpenStrategyDialog(false);
+    strategyForm.reset();
+  };
+
   const supportOptions = [
     {
       icon: <Mail size={20} />,
@@ -130,23 +189,26 @@ const SupportSection = () => {
       description: "Send us your questions on technical or product issues, bugs, etc.",
       buttonText: "Contact Support",
       isPrimary: true,
+      url: "https://help.elevenlabs.io/hc/en-us/requests/new?ticket_form_id=13145996177937",
     },
     {
       icon: <MessageSquare size={20} />,
       title: "Contact Customer Success",
       description: "Contact the ElevenLabs CS team on any product related questions, account related questions, contract details, use case inquiries, etc.",
       buttonText: "Contact Success Team",
+      onClick: () => setOpenSuccessDialog(true),
     },
     {
       icon: <Calendar size={20} />,
       title: "Strategy Session",
       description: "Book a complementary strategy session to develop or refine your use of voice AI technology.",
       buttonText: "Book Session",
+      onClick: () => setOpenStrategyDialog(true),
     },
     {
       icon: <Headset size={20} />,
       title: "Real Time Product Support",
-      description: "Get immediate assistance with our real-time product support for urgent technical issues.",
+      description: "Get immediate assistance with our real time product assistance agent - Call El",
       buttonText: "Get Support",
     },
     {
@@ -154,7 +216,7 @@ const SupportSection = () => {
       title: "On-Demand Webinars",
       description: "Access our library of internal and customer webinars to enhance your knowledge of our product or get inspired!",
       buttonText: "Watch Now",
-      url: "https://www.youtube.com/watch?v=0vyUwVR0vx0",
+      url: "https://elevenlabs.io/webinars",
     },
   ];
 
@@ -188,10 +250,107 @@ const SupportSection = () => {
               delay={index * 100}
               isPrimary={option.isPrimary}
               url={option.url}
+              onClick={option.onClick}
             />
           ))}
         </div>
       </div>
+
+      {/* Contact Customer Success Dialog */}
+      <Dialog open={openSuccessDialog} onOpenChange={setOpenSuccessDialog}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Contact Customer Success</DialogTitle>
+            <DialogDescription>
+              Please provide your information to contact our customer success team.
+            </DialogDescription>
+          </DialogHeader>
+          <Form {...successForm}>
+            <form onSubmit={successForm.handleSubmit(onSuccessSubmit)} className="space-y-4">
+              <FormField
+                control={successForm.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={successForm.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email Address Associated with your ElevenLabs Account</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your email" type="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter>
+                <Button type="submit" className="w-full">
+                  <Send className="mr-2 h-4 w-4" />
+                  Send Request
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
+
+      {/* Strategy Session Dialog */}
+      <Dialog open={openStrategyDialog} onOpenChange={setOpenStrategyDialog}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Book a Strategy Session</DialogTitle>
+            <DialogDescription>
+              Please provide your information to schedule a complementary strategy session.
+            </DialogDescription>
+          </DialogHeader>
+          <Form {...strategyForm}>
+            <form onSubmit={strategyForm.handleSubmit(onStrategySubmit)} className="space-y-4">
+              <FormField
+                control={strategyForm.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={strategyForm.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email Address Associated with your ElevenLabs Account</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter your email" type="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter>
+                <Button type="submit" className="w-full">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Book Session
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

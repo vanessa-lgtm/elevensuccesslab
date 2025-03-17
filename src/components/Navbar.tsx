@@ -44,7 +44,7 @@ const Navbar = () => {
           <a href="#support" className="text-foreground/80 hover:text-primary transition-colors">
             Support
           </a>
-          <a href="https://elevenlabs.io/blog?category=customer-stories" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
+          <a href="https://elevenlabs.io/blog?category=product" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
             Product Updates
           </a>
           <Link to="/use-case-inspiration" className="text-foreground/80 hover:text-primary transition-colors flex items-center gap-1">
@@ -89,7 +89,7 @@ const Navbar = () => {
             Support
           </a>
           <a 
-            href="https://elevenlabs.io/blog?category=customer-stories" 
+            href="https://elevenlabs.io/blog?category=product" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-foreground/80 text-lg font-medium"
