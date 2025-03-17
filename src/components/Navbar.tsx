@@ -38,8 +38,8 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="#resources" className="text-foreground/80 hover:text-primary transition-colors">
-            Resources
+          <a href="https://elevenlabs.io/webinars" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
+            Upcoming Events
           </a>
           <a href="#support" className="text-foreground/80 hover:text-primary transition-colors">
             Support
@@ -75,11 +75,13 @@ const Navbar = () => {
       >
         <nav className="flex flex-col space-y-6 items-center">
           <a 
-            href="#resources" 
+            href="https://elevenlabs.io/webinars"
+            target="_blank" 
+            rel="noopener noreferrer"
             className="text-foreground/80 text-lg font-medium"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Resources
+            Upcoming Events
           </a>
           <a 
             href="#support" 
