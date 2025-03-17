@@ -44,8 +44,8 @@ const Navbar = () => {
           <a href="#support" className="text-foreground/80 hover:text-primary transition-colors">
             Support
           </a>
-          <a href="#testimonials" className="text-foreground/80 hover:text-primary transition-colors">
-            Success Stories
+          <a href="https://elevenlabs.io/blog?category=customer-stories" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
+            Product Updates
           </a>
           <Link to="/use-case-inspiration" className="text-foreground/80 hover:text-primary transition-colors flex items-center gap-1">
             <Lightbulb className="h-4 w-4" />
@@ -89,11 +89,13 @@ const Navbar = () => {
             Support
           </a>
           <a 
-            href="#testimonials" 
+            href="https://elevenlabs.io/blog?category=customer-stories" 
+            target="_blank" 
+            rel="noopener noreferrer"
             className="text-foreground/80 text-lg font-medium"
             onClick={() => setMobileMenuOpen(false)}
           >
-            Success Stories
+            Product Updates
           </a>
           <Link 
             to="/use-case-inspiration" 

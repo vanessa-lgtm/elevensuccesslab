@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Testimonial {
@@ -91,9 +91,23 @@ const TestimonialSection = () => {
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-6">
             What Our Customers Say
           </h2>
-          <p className="text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-foreground/70 max-w-2xl mx-auto mb-6">
             Hear from organizations that have transformed their customer success strategies using our resources and support.
           </p>
+          <Button 
+            variant="outline" 
+            asChild 
+            className="flex items-center gap-2 mx-auto"
+          >
+            <a 
+              href="https://elevenlabs.io/blog?category=customer-stories" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              View All Customer Stories
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </Button>
         </div>
         
         <div className="max-w-4xl mx-auto relative">

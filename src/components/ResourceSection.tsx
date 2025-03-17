@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock } from 'lucide-react';
+import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -14,9 +14,10 @@ interface ResourceCardProps {
   description: string;
   delay: number;
   onClick?: () => void;
+  comingSoon?: boolean;
 }
 
-const ResourceCard = ({ icon, title, description, delay, onClick }: ResourceCardProps) => {
+const ResourceCard = ({ icon, title, description, delay, onClick, comingSoon }: ResourceCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -53,20 +54,27 @@ const ResourceCard = ({ icon, title, description, delay, onClick }: ResourceCard
       className={cn(
         "glass-card rounded-xl p-6 opacity-0 translate-y-10 transition-all duration-700 ease-out",
         "transform hover:translate-y-[-5px] hover:shadow-lg transition-all duration-300",
-        "cursor-pointer"
+        comingSoon ? "cursor-default" : "cursor-pointer"
       )}
-      onClick={onClick}
+      onClick={comingSoon ? undefined : onClick}
     >
       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-5">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold mb-3">{title}</h3>
+      <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
+        {title}
+        {comingSoon && (
+          <Badge variant="outline" className="text-xs font-normal bg-secondary/50">Coming Soon</Badge>
+        )}
+      </h3>
       <p className="text-foreground/70 mb-5">{description}</p>
       
-      <Button variant="ghost" className="group p-0 h-auto font-medium text-primary">
-        Learn more
-        <ArrowUpRight className="ml-1 h-4 w-4 group-hover:translate-x-1 group-hover:translate-y-[-2px] transition-transform" />
-      </Button>
+      {!comingSoon && (
+        <Button variant="ghost" className="group p-0 h-auto font-medium text-primary">
+          Learn more
+          <ArrowUpRight className="ml-1 h-4 w-4 group-hover:translate-x-1 group-hover:translate-y-[-2px] transition-transform" />
+        </Button>
+      )}
     </div>
   );
 };
@@ -195,33 +203,6 @@ const VoiceAIBasicsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChan
 };
 
 const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => {
-  const webinars = [
-    {
-      title: "Getting Started with ElevenLabs Voice AI",
-      description: "A comprehensive introduction to ElevenLabs voice technology and its applications.",
-      duration: "45 min",
-      url: "https://www.youtube.com/watch?v=0vyUwVR0vx0"
-    },
-    {
-      title: "Voice AI in Customer Service",
-      description: "Learn how voice AI is revolutionizing customer service operations.",
-      duration: "38 min",
-      url: "#"
-    },
-    {
-      title: "Advanced Voice Customization Techniques",
-      description: "Discover advanced techniques for customizing voices for your specific needs.",
-      duration: "52 min",
-      url: "#"
-    },
-    {
-      title: "Integration Strategies for Voice AI",
-      description: "Best practices for integrating voice AI into your existing systems.",
-      duration: "41 min",
-      url: "#"
-    }
-  ];
-
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
@@ -235,29 +216,132 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
           </DialogDescription>
         </DialogHeader>
         
+        <div className="text-center mb-6">
+          <Button 
+            variant="default" 
+            size="lg" 
+            className="flex items-center gap-2"
+            onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}
+          >
+            View All Webinars
+            <ExternalLink className="h-4 w-4" />
+          </Button>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          {webinars.map((webinar, index) => (
-            <Card key={index} className="overflow-hidden">
-              <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-                <Button 
-                  variant="default" 
-                  size="sm" 
-                  className="absolute z-10 flex gap-2 items-center"
-                  onClick={() => webinar.url && window.open(webinar.url, '_blank')}
-                >
-                  <Video className="h-4 w-4" />
-                  Watch Now
-                </Button>
-                <div className="absolute inset-0 bg-black/50"></div>
+          <Card className="overflow-hidden">
+            <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="absolute z-10 flex gap-2 items-center"
+                onClick={() => window.open('https://www.youtube.com/watch?v=0vyUwVR0vx0', '_blank')}
+              >
+                <Video className="h-4 w-4" />
+                Watch Now
+              </Button>
+              <div className="absolute inset-0 bg-black/50"></div>
+            </div>
+            <CardContent className="p-4">
+              <h3 className="font-semibold mb-2">Getting Started with ElevenLabs Voice AI</h3>
+              <p className="text-sm text-muted-foreground mb-2">A comprehensive introduction to ElevenLabs voice technology and its applications.</p>
+              <div className="flex items-center text-xs text-muted-foreground">
+                <Clock className="h-3 w-3 mr-1" />
+                45 min
               </div>
-              <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">{webinar.title}</h3>
-                <p className="text-sm text-muted-foreground mb-2">{webinar.description}</p>
-                <div className="flex items-center text-xs text-muted-foreground">
-                  <Clock className="h-3 w-3 mr-1" />
-                  {webinar.duration}
-                </div>
-              </CardContent>
+            </CardContent>
+          </Card>
+          
+          <Card className="overflow-hidden">
+            <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="absolute z-10 flex gap-2 items-center"
+                onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}
+              >
+                <Video className="h-4 w-4" />
+                Watch Now
+              </Button>
+              <div className="absolute inset-0 bg-black/50"></div>
+            </div>
+            <CardContent className="p-4">
+              <h3 className="font-semibold mb-2">Voice AI in Customer Service</h3>
+              <p className="text-sm text-muted-foreground mb-2">Learn how voice AI is revolutionizing customer service operations.</p>
+              <div className="flex items-center text-xs text-muted-foreground">
+                <Clock className="h-3 w-3 mr-1" />
+                38 min
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+const SuccessStoriesDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => {
+  const testimonials = [
+    {
+      quote: "The resources provided helped us restructure our entire customer success program, leading to a 35% increase in customer retention within just six months.",
+      name: "Sarah Johnson",
+      role: "VP of Customer Success",
+      company: "TechVision Inc."
+    },
+    {
+      quote: "The strategic frameworks and measurement tools allowed us to scale our customer success operations efficiently while maintaining high quality interactions.",
+      name: "Michael Chen",
+      role: "Chief Customer Officer",
+      company: "GrowthWave"
+    },
+    {
+      quote: "Access to the training materials and expert consultation transformed how we approach customer success. Our NPS score has increased by 28 points.",
+      name: "Elena Rodriguez",
+      role: "Customer Success Director",
+      company: "Innovate Solutions"
+    },
+  ];
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <Quote className="h-5 w-5 text-primary" />
+            Success Stories
+          </DialogTitle>
+          <DialogDescription>
+            Read about how our customers are achieving success with our platform
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="text-center mb-6">
+          <Button 
+            variant="default" 
+            size="lg" 
+            className="flex items-center gap-2"
+            onClick={() => window.open('https://elevenlabs.io/blog?category=customer-stories', '_blank')}
+          >
+            View All Customer Stories
+            <ExternalLink className="h-4 w-4" />
+          </Button>
+        </div>
+        
+        <div className="space-y-4 mt-4">
+          {testimonials.map((testimonial, index) => (
+            <Card key={index} className="p-6">
+              <div className="text-primary mb-4">
+                <Quote size={24} className="opacity-30" />
+              </div>
+              <blockquote className="text-lg mb-4 font-medium text-balance">
+                "{testimonial.quote}"
+              </blockquote>
+              <div>
+                <p className="font-semibold">{testimonial.name}</p>
+                <p className="text-foreground/70">
+                  {testimonial.role}, {testimonial.company}
+                </p>
+              </div>
             </Card>
           ))}
         </div>
@@ -270,6 +354,7 @@ const ResourceSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [voiceAIBasicsOpen, setVoiceAIBasicsOpen] = useState(false);
   const [webinarsOpen, setWebinarsOpen] = useState(false);
+  const [successStoriesOpen, setSuccessStoriesOpen] = useState(false);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -315,19 +400,22 @@ const ResourceSection = () => {
       onClick: () => setWebinarsOpen(true)
     },
     {
+      icon: <Quote size={20} />,
+      title: "Success Stories",
+      description: "Discover how organizations are achieving success with our voice AI solutions.",
+      onClick: () => setSuccessStoriesOpen(true)
+    },
+    {
       icon: <BarChart size={20} />,
       title: "Measurement Frameworks",
       description: "Tools and templates to measure the impact of your customer success initiatives.",
-    },
-    {
-      icon: <FileText size={20} />,
-      title: "Case Studies",
-      description: "Real-world examples of successful customer success strategies and their outcomes.",
+      comingSoon: true
     },
     {
       icon: <RefreshCw size={20} />,
       title: "Process Templates",
       description: "Ready-to-use process templates to streamline your customer success workflows.",
+      comingSoon: true
     },
   ];
 
@@ -357,6 +445,7 @@ const ResourceSection = () => {
               description={resource.description} 
               delay={index * 100}
               onClick={resource.onClick}
+              comingSoon={resource.comingSoon}
             />
           ))}
         </div>
@@ -372,6 +461,12 @@ const ResourceSection = () => {
       <WebinarsDialog 
         open={webinarsOpen} 
         onOpenChange={setWebinarsOpen} 
+      />
+      
+      {/* Success Stories Dialog */}
+      <SuccessStoriesDialog 
+        open={successStoriesOpen} 
+        onOpenChange={setSuccessStoriesOpen} 
       />
       
       {/* Background decorative elements */}
