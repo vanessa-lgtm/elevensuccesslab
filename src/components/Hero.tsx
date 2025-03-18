@@ -52,15 +52,41 @@ const Hero = () => {
     };
   }, []);
 
-  const onNewsletterSubmit = (data: FormValues) => {
-    // In a real implementation, this would send an email to success@elevenlabs.io
-    console.log('Sending newsletter signup to success@elevenlabs.io with data:', data);
-    toast({
-      title: "Success!",
-      description: "Your information has been sent to our team.",
-    });
-    setOpenNewsletterDialog(false);
-    newsletterForm.reset();
+  const onNewsletterSubmit = async (data: FormValues) => {
+    try {
+      // Send data to our contact API endpoint with newsletter tag
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...data,
+          message: 'Newsletter signup',
+          source: 'newsletter_dialog',
+          optIn: true,
+          tags: ['newsletter_subscriber']
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit newsletter signup');
+      }
+
+      toast({
+        title: "Success!",
+        description: "Thank you for subscribing to our newsletter.",
+      });
+      setOpenNewsletterDialog(false);
+      newsletterForm.reset();
+    } catch (error) {
+      console.error('Error submitting newsletter signup:', error);
+      toast({
+        title: "Error",
+        description: "There was a problem with your subscription. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const scrollToResources = (e: React.MouseEvent) => {

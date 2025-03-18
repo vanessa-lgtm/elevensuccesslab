@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -5,6 +6,13 @@ import { Textarea } from '@/components/ui/textarea';
 import { CheckCircle, Send } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
+
+// Define the contact interface
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const ContactSection = () => {
   const [name, setName] = useState('');
@@ -42,28 +50,54 @@ const ContactSection = () => {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const contactData: ContactFormData = {
+      name,
+      email,
+      message
+    };
+
+    try {
+      // Send data to our API endpoint
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit contact form');
+      }
+
       setIsSuccess(true);
       
       toast({
         title: "Success!",
-        description: "Your message has been sent. We'll be in touch soon.",
+        description: "Your message has been received. We'll be in touch soon.",
       });
       
-      // Reset success state after 3 seconds
+      // Reset form after successful submission
       setTimeout(() => {
         setIsSuccess(false);
         setName('');
         setEmail('');
         setMessage('');
       }, 3000);
-    }, 1500);
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      toast({
+        title: "Error",
+        description: "There was a problem submitting your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
