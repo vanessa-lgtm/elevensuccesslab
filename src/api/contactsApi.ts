@@ -4,6 +4,44 @@ import { ContactService } from '@/services/contactService';
 
 // Function to handle contact form submissions
 export async function handleContactSubmission(request: Request): Promise<Response> {
+  if (request.method === 'GET') {
+    // Handle GET request for exporting contacts
+    const url = new URL(request.url);
+    const format = url.searchParams.get('format');
+    
+    if (format === 'csv') {
+      try {
+        const csvData = await ContactService.exportContactsToCSV();
+        return new Response(csvData, {
+          status: 200,
+          headers: { 
+            'Content-Type': 'text/csv',
+            'Content-Disposition': 'attachment; filename="contacts.csv"'
+          }
+        });
+      } catch (error) {
+        return new Response(JSON.stringify({ error: 'Failed to export contacts' }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+    
+    // Return all contacts as JSON if no specific format requested
+    try {
+      const contacts = await ContactService.getContacts();
+      return new Response(JSON.stringify({ contacts }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (error) {
+      return new Response(JSON.stringify({ error: 'Failed to retrieve contacts' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+  }
+  
   if (request.method !== 'POST') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {
       status: 405,

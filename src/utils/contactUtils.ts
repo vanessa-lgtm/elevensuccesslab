@@ -19,9 +19,17 @@ export function formatContacts(contacts: any[], format: 'csv' | 'json' = 'json')
   if (format === 'csv') {
     // Convert contacts to CSV format
     const headers = 'Name,Email,Message,Source,Created At,Opt-In\n';
-    const rows = contacts.map(contact => 
-      `"${contact.name}","${contact.email}","${contact.message || ''}","${contact.source || ''}","${contact.createdAt}","${contact.optIn ? 'Yes' : 'No'}"`
-    ).join('\n');
+    const rows = contacts.map(contact => {
+      // Clean up values to avoid CSV parsing issues
+      const name = contact.name?.replace(/"/g, '""') || '';
+      const email = contact.email?.replace(/"/g, '""') || '';
+      const message = (contact.message || '').replace(/"/g, '""').replace(/\n/g, ' ');
+      const source = contact.source?.replace(/"/g, '""') || '';
+      const createdAt = contact.createdAt ? new Date(contact.createdAt).toISOString() : '';
+      const optIn = contact.optIn ? 'Yes' : 'No';
+      
+      return `"${name}","${email}","${message}","${source}","${createdAt}","${optIn}"`;
+    }).join('\n');
     
     return headers + rows;
   }
@@ -39,7 +47,7 @@ export function anonymizeContact(contact: any): any {
   return {
     ...contact,
     name: '[Redacted]',
-    email: `redacted-${contact.id.substring(0, 8)}@example.com`,
+    email: `redacted-${contact.id?.substring(0, 8) || 'unknown'}@example.com`,
     ipAddress: 'redacted',
     userAgent: 'redacted'
   };

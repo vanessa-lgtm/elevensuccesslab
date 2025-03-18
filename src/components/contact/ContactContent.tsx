@@ -1,5 +1,6 @@
 
 import React from 'react';
+import ContactExport from './ContactExport';
 
 const ContactContent: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const ContactContent: React.FC = () => {
       <p className="text-foreground/70 mb-8">
         Fill out the form and one of our customer success experts will get in touch to discuss how we can help you implement and scale your strategy.
       </p>
+      <ContactExport />
     </div>
   );
 };
