@@ -86,7 +86,19 @@ const useCases = [
   { value: 'education', label: 'Educational Content' },
   { value: 'conversational_ai', label: 'Conversational AI' },
   { value: 'call_center', label: 'Call Center Automation' },
-  { value: 'not_sure', label: 'I don\'t know yet' }
+  { value: 'not_sure', label: "I don't know yet" }
+];
+
+const primaryGoals = [
+  { value: 'time_efficiency', label: 'Improve time efficiency' },
+  { value: 'cost_reduction', label: 'Reduce costs' },
+  { value: 'quality_content', label: 'Create higher quality content' },
+  { value: 'scale_operations', label: 'Scale operations' },
+  { value: 'automation', label: 'Automate processes' },
+  { value: 'new_offerings', label: 'Develop new offerings' },
+  { value: 'customer_experience', label: 'Enhance customer experience' },
+  { value: 'expand_markets', label: 'Expand to new markets' },
+  { value: 'accessibility', label: 'Improve accessibility' }
 ];
 
 const mediaIndustries = [
@@ -194,13 +206,13 @@ const determineOnboardingPlan = (formData: any) => {
 };
 
 interface SurveyFormValues {
-  full_name: string;
+  company_name: string;
   email: string;
   knowledge_level: 'low' | 'medium' | 'high';
   industry: string;
   other_industry?: string;
   primary_use_case: string;
-  additional_use_cases: string[];
+  primary_goals: string[];
   subscribe: boolean;
 }
 
@@ -213,21 +225,31 @@ const OnboardingSurvey = () => {
   
   const form = useForm<SurveyFormValues>({
     defaultValues: {
-      full_name: '',
+      company_name: '',
       email: '',
       knowledge_level: 'medium',
       industry: '',
       other_industry: '',
       primary_use_case: '',
-      additional_use_cases: [],
+      primary_goals: [],
       subscribe: false,
     }
   });
 
-  const totalSteps = 3; // Reduced from 4 to 3 steps
+  const totalSteps = 3;
   const progress = ((currentStep + 1) / totalSteps) * 100;
   
-  const handleNext = () => {
+  const handleNext = async () => {
+    const isCurrentStepValid = await form.trigger(
+      currentStep === 0 
+        ? ['company_name', 'email'] 
+        : currentStep === 1 
+          ? ['knowledge_level']
+          : ['industry', 'primary_use_case', 'primary_goals']
+    );
+
+    if (!isCurrentStepValid) return;
+    
     if (currentStep === 1 && form.getValues('knowledge_level') === 'low') {
       setSuggestResources(true);
     } else {
@@ -271,12 +293,13 @@ const OnboardingSurvey = () => {
             
             <FormField
               control={form.control}
-              name="full_name"
+              name="company_name"
+              rules={{ required: "Company name is required" }}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Your Name</FormLabel>
+                  <FormLabel>Company Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} />
+                    <Input placeholder="Acme Corp" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -286,6 +309,13 @@ const OnboardingSurvey = () => {
             <FormField
               control={form.control}
               name="email"
+              rules={{ 
+                required: "Email is required",
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "Invalid email address"
+                }
+              }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Email Address</FormLabel>
@@ -293,7 +323,7 @@ const OnboardingSurvey = () => {
                     Associated with your ElevenLabs account
                   </FormDescription>
                   <FormControl>
-                    <Input type="email" placeholder="john@example.com" {...field} />
+                    <Input type="email" placeholder="contact@acmecorp.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -310,6 +340,7 @@ const OnboardingSurvey = () => {
             <FormField
               control={form.control}
               name="knowledge_level"
+              rules={{ required: "Please select your knowledge level" }}
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
@@ -375,6 +406,7 @@ const OnboardingSurvey = () => {
             <FormField
               control={form.control}
               name="industry"
+              rules={{ required: "Please select your industry" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Your Industry</FormLabel>
@@ -409,6 +441,7 @@ const OnboardingSurvey = () => {
               <FormField
                 control={form.control}
                 name="other_industry"
+                rules={{ required: "Please specify your industry" }}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Please specify your industry</FormLabel>
@@ -424,6 +457,7 @@ const OnboardingSurvey = () => {
             <FormField
               control={form.control}
               name="primary_use_case"
+              rules={{ required: "Please select a primary use case" }}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Primary use case</FormLabel>
@@ -444,6 +478,47 @@ const OnboardingSurvey = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="primary_goals"
+              rules={{ 
+                required: "Please select at least one primary goal",
+                validate: (value) => value.length > 0 || "Please select at least one primary goal" 
+              }}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Primary Goals</FormLabel>
+                  <FormDescription>
+                    What are you hoping to achieve with voice AI? (Select at least one)
+                  </FormDescription>
+                  <div className="space-y-2">
+                    {primaryGoals.map((goal) => (
+                      <FormItem
+                        key={goal.value}
+                        className="flex flex-row items-start space-x-3 space-y-0"
+                      >
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value?.includes(goal.value)}
+                            onCheckedChange={(checked) => {
+                              const updatedGoals = checked
+                                ? [...field.value, goal.value]
+                                : field.value?.filter((value) => value !== goal.value);
+                              field.onChange(updatedGoals);
+                            }}
+                          />
+                        </FormControl>
+                        <FormLabel className="font-normal">
+                          {goal.label}
+                        </FormLabel>
+                      </FormItem>
+                    ))}
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}
@@ -479,7 +554,7 @@ const OnboardingSurvey = () => {
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel>
-                      Subscribe to news and product updates
+                      Subscribe to product updates and company news
                     </FormLabel>
                     <FormDescription>
                       Stay up to date with the latest features and improvements
