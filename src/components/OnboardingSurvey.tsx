@@ -52,7 +52,8 @@ import {
   Building,
   Code,
   Stethoscope,
-  Film
+  Film,
+  MessageCircle
 } from 'lucide-react';
 
 const industries = [
@@ -104,6 +105,10 @@ const primaryGoals = [
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
   'marketing', 'gaming', 'digital_media', 'audio_production'
+];
+
+const conversationalAIUseCases = [
+  'conversational_ai', 'customer_service', 'call_center'
 ];
 
 const onboardingPlans = [
@@ -178,6 +183,18 @@ const onboardingPlans = [
       'Character voice development',
       'Content localization strategies'
     ]
+  },
+  {
+    id: 'conversational_ai',
+    title: 'Conversational AI Solutions',
+    description: 'Specialized onboarding for implementing voice-based conversational AI assistants and customer support solutions.',
+    icon: <MessageCircle className="h-12 w-12 text-primary" />,
+    features: [
+      'Conversational AI agent design',
+      'Customer service automation',
+      'Call center integration workflows',
+      'Conversation design best practices'
+    ]
   }
 ];
 
@@ -190,6 +207,8 @@ const determineOnboardingPlan = (formData: any) => {
     return 'media';
   } else if (industry === 'healthcare') {
     return 'healthcare';
+  } else if (conversationalAIUseCases.includes(primaryUseCase)) {
+    return 'conversational_ai';
   }
   
   if (knowledgeLevel === 'low') {

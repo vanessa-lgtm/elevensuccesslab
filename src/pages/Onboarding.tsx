@@ -9,7 +9,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible';
-import { ChevronDown, ChevronRight, Shield, BookOpen, Film, Globe, Download, MicVocal, Music, Code, Check } from 'lucide-react';
+import { ChevronDown, ChevronRight, Shield, BookOpen, Film, Globe, Download, MicVocal, Music, Code, Check, MessageCircle, Phone, Headset } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 
@@ -18,10 +18,15 @@ const mediaIndustries = [
   'marketing', 'gaming', 'digital_media', 'audio_production'
 ];
 
+const conversationalAIUseCases = [
+  'conversational_ai', 'customer_service', 'call_center'
+];
+
 const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [activeTab, setActiveTab] = useState("checklist");
   const [industry, setIndustry] = useState<string>("media");
+  const [useCase, setUseCase] = useState<string | null>(null);
   const [completedActions, setCompletedActions] = useState<Record<string, boolean>>({});
   
   const location = useLocation();
@@ -30,9 +35,17 @@ const Onboarding = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const industryParam = params.get('industry');
+    const planParam = params.get('plan');
+    const useCaseParam = params.get('useCase');
     
     if (industryParam && mediaIndustries.includes(industryParam)) {
       setIndustry('media');
+    }
+    
+    if (planParam === 'conversational_ai' || 
+        (useCaseParam && conversationalAIUseCases.includes(useCaseParam))) {
+      setIndustry('conversational_ai');
+      setUseCase(useCaseParam || 'conversational_ai');
     }
     
     const tabParam = params.get('tab');
@@ -52,7 +65,7 @@ const Onboarding = () => {
   
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    navigate(`/onboarding?industry=${industry}&tab=${value}`, { replace: true });
+    navigate(`/onboarding?industry=${industry}&tab=${value}${useCase ? `&useCase=${useCase}` : ''}`, { replace: true });
   };
 
   const toggleActionCompletion = (id: string) => {
@@ -68,7 +81,7 @@ const Onboarding = () => {
     });
   };
   
-  const keyActionSteps = [
+  const mediaKeyActionSteps = [
     {
       id: 'api-request',
       title: 'Make Your First API Request',
@@ -142,8 +155,95 @@ const Onboarding = () => {
       link: 'https://elevenlabs.io/speech-synthesis'
     }
   ];
-  
-  const resources = [
+
+  const conversationalAIKeyActionSteps = [
+    {
+      id: 'api-request',
+      title: 'Make Your First API Request',
+      description: 'Start integrating ElevenLabs into your conversational AI applications.',
+      icon: <Code className="h-8 w-8 text-primary" />,
+      steps: [
+        'Generate your API key in your account settings',
+        'Install the API client library for your programming language',
+        'Make a simple text-to-speech API call',
+        'Set voice and model parameters',
+        'Receive and use the generated audio'
+      ],
+      link: 'https://elevenlabs.io/docs/quickstart'
+    },
+    {
+      id: 'voice-selection',
+      title: 'Select the Right AI Voice',
+      description: 'Choose the perfect voice for your conversational assistant or call center application.',
+      icon: <MicVocal className="h-8 w-8 text-primary" />,
+      steps: [
+        'Visit the Voice Library page',
+        'Listen to different voice samples',
+        'Consider voice characteristics that match your brand',
+        'Test selected voices with sample dialog',
+        'Add selected voices to your library'
+      ],
+      link: 'https://elevenlabs.io/voice-library'
+    },
+    {
+      id: 'conversation-design',
+      title: 'Design Your Conversation Flows',
+      description: 'Create natural, engaging conversation flows for your AI assistant.',
+      icon: <MessageCircle className="h-8 w-8 text-primary" />,
+      steps: [
+        'Map out common user intents and questions',
+        'Design conversation branches and responses',
+        'Implement voice-specific language and phrasing',
+        'Create fallback paths for unexpected inputs',
+        'Test conversation flows with real users'
+      ],
+      link: 'https://elevenlabs.io/docs/agent-overview'
+    },
+    {
+      id: 'call-center-integration',
+      title: 'Set Up Call Center Integration',
+      description: 'Integrate ElevenLabs voice technology with your existing call center infrastructure.',
+      icon: <Phone className="h-8 w-8 text-primary" />,
+      steps: [
+        'Identify integration points in your current system',
+        'Configure API webhooks and endpoints',
+        'Set up real-time speech synthesis for calls',
+        'Implement call transfer and handoff logic',
+        'Test with sample customer scenarios'
+      ],
+      link: 'https://elevenlabs.io/docs/api-reference/overview'
+    },
+    {
+      id: 'multilingual-support',
+      title: 'Configure Multilingual Support',
+      description: 'Expand your conversational AI to support multiple languages.',
+      icon: <Globe className="h-8 w-8 text-primary" />,
+      steps: [
+        'Select multilingual voice models',
+        'Configure language detection',
+        'Set up language-specific conversation flows',
+        'Test pronunciation and inflection',
+        'Implement language switching capabilities'
+      ],
+      link: 'https://elevenlabs.io/docs/language-support'
+    },
+    {
+      id: 'generate-tts',
+      title: 'Test Real-Time Voice Responses',
+      description: 'Configure and test real-time voice synthesis for conversational applications.',
+      icon: <Headset className="h-8 w-8 text-primary" />,
+      steps: [
+        'Set up low-latency audio streaming',
+        'Configure voice parameters for real-time use',
+        'Implement audio buffering strategies',
+        'Test response times under various conditions',
+        'Optimize for different network environments'
+      ],
+      link: 'https://elevenlabs.io/speech-synthesis'
+    }
+  ];
+
+  const mediaResources = [
     {
       title: 'Product Guide',
       description: 'Comprehensive guide for implementing ElevenLabs in media production workflows.',
@@ -181,6 +281,51 @@ const Onboarding = () => {
       link: 'https://elevenlabs.io/blog/starsports'
     }
   ];
+
+  const conversationalAIResources = [
+    {
+      title: 'Conversational AI Implementation Guide',
+      description: 'Comprehensive guide for implementing voice-based conversational AI systems.',
+      icon: <MessageCircle className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/guides/conversational-ai'
+    },
+    {
+      title: 'Call Center Automation Best Practices',
+      description: 'Learn techniques for effective call center automation with AI voice technology.',
+      icon: <Phone className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/call-center-automation'
+    },
+    {
+      title: 'Voice Design for Customer Service',
+      description: 'Guidelines for creating natural and helpful voice interactions for customer service.',
+      icon: <Headset className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/guides/voice-design'
+    },
+    {
+      title: 'API Integration for Real-Time Voice Applications',
+      description: 'Technical documentation for integrating with the ElevenLabs API for real-time use.',
+      icon: <Code className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/api-reference/overview'
+    },
+    {
+      title: 'Security & Compliance for Voice Assistants',
+      description: 'Information about security features and compliance for handling customer conversations.',
+      icon: <Shield className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/docs/guides/security'
+    },
+    {
+      title: 'Customer Story: ABC Financial',
+      description: 'Learn how ABC Financial transformed their customer service with AI voice technology.',
+      icon: <BookOpen className="h-6 w-6 text-primary" />,
+      link: 'https://elevenlabs.io/blog/abc-financial'
+    }
+  ];
+
+  const keyActionSteps = industry === 'conversational_ai' ? 
+    conversationalAIKeyActionSteps : mediaKeyActionSteps;
+  
+  const resources = industry === 'conversational_ai' ? 
+    conversationalAIResources : mediaResources;
   
   const KeyActionItem = ({ step }: { step: typeof keyActionSteps[0] }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -284,15 +429,23 @@ const Onboarding = () => {
       <div className="container mx-auto px-4 py-10 pt-24">
         <div className="max-w-4xl mx-auto">
           <div className="mb-8 text-center">
-            <h1 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">Media & Entertainment Onboarding</h1>
+            <h1 className="text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
+              {industry === 'conversational_ai' ? 
+                'Conversational AI Onboarding' : 
+                'Media & Entertainment Onboarding'}
+            </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Welcome to your personalized onboarding experience. We've tailored this guide to help media and entertainment professionals get the most out of ElevenLabs.
+              {industry === 'conversational_ai' ? 
+                'Welcome to your personalized onboarding experience. We\'ve tailored this guide to help you implement voice-based conversational AI and customer service solutions with ElevenLabs.' : 
+                'Welcome to your personalized onboarding experience. We\'ve tailored this guide to help media and entertainment professionals get the most out of ElevenLabs.'}
             </p>
             
             <div className="mb-8">
               <VideoEmbed 
-                videoId="z0sD2BvUfM0" 
-                title="ElevenLabs Onboarding Video" 
+                videoId={industry === 'conversational_ai' ? 'dQw4w9WgXcQ' : 'z0sD2BvUfM0'} 
+                title={industry === 'conversational_ai' ? 
+                  'ElevenLabs Conversational AI Onboarding Video' : 
+                  'ElevenLabs Onboarding Video'}
               />
             </div>
           </div>
@@ -322,16 +475,21 @@ const Onboarding = () => {
             
             <TabsContent value="checklist" className="mt-4 space-y-4 animate-fade-in">
               <div className="bg-card p-6 rounded-lg shadow-sm border border-muted">
-                <OnboardingChecklist onProgressUpdate={handleProgressUpdate} industry="media" />
+                <OnboardingChecklist onProgressUpdate={handleProgressUpdate} industry={industry} />
               </div>
             </TabsContent>
             
             <TabsContent value="key-actions" className="mt-4 animate-fade-in">
               <div className="mb-6 bg-card p-6 rounded-lg shadow-sm border border-muted">
-                <h2 className="text-2xl font-bold mb-4 text-primary">Key Actions for Mastering ElevenLabs</h2>
+                <h2 className="text-2xl font-bold mb-4 text-primary">
+                  {industry === 'conversational_ai' ? 
+                    'Key Actions for Mastering Conversational AI' : 
+                    'Key Actions for Mastering ElevenLabs'}
+                </h2>
                 <p className="text-muted-foreground mb-6">
-                  Complete these steps to quickly get started with ElevenLabs for your media production needs. 
-                  Each guide includes step-by-step instructions.
+                  {industry === 'conversational_ai' ? 
+                    'Complete these steps to quickly get started with ElevenLabs for your conversational AI and customer service solutions. Each guide includes step-by-step instructions.' : 
+                    'Complete these steps to quickly get started with ElevenLabs for your media production needs. Each guide includes step-by-step instructions.'}
                 </p>
                 
                 {keyActionSteps.map((step) => (
@@ -342,7 +500,11 @@ const Onboarding = () => {
             
             <TabsContent value="resources" className="mt-4 animate-fade-in">
               <div className="bg-card p-6 rounded-lg shadow-sm border border-muted">
-                <h2 className="text-2xl font-bold mb-4 text-primary">Resources for Media & Entertainment</h2>
+                <h2 className="text-2xl font-bold mb-4 text-primary">
+                  {industry === 'conversational_ai' ? 
+                    'Resources for Conversational AI' : 
+                    'Resources for Media & Entertainment'}
+                </h2>
                 <p className="text-muted-foreground mb-6">
                   Explore these resources to deepen your understanding of ElevenLabs and optimize your implementation.
                 </p>

@@ -173,6 +173,145 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/docs/product-guides/playground/sound-effects'
           },
         ]);
+      } else if (industry === "conversational_ai") {
+        setChecklistItems([
+          {
+            id: '1',
+            title: 'Set up your account',
+            description: 'Configure your workspace settings and user profile information.',
+            timeEstimate: '10 min',
+            completed: false,
+            section: 'admin',
+            link: 'https://elevenlabs.io/docs/product-guides/administration/workspaces/overview'
+          },
+          {
+            id: '2',
+            title: 'Set up your Workspace',
+            description: 'Set up user groups and permission levels for your team members.',
+            timeEstimate: '15 min',
+            completed: false,
+            section: 'admin',
+            link: 'https://elevenlabs.io/docs/product-guides/administration/workspaces/user-groups'
+          },
+          {
+            id: '3',
+            title: 'Share resources with your team',
+            description: 'Invite team members to your Enterprise Workspace and set up resource sharing.',
+            timeEstimate: '10 min',
+            completed: false,
+            section: 'admin',
+            link: 'https://elevenlabs.io/docs/product-guides/administration/workspaces/sharing-resources'
+          },
+          {
+            id: '4',
+            title: 'Manage usage & billing',
+            description: 'Activate usage-based billing to avoid hitting your quota and set up usage alerts.',
+            timeEstimate: '10 min',
+            completed: false,
+            section: 'admin',
+            link: 'https://elevenlabs.io/docs/product-guides/administration/billing'
+          },
+          {
+            id: '5',
+            title: 'Set up product update notifications',
+            description: 'Configure your notification preferences to stay updated with the latest product improvements.',
+            timeEstimate: '5 min',
+            completed: false,
+            section: 'admin'
+          },
+          {
+            id: '6',
+            title: 'Monitor service status',
+            description: 'Subscribe to the ElevenLabs status page for real-time service updates.',
+            timeEstimate: '5 min',
+            completed: false,
+            section: 'admin',
+            link: 'https://status.elevenlabs.io/'
+          },
+          
+          {
+            id: '7',
+            title: 'Learn about voice AI models',
+            description: 'Understand the different voice models available and their specific use cases for conversational AI.',
+            timeEstimate: '20 min',
+            completed: false,
+            section: 'general',
+            link: 'https://elevenlabs.io/docs/models'
+          },
+          {
+            id: '8',
+            title: 'Understand voice API capabilities',
+            description: 'Learn how the voice API works for real-time conversational applications.',
+            timeEstimate: '25 min',
+            completed: false,
+            section: 'general',
+            link: 'https://elevenlabs.io/docs/api-reference/overview'
+          },
+          {
+            id: '9',
+            title: 'Plan your conversational design',
+            description: 'Learn the principles of effective conversation design for voice assistants.',
+            timeEstimate: '30 min',
+            completed: false,
+            section: 'general',
+            link: 'https://elevenlabs.io/docs/conversation-design'
+          },
+          
+          {
+            id: '10',
+            title: 'Set up your first voice agent',
+            description: 'Configure a basic conversational agent with voice capabilities.',
+            timeEstimate: '45 min',
+            completed: false,
+            section: 'usecase',
+            link: 'https://elevenlabs.io/docs/agent-overview'
+          },
+          {
+            id: '11',
+            title: 'Configure call center integration',
+            description: 'Set up the necessary connections between your call center platform and ElevenLabs.',
+            timeEstimate: '60 min',
+            completed: false,
+            section: 'usecase',
+            link: 'https://elevenlabs.io/docs/call-center-integration'
+          },
+          {
+            id: '12',
+            title: 'Implement customer service workflows',
+            description: 'Create voice-based workflows for handling common customer service scenarios.',
+            timeEstimate: '90 min',
+            completed: false,
+            section: 'usecase',
+            link: 'https://elevenlabs.io/docs/customer-service-workflows'
+          },
+          {
+            id: '13',
+            title: 'Test conversation performance',
+            description: 'Evaluate your conversational AI implementation with real-world testing scenarios.',
+            timeEstimate: '45 min',
+            completed: false,
+            section: 'usecase',
+            link: 'https://elevenlabs.io/docs/testing-conversations'
+          },
+          {
+            id: '14',
+            title: 'Set up analytics and monitoring',
+            description: 'Configure analytics to track conversation metrics and performance.',
+            timeEstimate: '30 min',
+            completed: false,
+            section: 'usecase',
+            link: 'https://elevenlabs.io/docs/conversation-analytics'
+          },
+          {
+            id: '15',
+            title: 'Implement multilingual support',
+            description: 'Extend your voice assistants to support multiple languages.',
+            timeEstimate: '60 min',
+            completed: false,
+            section: 'usecase',
+            link: 'https://elevenlabs.io/docs/multilingual-support'
+          },
+        ]);
       } else {
         setChecklistItems([
           {
@@ -368,11 +507,15 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">
-        {industry === "media" ? "Media & Entertainment Onboarding" : "Onboarding Checklist"}
+        {industry === "media" ? "Media & Entertainment Onboarding" : 
+         industry === "conversational_ai" ? "Conversational AI Onboarding" : 
+         "Onboarding Checklist"}
       </h2>
       <p className="text-muted-foreground mb-6">
         {industry === "media" 
           ? "Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation."
+          : industry === "conversational_ai"
+          ? "Complete these steps to set up your ElevenLabs implementation for conversational AI and customer service applications. Each step includes an estimated time to complete and links to relevant documentation."
           : "Complete these steps to get started with ElevenLabs. Each step includes an estimated time to complete."}
       </p>
       
