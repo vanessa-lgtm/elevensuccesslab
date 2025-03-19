@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -49,7 +48,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           },
           {
             id: '2',
-            title: 'Configure team collaboration',
+            title: 'Set up your Workspace',
             description: 'Set up user groups and permission levels for your team members.',
             timeEstimate: '15 min',
             completed: false,
