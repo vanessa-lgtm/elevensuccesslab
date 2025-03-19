@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -42,9 +43,6 @@ import {
 import { 
   Input 
 } from '@/components/ui/input';
-import { 
-  Textarea 
-} from '@/components/ui/textarea';
 import { 
   ArrowRight, 
   ArrowLeft, 
@@ -91,17 +89,9 @@ const useCases = [
   { value: 'not_sure', label: 'I don\'t know yet' }
 ];
 
-const integrationPlatforms = [
-  { value: 'crm', label: 'CRM (e.g., Salesforce, HubSpot)' },
-  { value: 'helpdesk', label: 'Helpdesk (e.g., Zendesk, Freshdesk)' },
-  { value: 'cms', label: 'CMS (e.g., WordPress, Drupal)' },
-  { value: 'ecommerce', label: 'E-commerce platforms (e.g., Shopify, WooCommerce)' },
-  { value: 'lms', label: 'Learning Management Systems (e.g., Moodle, Canvas)' },
-  { value: 'messaging', label: 'Messaging platforms (e.g., Slack, Discord)' },
-  { value: 'social', label: 'Social Media platforms' },
-  { value: 'custom', label: 'Custom in-house system' },
-  { value: 'none', label: 'No integration planned' },
-  { value: 'not_sure', label: 'Not sure yet' }
+const mediaIndustries = [
+  'localization', 'broadcasting', 'streaming', 'film', 
+  'marketing', 'gaming', 'digital_media', 'audio_production'
 ];
 
 const onboardingPlans = [
@@ -179,16 +169,10 @@ const onboardingPlans = [
   }
 ];
 
-const mediaIndustries = [
-  'localization', 'broadcasting', 'streaming', 'film', 
-  'marketing', 'gaming', 'digital_media', 'audio_production'
-];
-
 const determineOnboardingPlan = (formData: any) => {
   const knowledgeLevel = formData.knowledge_level;
   const primaryUseCase = formData.primary_use_case;
   const industry = formData.industry;
-  const integrations = formData.integrations || [];
   
   if (mediaIndustries.includes(industry)) {
     return 'media';
@@ -200,7 +184,7 @@ const determineOnboardingPlan = (formData: any) => {
     return 'beginner';
   } else if (primaryUseCase === 'content_creation' || primaryUseCase === 'audiobooks' || primaryUseCase === 'advertising') {
     return 'creative';
-  } else if (industry === 'technology' || integrations.includes('custom')) {
+  } else if (industry === 'technology') {
     return 'technical';
   } else if (industry === 'financial' || industry === 'telecom') {
     return 'enterprise';
@@ -218,9 +202,6 @@ interface SurveyFormValues {
   primary_use_case: string;
   additional_use_cases: string[];
   subscribe: boolean;
-  primary_goals: string;
-  integrations: string[];
-  success_definition: string;
 }
 
 const OnboardingSurvey = () => {
@@ -240,13 +221,10 @@ const OnboardingSurvey = () => {
       primary_use_case: '',
       additional_use_cases: [],
       subscribe: false,
-      primary_goals: '',
-      integrations: [],
-      success_definition: '',
     }
   });
 
-  const totalSteps = 4;
+  const totalSteps = 3; // Reduced from 4 to 3 steps
   const progress = ((currentStep + 1) / totalSteps) * 100;
   
   const handleNext = () => {
@@ -487,149 +465,6 @@ const OnboardingSurvey = () => {
                 </Button>
               </div>
             )}
-            
-            <FormField
-              control={form.control}
-              name="additional_use_cases"
-              render={() => (
-                <FormItem>
-                  <div className="mb-4">
-                    <FormLabel>Additional use cases you're interested in (select all that apply)</FormLabel>
-                    <FormDescription>
-                      Which other applications of voice AI would you like to explore?
-                    </FormDescription>
-                  </div>
-                  <div className="space-y-2">
-                    {useCases.map((item) => (
-                      <FormField
-                        key={item.value}
-                        control={form.control}
-                        name="additional_use_cases"
-                        render={({ field }) => {
-                          return (
-                            <FormItem
-                              key={item.value}
-                              className="flex flex-row items-start space-x-3 space-y-0"
-                            >
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(item.value)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([...field.value, item.value])
-                                      : field.onChange(
-                                          field.value?.filter(
-                                            (value) => value !== item.value
-                                          )
-                                        )
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                {item.label}
-                              </FormLabel>
-                            </FormItem>
-                          )
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        );
-      
-      case 3:
-        return (
-          <div className="space-y-6">
-            <h3 className="text-lg font-medium">Goals & Implementation Details</h3>
-            
-            <FormField
-              control={form.control}
-              name="primary_goals"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>What are your primary goals for implementing voice AI?</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="e.g., Improve customer engagement, reduce costs, create interactive content..."
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="success_definition"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>How would you define success with voice AI?</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="e.g., Higher conversion rates, positive user feedback..."
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="integrations"
-              render={() => (
-                <FormItem>
-                  <div className="mb-2">
-                    <FormLabel>Will you be integrating with other platforms?</FormLabel>
-                    <FormDescription>
-                      Select all that apply
-                    </FormDescription>
-                  </div>
-                  <div className="space-y-2">
-                    {integrationPlatforms.map((item) => (
-                      <FormField
-                        key={item.value}
-                        control={form.control}
-                        name="integrations"
-                        render={({ field }) => {
-                          return (
-                            <FormItem
-                              key={item.value}
-                              className="flex flex-row items-start space-x-3 space-y-0"
-                            >
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(item.value)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([...field.value, item.value])
-                                      : field.onChange(
-                                          field.value?.filter(
-                                            (value) => value !== item.value
-                                          )
-                                        )
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="font-normal">
-                                {item.label}
-                              </FormLabel>
-                            </FormItem>
-                          )
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             
             <FormField
               control={form.control}
