@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { TabsContent } from '@/components/ui/tabs';
-import OnboardingChecklist from '@/components/OnboardingChecklist';
+import OnboardingChecklist from '@/components/onboarding/checklist/OnboardingChecklist';
 import KeyActionItem, { KeyActionStep } from './KeyActionItem';
 import ResourceCard, { ResourceItem } from './ResourceCard';
 
