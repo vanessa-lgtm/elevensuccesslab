@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { cn } from '@/lib/utils';
 import OnboardingHeader from '@/components/onboarding/OnboardingHeader';
 import OnboardingTabContent from '@/components/onboarding/OnboardingTabContent';
 import { mediaKeyActionSteps, mediaResources } from '@/data/mediaOnboardingData';
@@ -44,6 +43,8 @@ const Onboarding = () => {
         (useCaseParam && conversationalAIUseCases.includes(useCaseParam))) {
       setIndustry('conversational_ai');
       setUseCase(useCaseParam || 'conversational_ai');
+    } else if (planParam === 'media') {
+      setIndustry('media');
     }
     
     const tabParam = params.get('tab');
@@ -63,7 +64,7 @@ const Onboarding = () => {
   
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    navigate(`/get-started?industry=${industry}&tab=${value}${useCase ? `&useCase=${useCase}` : ''}`, { replace: true });
+    navigate(`/onboarding?industry=${industry}&tab=${value}${useCase ? `&useCase=${useCase}` : ''}`, { replace: true });
   };
 
   const toggleActionCompletion = (id: string) => {

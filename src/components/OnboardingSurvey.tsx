@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -292,6 +291,7 @@ const OnboardingSurvey = () => {
   };
 
   const handleComplete = () => {
+    // Use the selectedPlan to determine which onboarding flow to show
     navigate(`/onboarding?plan=${selectedPlan}`);
   };
 

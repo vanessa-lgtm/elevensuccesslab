@@ -32,7 +32,7 @@ const OnboardingHeader: React.FC<OnboardingHeaderProps> = ({
           platform="youtube"
           title={industry === 'conversational_ai' ? 
             'ElevenLabs Conversational AI Overview' : 
-            'ElevenLabs Onboarding Video'}
+            'ElevenLabs Media & Entertainment Overview'}
         />
       </div>
 
