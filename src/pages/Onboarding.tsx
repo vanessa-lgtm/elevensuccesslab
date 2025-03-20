@@ -8,45 +8,26 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import OnboardingHeader from '@/components/onboarding/OnboardingHeader';
 import OnboardingTabContent from '@/components/onboarding/OnboardingTabContent';
 import { mediaKeyActionSteps, mediaResources } from '@/data/mediaOnboardingData';
-import { conversationalAIKeyActionSteps, conversationalAIResources } from '@/data/conversationalAIOnboardingData';
 
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
   'marketing', 'gaming', 'digital_media', 'audio_production'
 ];
 
-const conversationalAIUseCases = [
-  'conversational_ai', 'customer_service', 'call_center'
-];
-
 const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [activeTab, setActiveTab] = useState("checklist");
   const [industry, setIndustry] = useState<string>("media");
-  const [useCase, setUseCase] = useState<string | null>(null);
   const [completedActions, setCompletedActions] = useState<Record<string, boolean>>({});
   
   const location = useLocation();
   const navigate = useNavigate();
   
   useEffect(() => {
+    // Always set industry to 'media' regardless of URL parameters
+    setIndustry('media');
+    
     const params = new URLSearchParams(location.search);
-    const industryParam = params.get('industry');
-    const planParam = params.get('plan');
-    const useCaseParam = params.get('useCase');
-    
-    if (industryParam && mediaIndustries.includes(industryParam)) {
-      setIndustry('media');
-    }
-    
-    if (planParam === 'conversational_ai' || 
-        (useCaseParam && conversationalAIUseCases.includes(useCaseParam))) {
-      setIndustry('conversational_ai');
-      setUseCase(useCaseParam || 'conversational_ai');
-    } else if (planParam === 'media') {
-      setIndustry('media');
-    }
-    
     const tabParam = params.get('tab');
     if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
       setActiveTab(tabParam);
@@ -64,7 +45,7 @@ const Onboarding = () => {
   
   const handleTabChange = (value: string) => {
     setActiveTab(value);
-    navigate(`/onboarding?industry=${industry}&tab=${value}${useCase ? `&useCase=${useCase}` : ''}`, { replace: true });
+    navigate(`/onboarding?industry=media&tab=${value}`, { replace: true });
   };
 
   const toggleActionCompletion = (id: string) => {
@@ -80,11 +61,8 @@ const Onboarding = () => {
     });
   };
   
-  const keyActionSteps = industry === 'conversational_ai' ? 
-    conversationalAIKeyActionSteps : mediaKeyActionSteps;
-  
-  const resources = industry === 'conversational_ai' ? 
-    conversationalAIResources : mediaResources;
+  const keyActionSteps = mediaKeyActionSteps;
+  const resources = mediaResources;
   
   return (
     <div className="min-h-screen bg-background">
@@ -92,7 +70,7 @@ const Onboarding = () => {
       
       <div className="container mx-auto px-4 py-10 pt-24">
         <div className="max-w-4xl mx-auto">
-          <OnboardingHeader industry={industry} currentStep={currentStep} />
+          <OnboardingHeader industry="media" currentStep={currentStep} />
           
           <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
             <TabsList className="grid w-full grid-cols-3 mb-8">
@@ -105,7 +83,7 @@ const Onboarding = () => {
               activeTab={activeTab}
               currentStep={currentStep}
               handleProgressUpdate={handleProgressUpdate}
-              industry={industry}
+              industry="media"
               keyActionSteps={keyActionSteps}
               resources={resources}
               completedActions={completedActions}

@@ -94,10 +94,6 @@ const mediaIndustries = [
   'marketing', 'gaming', 'digital_media', 'audio_production'
 ];
 
-const conversationalAIUseCases = [
-  'conversational_ai', 'customer_service', 'call_center'
-];
-
 const onboardingPlans = [
   {
     id: 'beginner',
@@ -185,32 +181,6 @@ const onboardingPlans = [
   }
 ];
 
-const determineOnboardingPlan = (formData: any) => {
-  const knowledgeLevel = formData.knowledge_level;
-  const primaryUseCase = formData.primary_use_case;
-  const industry = formData.industry;
-  
-  if (mediaIndustries.includes(industry)) {
-    return 'media';
-  } else if (industry === 'healthcare') {
-    return 'healthcare';
-  } else if (conversationalAIUseCases.includes(primaryUseCase)) {
-    return 'conversational_ai';
-  }
-  
-  if (knowledgeLevel === 'low') {
-    return 'beginner';
-  } else if (primaryUseCase === 'content_creation' || primaryUseCase === 'audiobooks' || primaryUseCase === 'advertising') {
-    return 'creative';
-  } else if (industry === 'technology') {
-    return 'technical';
-  } else if (industry === 'financial' || industry === 'telecom') {
-    return 'enterprise';
-  }
-  
-  return 'beginner';
-};
-
 interface SurveyFormValues {
   company_name: string;
   email: string;
@@ -265,9 +235,7 @@ const OnboardingSurvey = () => {
     if (currentStep < totalSteps - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      const formData = form.getValues();
-      const planId = determineOnboardingPlan(formData);
-      setSelectedPlan(planId);
+      setSelectedPlan('media');
       setShowResults(true);
     }
   };
@@ -279,8 +247,7 @@ const OnboardingSurvey = () => {
   };
 
   const handleComplete = () => {
-    // Use the selectedPlan to determine which onboarding flow to show
-    navigate(`/onboarding?plan=${selectedPlan}`);
+    navigate('/onboarding?industry=media&plan=media');
   };
 
   const resetSurvey = () => {
@@ -579,9 +546,7 @@ const OnboardingSurvey = () => {
   };
 
   const renderPlan = () => {
-    if (!selectedPlan) return null;
-    
-    const plan = onboardingPlans.find(p => p.id === selectedPlan);
+    const plan = onboardingPlans.find(p => p.id === 'media');
     if (!plan) return null;
     
     return (
