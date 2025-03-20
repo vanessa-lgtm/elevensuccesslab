@@ -442,9 +442,14 @@ const Onboarding = () => {
             
             <div className="mb-8">
               <VideoEmbed 
-                videoId={industry === 'conversational_ai' ? 'dQw4w9WgXcQ' : 'z0sD2BvUfM0'} 
+                videoId={industry === 'conversational_ai' ? 
+                  'GV3zMRqcn7M' : 
+                  'z0sD2BvUfM0'} 
+                platform={industry === 'conversational_ai' ?
+                  'youtube' : 
+                  'youtube'}
                 title={industry === 'conversational_ai' ? 
-                  'ElevenLabs Conversational AI Onboarding Video' : 
+                  'ElevenLabs Conversational AI Overview' : 
                   'ElevenLabs Onboarding Video'}
               />
             </div>
@@ -527,3 +532,4 @@ const Onboarding = () => {
 };
 
 export default Onboarding;
+
