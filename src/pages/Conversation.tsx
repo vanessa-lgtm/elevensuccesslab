@@ -1,10 +1,23 @@
 
-import React from 'react';
-import { Navbar } from '@/components/Navbar';
-import { Footer } from '@/components/Footer';
-import { ElevenLabsConversation } from '@/components/ElevenLabsConversation';
+import React, { useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Conversation: React.FC = () => {
+  useEffect(() => {
+    // Load the ElevenLabs widget script
+    const script = document.createElement('script');
+    script.src = 'https://embeds.cdn.elevenlabs.io/elevenlabs-chats.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup script on component unmount
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
@@ -13,11 +26,26 @@ const Conversation: React.FC = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-3xl font-bold mb-6">ElevenLabs Conversational AI</h1>
           <p className="mb-8 text-muted-foreground">
-            Experience the power of ElevenLabs voice AI through an interactive conversation.
-            Enter your agent ID to start a voice conversation with an AI assistant.
+            Experience the power of ElevenLabs voice AI through this interactive conversation widget.
           </p>
           
-          <ElevenLabsConversation />
+          <Card className="w-full mx-auto overflow-hidden">
+            <CardHeader>
+              <CardTitle>AI Voice Chat</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0 h-[600px]">
+              <div 
+                className="elevenlabs-chat-widget" 
+                data-id="YOUR_AGENT_ID" 
+                style={{ height: '100%', width: '100%' }}
+              ></div>
+            </CardContent>
+          </Card>
+          
+          <div className="mt-6 text-sm text-muted-foreground">
+            <p>Note: Replace "YOUR_AGENT_ID" in the widget with your ElevenLabs Agent ID.</p>
+            <p>You can find your Agent ID in the ElevenLabs Conversational AI dashboard.</p>
+          </div>
         </div>
       </main>
       
