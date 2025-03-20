@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { X, Sparkle, Megaphone } from 'lucide-react';
+import { X, Sparkle, Megaphone, Mic, ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Link } from 'react-router-dom';
 
 const POPUP_DISPLAY_LIMIT = 2;
 const LOCAL_STORAGE_KEY = 'webinarPopupShownCount';
@@ -33,24 +34,36 @@ const WebinarPopup = () => {
 
   return (
     <>
-      {/* Minimized version that shows in corner */}
+      {/* Minimized version that shows in corner with added AI voice assistant button */}
       {!isOpen && (
-        <Popover>
-          <PopoverTrigger asChild>
+        <div className="fixed bottom-6 right-6 flex gap-4 items-center z-50">
+          <Link to="/conversation">
             <Button
-              className="fixed bottom-6 right-6 rounded-full h-14 w-14 shadow-lg hover:shadow-xl z-50"
-              onClick={() => setIsOpen(true)}
+              className="rounded-full h-14 shadow-lg hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4"
             >
-              <Megaphone className="h-6 w-6" />
+              <Mic className="mr-2 h-5 w-5" />
+              Talk to our AI Voice Assistant
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-80 p-0" side="top" align="end">
-            <div className="p-4">
-              <p className="text-sm font-medium">New announcements available!</p>
-              <p className="text-xs text-muted-foreground mt-1">Click to see what's new</p>
-            </div>
-          </PopoverContent>
-        </Popover>
+          </Link>
+          
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl"
+                onClick={() => setIsOpen(true)}
+              >
+                <Megaphone className="h-6 w-6" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80 p-0" side="top" align="end">
+              <div className="p-4">
+                <p className="text-sm font-medium">New announcements available!</p>
+                <p className="text-xs text-muted-foreground mt-1">Click to see what's new</p>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
       )}
 
       {/* Expanded notification */}
@@ -120,6 +133,18 @@ const WebinarPopup = () => {
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* Added the AI Assistant button at the bottom of the announcement panel when open */}
+          <div className="p-4 pt-0">
+            <Link to="/conversation" className="block w-full">
+              <Button
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              >
+                <Mic className="mr-2 h-4 w-4" />
+                Talk to our AI Voice Assistant
+              </Button>
+            </Link>
           </div>
         </div>
       )}
