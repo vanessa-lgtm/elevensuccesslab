@@ -35,7 +35,7 @@ const Conversation: React.FC = () => {
               <CardTitle>AI Voice Chat</CardTitle>
             </CardHeader>
             <CardContent className="p-0 h-[600px]">
-              <div className="elevenlabs-convai agent-id="C6DAdeHLXXHPNrJnf5kq"></div>
+              <div className="elevenlabs-convai" agent-id="C6DAdeHLXXHPNrJnf5kq"></div>
             </CardContent>
           </Card>
         </div>
