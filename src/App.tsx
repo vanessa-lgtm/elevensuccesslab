@@ -9,7 +9,6 @@ import EventDetails from "./pages/EventDetails";
 import UseCaseInspiration from "./pages/UseCaseInspiration";
 import Onboarding from "./pages/Onboarding";
 import NotFound from "./pages/NotFound";
-import Conversation from "./pages/Conversation";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +23,6 @@ const App = () => (
           <Route path="/events/:eventId" element={<EventDetails />} />
           <Route path="/use-case-inspiration" element={<UseCaseInspiration />} />
           <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/conversation" element={<Conversation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

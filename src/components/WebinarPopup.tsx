@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { X, Sparkle, Megaphone, Mic, ArrowRight } from 'lucide-react';
@@ -15,16 +14,13 @@ const WebinarPopup = () => {
   const [hasBeenShown, setHasBeenShown] = useState(false);
   
   useEffect(() => {
-    // Get current number of times the popup has been shown
     const popupShownCount = parseInt(localStorage.getItem(LOCAL_STORAGE_KEY) || '0');
     
-    // Only show popup if it hasn't been shown the maximum number of times
     if (popupShownCount < POPUP_DISPLAY_LIMIT && !hasBeenShown) {
       const timer = setTimeout(() => {
         setIsOpen(true);
         setHasBeenShown(true);
         
-        // Increment and save the shown count
         localStorage.setItem(LOCAL_STORAGE_KEY, (popupShownCount + 1).toString());
       }, 3000);
       
@@ -34,18 +30,16 @@ const WebinarPopup = () => {
 
   return (
     <>
-      {/* Minimized version that shows in corner with added AI voice assistant button */}
       {!isOpen && (
         <div className="fixed bottom-6 right-6 flex gap-4 items-center z-50">
-          <Link to="/conversation">
-            <Button
-              className="rounded-full h-14 shadow-lg hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4"
-            >
-              <Mic className="mr-2 h-5 w-5" />
-              Talk to our AI Voice Assistant
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
-          </Link>
+          <Button
+            className="rounded-full h-14 shadow-lg hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4"
+            onClick={() => alert("AI Voice Assistant feature will be implemented later.")}
+          >
+            <Mic className="mr-2 h-5 w-5" />
+            Talk to our AI Voice Assistant
+            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Button>
           
           <Popover>
             <PopoverTrigger asChild>
@@ -66,7 +60,6 @@ const WebinarPopup = () => {
         </div>
       )}
 
-      {/* Expanded notification */}
       {isOpen && (
         <div 
           className={cn(
@@ -91,7 +84,6 @@ const WebinarPopup = () => {
             </div>
             
             <div className="space-y-4">
-              {/* Upcoming Webinar */}
               <div className="rounded-md bg-primary/5 p-3">
                 <div className="flex items-start gap-2 mb-2">
                   <Megaphone className="h-4 w-4 text-primary mt-0.5 shrink-0" />
@@ -112,7 +104,6 @@ const WebinarPopup = () => {
                 </div>
               </div>
               
-              {/* New Scribe feature */}
               <div className="rounded-md bg-primary/5 p-3">
                 <div className="flex items-start gap-2">
                   <Sparkle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
@@ -135,16 +126,14 @@ const WebinarPopup = () => {
             </div>
           </div>
           
-          {/* Added the AI Assistant button at the bottom of the announcement panel when open */}
           <div className="p-4 pt-0">
-            <Link to="/conversation" className="block w-full">
-              <Button
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-              >
-                <Mic className="mr-2 h-4 w-4" />
-                Talk to our AI Voice Assistant
-              </Button>
-            </Link>
+            <Button
+              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              onClick={() => alert("AI Voice Assistant feature will be implemented later.")}
+            >
+              <Mic className="mr-2 h-4 w-4" />
+              Talk to our AI Voice Assistant
+            </Button>
           </div>
         </div>
       )}
