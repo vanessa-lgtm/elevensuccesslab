@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { X, Sparkle, Megaphone, Mic, ArrowRight } from 'lucide-react';
+import { X, Sparkle, Megaphone, Mic, ArrowRight, PhoneCall } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -36,8 +37,8 @@ const WebinarPopup = () => {
             className="rounded-full h-14 shadow-lg hover:shadow-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 px-4"
             onClick={() => alert("AI Voice Assistant feature will be implemented later.")}
           >
-            <Mic className="mr-2 h-5 w-5" />
-            Talk to our AI Voice Assistant
+            <PhoneCall className="mr-2 h-5 w-5" />
+            Get Help - Start a Call
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Button>
           
@@ -131,8 +132,8 @@ const WebinarPopup = () => {
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               onClick={() => alert("AI Voice Assistant feature will be implemented later.")}
             >
-              <Mic className="mr-2 h-4 w-4" />
-              Talk to our AI Voice Assistant
+              <PhoneCall className="mr-2 h-4 w-4" />
+              Get Help - Start a Call
             </Button>
           </div>
         </div>
