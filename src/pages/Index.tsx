@@ -7,8 +7,6 @@ import SupportSection from '@/components/SupportSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
-import EventsWidget from '@/components/EventsWidget';
-import StatsWidget from '@/components/StatsWidget';
 
 const Index = () => {
   useEffect(() => {
@@ -40,9 +38,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
-      <StatsWidget />
       <ResourceSection />
-      <EventsWidget />
       <SupportSection />
       <TestimonialSection />
       <Footer />
