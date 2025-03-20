@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Bell } from 'lucide-react';
+import { ArrowRight, Bell, Mic } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import OnboardingSurvey from '@/components/OnboardingSurvey';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
@@ -132,6 +132,17 @@ const Hero = () => {
               Explore Resources
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
+          </div>
+          
+          {/* New button to talk to the AI agent */}
+          <div className="mt-4 mb-8">
+            <Link to="/conversation">
+              <Button size="lg" className="group bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                <Mic className="mr-2 h-5 w-5" />
+                Talk to our AI Voice Assistant
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
           
           <div className="mt-6">
