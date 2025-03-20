@@ -26,16 +26,27 @@ const Onboarding = () => {
     } else {
       // Default to checklist tab if no valid tab parameter
       setActiveTab('checklist');
+      navigate('/onboarding?industry=media&tab=checklist', { replace: true });
     }
 
     const savedCompletedActions = localStorage.getItem('completedActions');
     if (savedCompletedActions) {
       setCompletedActions(JSON.parse(savedCompletedActions));
     }
-  }, [location]);
+    
+    // Force a re-render after a short delay to ensure components are mounted
+    const timer = setTimeout(() => {
+      console.log("Forcing re-render of Onboarding component");
+      setCurrentStep(prev => prev); // This forces a re-render
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [location, navigate]);
   
   const handleProgressUpdate = (completed: number, total: number) => {
-    setCurrentStep(Math.round((completed / total) * 100));
+    console.log(`Progress update: ${completed}/${total}`);
+    const newStep = total > 0 ? Math.round((completed / total) * 100) : 0;
+    setCurrentStep(newStep);
   };
   
   const handleTabChange = (value: string) => {
@@ -58,6 +69,9 @@ const Onboarding = () => {
   
   const keyActionSteps = mediaKeyActionSteps;
   const resources = mediaResources;
+  
+  console.log("Rendering Onboarding page with industry:", industry);
+  console.log("Active tab:", activeTab);
   
   return (
     <div className="min-h-screen bg-background">

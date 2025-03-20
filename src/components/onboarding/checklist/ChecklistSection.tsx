@@ -13,6 +13,8 @@ interface ChecklistSectionProps {
 const ChecklistSection: React.FC<ChecklistSectionProps> = ({ title, items, onToggleItemCompletion }) => {
   if (items.length === 0) return null;
   
+  console.log(`Rendering section "${title}" with ${items.length} items`);
+  
   return (
     <div className="mb-6">
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
