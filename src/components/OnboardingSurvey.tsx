@@ -77,15 +77,12 @@ const industries = [
 
 const useCases = [
   { value: 'content_creation', label: 'Content Creation' },
-  { value: 'customer_service', label: 'Customer Service' },
   { value: 'accessibility', label: 'Accessibility' },
   { value: 'localization', label: 'Localization & Translation' },
   { value: 'audiobooks', label: 'Audiobooks & Narration' },
   { value: 'gaming', label: 'Gaming Characters' },
   { value: 'advertising', label: 'Advertising & Marketing' },
   { value: 'education', label: 'Educational Content' },
-  { value: 'conversational_ai', label: 'Conversational AI' },
-  { value: 'call_center', label: 'Call Center Automation' },
   { value: 'not_sure', label: "I don't know yet" }
 ];
 
