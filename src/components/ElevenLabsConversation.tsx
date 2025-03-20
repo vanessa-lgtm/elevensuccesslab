@@ -1,8 +1,7 @@
-
 'use client';
 
 import { useConversation } from '@11labs/react';
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
@@ -13,6 +12,7 @@ export function ElevenLabsConversation() {
   const [isMuted, setIsMuted] = useState<boolean>(false);
   const [messages, setMessages] = useState<{role: string, content: string}[]>([]);
   const { toast } = useToast();
+  const micPermissionGranted = useRef<boolean>(false);
   
   const conversation = useConversation({
     onConnect: () => {
@@ -54,8 +54,15 @@ export function ElevenLabsConversation() {
   const startConversation = useCallback(async () => {
     try {
       setMessages([]);
-      // Request microphone permission
-      await navigator.mediaDevices.getUserMedia({ audio: true });
+      
+      // Check if microphone permission is already granted
+      if (!micPermissionGranted.current) {
+        // Request microphone permission
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        // Keep the stream active to maintain microphone access
+        micPermissionGranted.current = true;
+        // Don't stop the stream as it might cause the connection to drop
+      }
 
       // Start the conversation with the agent
       await conversation.startSession({
@@ -101,6 +108,11 @@ export function ElevenLabsConversation() {
       }
     };
   }, [conversation]);
+
+  // This helps diagnose connection issues
+  useEffect(() => {
+    console.log('Conversation status changed:', conversation.status);
+  }, [conversation.status]);
 
   return (
     <div className="flex flex-col gap-6">
