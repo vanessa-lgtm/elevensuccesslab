@@ -27,11 +27,9 @@ const OnboardingHeader: React.FC<OnboardingHeaderProps> = ({
       <div className="mb-8">
         <VideoEmbed 
           videoId={industry === 'conversational_ai' ? 
-            'GV3zMRqcn7M' : 
+            'v-EYzZCLF48' : 
             'z0sD2BvUfM0'} 
-          platform={industry === 'conversational_ai' ?
-            'youtube' : 
-            'youtube'}
+          platform="youtube"
           title={industry === 'conversational_ai' ? 
             'ElevenLabs Conversational AI Overview' : 
             'ElevenLabs Onboarding Video'}
