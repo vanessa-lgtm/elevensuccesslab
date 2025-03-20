@@ -9,11 +9,6 @@ import OnboardingHeader from '@/components/onboarding/OnboardingHeader';
 import OnboardingTabContent from '@/components/onboarding/OnboardingTabContent';
 import { mediaKeyActionSteps, mediaResources } from '@/data/mediaOnboardingData';
 
-const mediaIndustries = [
-  'localization', 'broadcasting', 'streaming', 'film', 
-  'marketing', 'gaming', 'digital_media', 'audio_production'
-];
-
 const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [activeTab, setActiveTab] = useState("checklist");
@@ -31,6 +26,9 @@ const Onboarding = () => {
     const tabParam = params.get('tab');
     if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
       setActiveTab(tabParam);
+    } else {
+      // Default to checklist tab if no valid tab parameter
+      setActiveTab('checklist');
     }
 
     const savedCompletedActions = localStorage.getItem('completedActions');

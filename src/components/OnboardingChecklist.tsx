@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
-import { CheckCircle, Clock, ExternalLink, Phone } from 'lucide-react';
+import { CheckCircle, Clock, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ChecklistItem {
