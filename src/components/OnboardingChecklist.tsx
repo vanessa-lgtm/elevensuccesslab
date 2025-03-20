@@ -37,10 +37,11 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
       // Initialize with default items if no saved state
       if (industry === "media") {
         setChecklistItems([
+          // Admin Section
           {
             id: '1',
-            title: 'Set up your account and billing',
-            description: 'Configure your workspace settings, user profile information, and verify your billing details.',
+            title: 'The Basics',
+            description: 'Set up your account and billing information to get started with ElevenLabs.',
             timeEstimate: '10 min',
             completed: false,
             section: 'admin',
@@ -48,8 +49,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           },
           {
             id: '2',
-            title: 'Invite workspace users',
-            description: 'Set up user groups and permission levels for your team members.',
+            title: 'Collaboration',
+            description: 'Invite workspace users and set up user groups with appropriate permission levels.',
             timeEstimate: '15 min',
             completed: false,
             section: 'admin',
@@ -57,7 +58,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           },
           {
             id: '3',
-            title: 'Share resources with your team',
+            title: 'Share Resources with your Team',
             description: 'Invite team members to your Enterprise Workspace and set up resource sharing.',
             timeEstimate: '10 min',
             completed: false,
@@ -66,7 +67,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           },
           {
             id: '4',
-            title: 'Manage usage & billing',
+            title: 'Manage Usage & Billing',
             description: 'Activate usage-based billing to avoid hitting your quota and set up usage alerts.',
             timeEstimate: '10 min',
             completed: false,
@@ -75,42 +76,25 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           },
           {
             id: '5',
-            title: 'Stay updated',
-            description: 'Configure your notification preferences to stay updated with the latest product improvements.',
+            title: 'Stay Updated',
+            description: 'Configure your notification preferences to keep up with the latest product improvements and updates.',
             timeEstimate: '5 min',
             completed: false,
             section: 'admin'
           },
           {
             id: '6',
-            title: 'Monitor service status',
+            title: 'Monitor Service Status',
             description: 'Subscribe to the ElevenLabs status page for real-time service updates.',
             timeEstimate: '5 min',
             completed: false,
             section: 'admin',
             link: 'https://status.elevenlabs.io/'
           },
+          
+          // Product General Info
           {
             id: '7',
-            title: 'Give El a call',
-            description: 'Schedule a call with our team for personalized assistance with your implementation.',
-            timeEstimate: '30 min',
-            completed: false,
-            section: 'admin',
-            link: 'https://calendly.com/elevenlabs-support'
-          },
-          
-          {
-            id: '8',
-            title: 'Generate and manage API keys',
-            description: 'Create and manage API keys for integrating ElevenLabs into your applications.',
-            timeEstimate: '10 min',
-            completed: false,
-            section: 'general',
-            link: 'https://elevenlabs.io/docs/api-reference/authentication'
-          },
-          {
-            id: '9',
             title: 'Learn about AI voice models',
             description: 'Understand the different voice models available and their specific use cases for media productions.',
             timeEstimate: '20 min',
@@ -119,7 +103,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/docs/models'
           },
           {
-            id: '10',
+            id: '8',
             title: 'Review API scaling best practices',
             description: 'Learn how to optimize API usage for high-volume media production environments.',
             timeEstimate: '25 min',
@@ -128,7 +112,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/docs/api-reference/overview'
           },
           {
-            id: '11',
+            id: '9',
             title: 'Schedule custom concurrency limits discussion',
             description: 'Work with our team to scale high-throughput applications for your media content generation needs.',
             timeEstimate: '30 min',
@@ -136,9 +120,10 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             section: 'general'
           },
           
+          // Use Case Specific
           {
-            id: '12',
-            title: 'Select the right voices for your content',
+            id: '10',
+            title: 'Selecting the Right Voice',
             description: 'Choose from pre-designed voices, clone existing ones, or create custom voices to match your brand, characters, or audience needs.',
             timeEstimate: '30 min',
             completed: false,
@@ -146,8 +131,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/voices'
           },
           {
-            id: '13',
-            title: 'Create custom voice clones',
+            id: '11',
+            title: 'Creating Custom Voice Clones',
             description: 'Develop personalized voice clones using Instant Voice Cloning (IVC) for quick results or Professional Voice Cloning (PVC) for high-accuracy and customization.',
             timeEstimate: '45 min',
             completed: false,
@@ -155,7 +140,7 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/docs/product-guides/voices/voice-cloning'
           },
           {
-            id: '14',
+            id: '12',
             title: 'Learn instant voice cloning techniques',
             description: 'Master the art of creating quick voice clones for rapid content production and iteration.',
             timeEstimate: '25 min',
@@ -164,8 +149,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/docs/product-guides/voices/voice-cloning/instant-voice-cloning'
           },
           {
-            id: '15',
-            title: 'Set up high-quality text-to-speech workflows',
+            id: '13',
+            title: 'Delivering Natural, High-Quality Speech',
             description: 'Configure your text-to-speech settings to deliver natural, high-quality speech for your media content.',
             timeEstimate: '30 min',
             completed: false,
@@ -173,8 +158,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/docs/product-guides/playground/text-to-speech'
           },
           {
-            id: '16',
-            title: 'Explore voice transformation capabilities',
+            id: '14',
+            title: 'Transform any Voice with Voice Changer',
             description: 'Learn how to transform any voice with Voice Changer for creative audio productions.',
             timeEstimate: '20 min',
             completed: false,
@@ -182,41 +167,13 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
             link: 'https://elevenlabs.io/docs/product-guides/playground/voice-changer'
           },
           {
-            id: '17',
-            title: 'Incorporate AI-generated sound effects',
+            id: '15',
+            title: 'Enhancing Content with AI-Generated Sound Effects',
             description: 'Enhance your media content with AI-generated sound effects for immersive audio experiences.',
             timeEstimate: '25 min',
             completed: false,
             section: 'usecase',
             link: 'https://elevenlabs.io/docs/product-guides/playground/sound-effects'
-          },
-          {
-            id: '18',
-            title: 'Master voice isolation techniques',
-            description: 'Learn how to isolate voices for clearer audio in your productions.',
-            timeEstimate: '20 min',
-            completed: false,
-            section: 'usecase',
-            link: 'https://elevenlabs.io/docs/product-guides/playground/voice-isolation'
-          },
-          
-          {
-            id: '19',
-            title: 'Review voice settings best practices',
-            description: 'Learn how to adjust voice settings for optimal results in different scenarios.',
-            timeEstimate: '15 min',
-            completed: false,
-            section: 'tips',
-            link: 'https://elevenlabs.io/docs/product-guides/voice-settings'
-          },
-          {
-            id: '20',
-            title: 'Explore advanced tool usage',
-            description: 'Discover tips and tricks for using ElevenLabs tools more effectively.',
-            timeEstimate: '20 min',
-            completed: false,
-            section: 'tips',
-            link: 'https://elevenlabs.io/docs/guides/best-practices'
           },
         ]);
       } else if (industry === "conversational_ai") {
