@@ -12,16 +12,13 @@ import { mediaKeyActionSteps, mediaResources } from '@/data/mediaOnboardingData'
 const Onboarding = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [activeTab, setActiveTab] = useState("checklist");
-  const [industry, setIndustry] = useState<string>("media");
+  const [industry] = useState<string>("media"); // Always set to "media" as default
   const [completedActions, setCompletedActions] = useState<Record<string, boolean>>({});
   
   const location = useLocation();
   const navigate = useNavigate();
   
   useEffect(() => {
-    // Always set industry to 'media' regardless of URL parameters
-    setIndustry('media');
-    
     const params = new URLSearchParams(location.search);
     const tabParam = params.get('tab');
     if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
