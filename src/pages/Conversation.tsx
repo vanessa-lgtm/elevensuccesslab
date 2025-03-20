@@ -8,8 +8,9 @@ const Conversation: React.FC = () => {
   useEffect(() => {
     // Load the ElevenLabs widget script
     const script = document.createElement('script');
-    script.src = 'https://embeds.cdn.elevenlabs.io/elevenlabs-chats.js';
+    script.src = 'https://elevenlabs.io/convai-widget/index.js';
     script.async = true;
+    script.type = 'text/javascript';
     document.body.appendChild(script);
 
     return () => {
@@ -34,18 +35,9 @@ const Conversation: React.FC = () => {
               <CardTitle>AI Voice Chat</CardTitle>
             </CardHeader>
             <CardContent className="p-0 h-[600px]">
-              <div 
-                className="elevenlabs-chat-widget" 
-                data-id="YOUR_AGENT_ID" 
-                style={{ height: '100%', width: '100%' }}
-              ></div>
+              <div className="elevenlabs-convai agent-id="C6DAdeHLXXHPNrJnf5kq"></div>
             </CardContent>
           </Card>
-          
-          <div className="mt-6 text-sm text-muted-foreground">
-            <p>Note: Replace "YOUR_AGENT_ID" in the widget with your ElevenLabs Agent ID.</p>
-            <p>You can find your Agent ID in the ElevenLabs Conversational AI dashboard.</p>
-          </div>
         </div>
       </main>
       
