@@ -32,8 +32,13 @@ export function ElevenLabsConversation() {
     },
     onMessage: (message) => {
       console.log('Message from agent:', message);
-      if (message.role && message.content) {
-        setMessages(prev => [...prev, message]);
+      // Convert message format from ElevenLabs to our format
+      if (message.source && message.message) {
+        const formattedMessage = {
+          role: message.source === 'ai' ? 'assistant' : 'user',
+          content: message.message
+        };
+        setMessages(prev => [...prev, formattedMessage]);
       }
     },
     onError: (error) => {
