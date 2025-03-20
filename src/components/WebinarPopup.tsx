@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Link } from 'react-router-dom';
+import VideoEmbed from './VideoEmbed';
 
 const POPUP_DISPLAY_LIMIT = 2;
 const LOCAL_STORAGE_KEY = 'webinarPopupShownCount';
@@ -13,6 +14,7 @@ const LOCAL_STORAGE_KEY = 'webinarPopupShownCount';
 const WebinarPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBeenShown, setHasBeenShown] = useState(false);
+  const [videoDialogOpen, setVideoDialogOpen] = useState(false);
   
   useEffect(() => {
     const popupShownCount = parseInt(localStorage.getItem(LOCAL_STORAGE_KEY) || '0');
@@ -109,17 +111,17 @@ const WebinarPopup = () => {
                 <div className="flex items-start gap-2">
                   <Sparkle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                   <div>
-                    <h4 className="font-medium text-sm">New Scribe Feature</h4>
+                    <h4 className="font-medium text-sm">On-Demand Webinars</h4>
                     <p className="text-xs text-muted-foreground mt-1">
-                      Transcribe Speech to Text with the world's most accurate ASR model.
+                      Watch our latest webinar: ElevenLabs Next-Gen Digital and News Publishing
                     </p>
                     <Button 
                       size="sm" 
                       variant="outline" 
                       className="mt-2 w-full text-xs h-8"
-                      onClick={() => window.open("https://elevenlabs.io/blog/meet-scribe", "_blank")}
+                      onClick={() => setVideoDialogOpen(true)}
                     >
-                      Learn More
+                      Watch Now
                     </Button>
                   </div>
                 </div>
@@ -138,6 +140,21 @@ const WebinarPopup = () => {
           </div>
         </div>
       )}
+
+      {/* Webinar Video Dialog */}
+      <Dialog open={videoDialogOpen} onOpenChange={setVideoDialogOpen}>
+        <DialogContent className="sm:max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>ElevenLabs Next-Gen Digital and News Publishing</DialogTitle>
+          </DialogHeader>
+          <div className="mt-2">
+            <VideoEmbed 
+              videoId="G-M0TQcTsZg" 
+              title="ElevenLabs Next-Gen Digital and News Publishing"
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
