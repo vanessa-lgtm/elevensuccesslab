@@ -261,7 +261,7 @@ const MediaUseCasesInspiration = () => {
       <div className="mt-8 flex justify-center">
         <Button 
           size="lg"
-          onClick={() => window.open('https://elevenlabs.io/blog', '_blank')}
+          onClick={() => window.open('https://elevenlabs.io/case-studies', '_blank')}
         >
           View All Voice AI Case Studies
         </Button>

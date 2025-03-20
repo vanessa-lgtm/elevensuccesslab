@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -63,17 +64,29 @@ const industries = [
   { value: 'marketing', label: 'Marketing and Advertising Services' },
   { value: 'gaming', label: 'Video Game Development' },
   { value: 'digital_media', label: 'Digital Media and Publishing' },
-  { value: 'audio_production', label: 'Audio Content Production and Publishing' }
+  { value: 'audio_production', label: 'Audio Content Production and Publishing' },
+  { value: 'media_software', label: 'Media and Content Creation Software' },
+  { value: 'ai_assistants', label: 'Consumer AI and Virtual Assistants' },
+  { value: 'edtech', label: 'EdTech (Education Technology)' },
+  { value: 'software', label: 'Software Development and SaaS Providers' },
+  { value: 'customer_support', label: 'Customer Support and Call Center Operations' },
+  { value: 'call_center', label: 'Call Center Technology and Solutions Providers' },
+  { value: 'hardware', label: 'Hardware and Electronics Manufacturing' },
+  { value: 'consulting', label: 'Management Consulting and Advisory Services' },
+  { value: 'other', label: 'Miscellaneous / Other Industries' }
 ];
 
 const useCases = [
   { value: 'content_creation', label: 'Content Creation' },
+  { value: 'customer_service', label: 'Customer Service' },
   { value: 'accessibility', label: 'Accessibility' },
   { value: 'localization', label: 'Localization & Translation' },
   { value: 'audiobooks', label: 'Audiobooks & Narration' },
   { value: 'gaming', label: 'Gaming Characters' },
   { value: 'advertising', label: 'Advertising & Marketing' },
   { value: 'education', label: 'Educational Content' },
+  { value: 'conversational_ai', label: 'Conversational AI' },
+  { value: 'call_center', label: 'Call Center Automation' },
   { value: 'not_sure', label: "I don't know yet" }
 ];
 
@@ -92,6 +105,10 @@ const primaryGoals = [
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
   'marketing', 'gaming', 'digital_media', 'audio_production'
+];
+
+const conversationalAIUseCases = [
+  'conversational_ai', 'customer_service', 'call_center'
 ];
 
 const onboardingPlans = [
@@ -181,6 +198,32 @@ const onboardingPlans = [
   }
 ];
 
+const determineOnboardingPlan = (formData: any) => {
+  const knowledgeLevel = formData.knowledge_level;
+  const primaryUseCase = formData.primary_use_case;
+  const industry = formData.industry;
+  
+  if (mediaIndustries.includes(industry)) {
+    return 'media';
+  } else if (industry === 'healthcare') {
+    return 'healthcare';
+  } else if (conversationalAIUseCases.includes(primaryUseCase)) {
+    return 'conversational_ai';
+  }
+  
+  if (knowledgeLevel === 'low') {
+    return 'beginner';
+  } else if (primaryUseCase === 'content_creation' || primaryUseCase === 'audiobooks' || primaryUseCase === 'advertising') {
+    return 'creative';
+  } else if (industry === 'technology') {
+    return 'technical';
+  } else if (industry === 'financial' || industry === 'telecom') {
+    return 'enterprise';
+  }
+  
+  return 'beginner';
+};
+
 interface SurveyFormValues {
   company_name: string;
   email: string;
@@ -235,7 +278,9 @@ const OnboardingSurvey = () => {
     if (currentStep < totalSteps - 1) {
       setCurrentStep(currentStep + 1);
     } else {
-      setSelectedPlan('media');
+      const formData = form.getValues();
+      const planId = determineOnboardingPlan(formData);
+      setSelectedPlan(planId);
       setShowResults(true);
     }
   };
@@ -247,7 +292,7 @@ const OnboardingSurvey = () => {
   };
 
   const handleComplete = () => {
-    navigate('/onboarding?industry=media&plan=media');
+    navigate(`/onboarding?plan=${selectedPlan}`);
   };
 
   const resetSurvey = () => {
@@ -546,7 +591,9 @@ const OnboardingSurvey = () => {
   };
 
   const renderPlan = () => {
-    const plan = onboardingPlans.find(p => p.id === 'media');
+    if (!selectedPlan) return null;
+    
+    const plan = onboardingPlans.find(p => p.id === selectedPlan);
     if (!plan) return null;
     
     return (
