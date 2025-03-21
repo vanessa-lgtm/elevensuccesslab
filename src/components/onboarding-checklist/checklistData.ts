@@ -27,7 +27,7 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
       },
       {
         id: '2',
-        title: 'Set up your Workspace',
+        title: 'Invite workspace users',
         description: 'Set up user groups and permission levels for your team members.',
         timeEstimate: '15 min',
         completed: false,
@@ -54,7 +54,7 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
       },
       {
         id: '5',
-        title: 'Set up product update notifications',
+        title: 'Stay updated with product improvements',
         description: 'Configure your notification preferences to stay updated with the latest product improvements.',
         timeEstimate: '5 min',
         completed: false,
@@ -165,7 +165,7 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
       },
       {
         id: '2',
-        title: 'Set up your Workspace',
+        title: 'Invite workspace users',
         description: 'Set up user groups and permission levels for your team members.',
         timeEstimate: '15 min',
         completed: false,
@@ -192,7 +192,7 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
       },
       {
         id: '5',
-        title: 'Set up product update notifications',
+        title: 'Stay updated with product improvements',
         description: 'Configure your notification preferences to stay updated with the latest product improvements.',
         timeEstimate: '5 min',
         completed: false,
@@ -219,8 +219,8 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
       },
       {
         id: '8',
-        title: 'Understand voice API capabilities',
-        description: 'Learn how the voice API works for real-time conversational applications.',
+        title: 'Review API scaling best practices',
+        description: 'Learn how to optimize API usage for high-volume conversational AI environments.',
         timeEstimate: '25 min',
         completed: false,
         section: 'general',
@@ -228,12 +228,11 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
       },
       {
         id: '9',
-        title: 'Plan your conversational design',
-        description: 'Learn the principles of effective conversation design for voice assistants.',
+        title: 'Schedule custom concurrency limits discussion',
+        description: 'Work with our team to scale high-throughput applications for your conversational AI needs.',
         timeEstimate: '30 min',
         completed: false,
-        section: 'general',
-        link: 'https://elevenlabs.io/docs/conversation-design'
+        section: 'general'
       },
       
       {
@@ -295,22 +294,42 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
     return [
       {
         id: '1',
-        title: 'Create your account',
-        description: 'Set up your personal profile and customize your account settings.',
-        timeEstimate: '5 min',
+        title: 'Set up your account',
+        description: 'Configure your workspace settings and user profile information.',
+        timeEstimate: '10 min',
         completed: false,
         section: 'basics',
-      },
-      {
-        id: '9',
-        title: 'Verify billing information',
-        description: 'Make sure your billing is set up with the correct payment method and your billing contact on file is correct (you can verify this with customer support).',
-        timeEstimate: '5 min',
-        completed: false,
-        section: 'basics',
+        link: 'https://elevenlabs.io/docs/product-guides/administration/workspaces/overview'
       },
       {
         id: '2',
+        title: 'Verify billing information',
+        description: 'Make sure your billing is set up with the correct payment method and your billing contact on file is correct.',
+        timeEstimate: '5 min',
+        completed: false,
+        section: 'basics',
+        link: 'https://elevenlabs.io/docs/product-guides/administration/billing'
+      },
+      {
+        id: '3',
+        title: 'Invite workspace users',
+        description: 'Set up user groups and permission levels for your team members.',
+        timeEstimate: '15 min',
+        completed: false,
+        section: 'basics',
+        link: 'https://elevenlabs.io/docs/product-guides/administration/workspaces/user-groups'
+      },
+      {
+        id: '4',
+        title: 'Share resources with your team',
+        description: 'Invite team members to your Workspace and set up resource sharing.',
+        timeEstimate: '10 min',
+        completed: false,
+        section: 'basics',
+        link: 'https://elevenlabs.io/docs/product-guides/administration/workspaces/sharing-resources'
+      },
+      {
+        id: '5',
         title: 'Complete the AI readiness assessment',
         description: 'Answer a few questions to help us understand your current AI maturity level.',
         timeEstimate: '10 min',
@@ -318,15 +337,25 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
         section: 'general',
       },
       {
-        id: '3',
-        title: 'Set up your first project',
-        description: 'Create your first AI project and define your objectives.',
-        timeEstimate: '15 min',
+        id: '6',
+        title: 'Learn about our voice models',
+        description: 'Understand the different voice models available and their specific use cases.',
+        timeEstimate: '20 min',
         completed: false,
         section: 'general',
+        link: 'https://elevenlabs.io/docs/models'
       },
       {
-        id: '4',
+        id: '7',
+        title: 'Review API documentation',
+        description: 'Learn how to implement ElevenLabs API in your applications.',
+        timeEstimate: '25 min',
+        completed: false,
+        section: 'general',
+        link: 'https://elevenlabs.io/docs/api-reference/overview'
+      },
+      {
+        id: '8',
         title: 'Connect your data sources',
         description: 'Integrate your existing data sources to power your AI solutions.',
         timeEstimate: '20 min',
@@ -334,31 +363,42 @@ export const getDefaultChecklistItems = (industry: string): ChecklistItem[] => {
         section: 'implementation',
       },
       {
-        id: '5',
-        title: 'Configure your first AI model',
-        description: 'Select and configure an AI model that matches your business needs.',
-        timeEstimate: '30 min',
-        completed: false,
-        section: 'implementation',
-      },
-      {
-        id: '6',
-        title: 'Test your implementation',
-        description: 'Run initial tests to ensure your AI solution is working correctly.',
+        id: '9',
+        title: 'Make your first API request',
+        description: 'Test the API with a simple text-to-speech conversion.',
         timeEstimate: '15 min',
         completed: false,
         section: 'implementation',
+        link: 'https://elevenlabs.io/docs/api-reference/overview'
       },
       {
-        id: '7',
-        title: 'Invite team members',
-        description: 'Add your colleagues to collaborate on your AI projects.',
+        id: '10',
+        title: 'Create your first voice clone',
+        description: 'Clone a voice using our Instant Voice Cloning technology.',
+        timeEstimate: '20 min',
+        completed: false,
+        section: 'implementation',
+        link: 'https://elevenlabs.io/docs/product-guides/voices/voice-cloning/instant-voice-cloning'
+      },
+      {
+        id: '11',
+        title: 'Stay updated with product improvements',
+        description: 'Configure your notification preferences to stay updated with the latest product improvements.',
+        timeEstimate: '5 min',
+        completed: false,
+        section: 'admin'
+      },
+      {
+        id: '12',
+        title: 'Monitor service status',
+        description: 'Subscribe to the ElevenLabs status page for real-time service updates.',
         timeEstimate: '5 min',
         completed: false,
         section: 'admin',
+        link: 'https://status.elevenlabs.io/'
       },
       {
-        id: '8',
+        id: '13',
         title: 'Schedule your first training session',
         description: 'Book a session with our experts to get the most out of ElevenLabs.',
         timeEstimate: '10 min',
