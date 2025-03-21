@@ -1,12 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { X, Sparkle, Megaphone, Mic, ArrowRight, PhoneCall } from 'lucide-react';
+import { X, Sparkle, Megaphone, Mic, ArrowRight, PhoneCall, Play } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Link } from 'react-router-dom';
 import VideoEmbed from './VideoEmbed';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 const POPUP_DISPLAY_LIMIT = 2;
 const LOCAL_STORAGE_KEY = 'webinarPopupShownCount';
@@ -15,6 +16,10 @@ const WebinarPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBeenShown, setHasBeenShown] = useState(false);
   const [videoDialogOpen, setVideoDialogOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState({ 
+    videoId: "G-M0TQcTsZg", 
+    title: "ElevenLabs Next-Gen Digital and News Publishing"
+  });
   
   useEffect(() => {
     const popupShownCount = parseInt(localStorage.getItem(LOCAL_STORAGE_KEY) || '0');
@@ -30,6 +35,11 @@ const WebinarPopup = () => {
       return () => clearTimeout(timer);
     }
   }, [hasBeenShown]);
+
+  const handleOpenVideo = (videoId: string, title: string) => {
+    setSelectedVideo({ videoId, title });
+    setVideoDialogOpen(true);
+  };
 
   return (
     <>
@@ -111,18 +121,41 @@ const WebinarPopup = () => {
                 <div className="flex items-start gap-2">
                   <Sparkle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                   <div>
-                    <h4 className="font-medium text-sm">On-Demand Webinars</h4>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Watch our latest webinar: ElevenLabs Next-Gen Digital and News Publishing
-                    </p>
-                    <Button 
-                      size="sm" 
-                      variant="outline" 
-                      className="mt-2 w-full text-xs h-8"
-                      onClick={() => setVideoDialogOpen(true)}
-                    >
-                      Watch Now
-                    </Button>
+                    <h4 className="font-medium text-sm">Video Resources</h4>
+                    <Tabs defaultValue="webinars" className="mt-2 w-full">
+                      <TabsList className="grid w-full grid-cols-2 text-xs">
+                        <TabsTrigger value="webinars">On-Demand Webinars</TabsTrigger>
+                        <TabsTrigger value="updates">What's New</TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="webinars" className="mt-2">
+                        <p className="text-xs text-muted-foreground">
+                          Watch our latest webinar: ElevenLabs Next-Gen Digital and News Publishing
+                        </p>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="mt-2 w-full text-xs h-8"
+                          onClick={() => handleOpenVideo("G-M0TQcTsZg", "ElevenLabs Next-Gen Digital and News Publishing")}
+                        >
+                          <Play className="h-3 w-3 mr-1" />
+                          Watch Now
+                        </Button>
+                      </TabsContent>
+                      <TabsContent value="updates" className="mt-2">
+                        <p className="text-xs text-muted-foreground">
+                          See the latest product updates and new features in action
+                        </p>
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className="mt-2 w-full text-xs h-8"
+                          onClick={() => handleOpenVideo("hIULRLEpp-E", "ElevenLabs Voice Library & Voice Design Updates")}
+                        >
+                          <Play className="h-3 w-3 mr-1" />
+                          Watch Now
+                        </Button>
+                      </TabsContent>
+                    </Tabs>
                   </div>
                 </div>
               </div>
@@ -145,12 +178,12 @@ const WebinarPopup = () => {
       <Dialog open={videoDialogOpen} onOpenChange={setVideoDialogOpen}>
         <DialogContent className="sm:max-w-4xl">
           <DialogHeader>
-            <DialogTitle>ElevenLabs Next-Gen Digital and News Publishing</DialogTitle>
+            <DialogTitle>{selectedVideo.title}</DialogTitle>
           </DialogHeader>
           <div className="mt-2">
             <VideoEmbed 
-              videoId="G-M0TQcTsZg" 
-              title="ElevenLabs Next-Gen Digital and News Publishing"
+              videoId={selectedVideo.videoId} 
+              title={selectedVideo.title}
             />
           </div>
         </DialogContent>
