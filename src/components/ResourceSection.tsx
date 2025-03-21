@@ -319,11 +319,11 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
                 <CardContent className="p-0">
                   <VideoEmbed 
                     videoId="NmRAhNTJ06M" 
-                    title="Meet Scribe: Speech Recognition"
+                    title="Studio is now available for everyone"
                   />
                 </CardContent>
                 <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">Meet Scribe: Speech Recognition</h3>
+                  <h3 className="font-semibold mb-2">Studio is now available for everyone</h3>
                   <p className="text-sm text-muted-foreground mb-2">Introduction to our newest speech recognition feature.</p>
                   <div className="flex items-center text-xs text-muted-foreground">
                     <Clock className="h-3 w-3 mr-1" />
