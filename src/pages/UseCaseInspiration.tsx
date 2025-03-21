@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
 import MediaUseCasesInspiration from '@/components/MediaUseCasesInspiration';
+import StoryPopup from '@/components/StoryPopup';
 
 const blogStories = [
   {
@@ -47,6 +48,14 @@ const blogStories = [
 ];
 
 const UseCaseInspiration = () => {
+  const [selectedStory, setSelectedStory] = useState<typeof blogStories[0] | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleStoryClick = (story: typeof blogStories[0]) => {
+    setSelectedStory(story);
+    setIsPopupOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -67,7 +76,11 @@ const UseCaseInspiration = () => {
         <h2 className="text-3xl font-bold mb-8 text-center">Featured Customer Stories</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {blogStories.map((story) => (
-            <Card key={story.id} className="overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+            <Card 
+              key={story.id} 
+              className="overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+              onClick={() => handleStoryClick(story)}
+            >
               <div className="aspect-video w-full overflow-hidden">
                 <img 
                   src={story.imageUrl} 
@@ -80,11 +93,28 @@ const UseCaseInspiration = () => {
               </CardHeader>
               <CardContent className="flex flex-col h-[calc(100%-theme(spacing.36))]">
                 <p className="text-sm text-muted-foreground mb-4 flex-grow line-clamp-3">{story.summary}</p>
-                <Button variant="outline" size="sm" className="w-full mt-auto" asChild>
-                  <a href={story.link} target="_blank" rel="noopener noreferrer">
-                    Read Case Study <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
+                <div className="flex justify-between w-full mt-auto">
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleStoryClick(story);
+                    }}
+                  >
+                    Read Preview
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    asChild
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <a href={story.link} target="_blank" rel="noopener noreferrer">
+                      Full Article <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}
@@ -99,6 +129,15 @@ const UseCaseInspiration = () => {
           </Button>
         </div>
       </div>
+      
+      {selectedStory && (
+        <StoryPopup 
+          open={isPopupOpen}
+          setOpen={setIsPopupOpen}
+          title={selectedStory.title}
+          articleUrl={selectedStory.link}
+        />
+      )}
       
       <Footer />
       <WebinarPopup />
