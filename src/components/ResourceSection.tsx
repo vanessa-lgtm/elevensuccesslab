@@ -367,20 +367,14 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               </Card>
               
               <Card className="overflow-hidden">
-                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="absolute z-10 flex gap-2 items-center"
-                    onClick={() => window.open('https://www.youtube.com/watch?v=h_H0ZOeWP9o', '_blank')}
-                  >
-                    <Video className="h-4 w-4" />
-                    Watch Now
-                  </Button>
-                  <div className="absolute inset-0 bg-black/50"></div>
-                </div>
+                <CardContent className="p-0">
+                  <VideoEmbed 
+                    videoId="x6ub-9HhxGU" 
+                    title="Smart Podcasts Produced by Generative AI"
+                  />
+                </CardContent>
                 <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">ElevenLabs Voice Gen 3</h3>
+                  <h3 className="font-semibold mb-2">Smart Podcasts Produced by Generative AI</h3>
                   <p className="text-sm text-muted-foreground mb-2">Explore the latest generation of our voice AI technology.</p>
                   <div className="flex items-center text-xs text-muted-foreground">
                     <Clock className="h-3 w-3 mr-1" />
@@ -589,3 +583,4 @@ const ResourceSection = () => {
 };
 
 export default ResourceSection;
+
