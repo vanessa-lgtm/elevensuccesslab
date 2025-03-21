@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import VideoEmbed from './VideoEmbed';
 
 interface ResourceCardProps {
   icon: React.ReactNode;
@@ -339,6 +340,23 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
                   <div className="flex items-center text-xs text-muted-foreground">
                     <Clock className="h-3 w-3 mr-1" />
                     15 min
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
+                <CardContent className="p-0">
+                  <VideoEmbed 
+                    videoId="K-48RXyuRaY" 
+                    title="ElevenLabs Product Updates"
+                  />
+                </CardContent>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">ElevenLabs Product Updates</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Learn about the latest product updates and enhancements.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    10 min
                   </div>
                 </CardContent>
               </Card>
