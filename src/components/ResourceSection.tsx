@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -500,8 +501,9 @@ const ResourceSection = () => {
     },
     {
       icon: <GraduationCap size={20} />,
-      title: "Training Materials",
-      description: "Training resources to help your team master voice AI principles and techniques.",
+      title: "ElevenLabs Product Documentation",
+      description: "Comprehensive documentation to help you understand and implement our voice AI technology.",
+      onClick: () => window.open("https://elevenlabs.io/docs/overview", "_blank")
     },
     {
       icon: <Video size={20} />,
