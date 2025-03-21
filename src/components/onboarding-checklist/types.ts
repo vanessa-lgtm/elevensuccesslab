@@ -11,5 +11,4 @@ export interface ChecklistItem {
 
 export interface OnboardingChecklistProps {
   onProgressUpdate: (completed: number, total: number) => void;
-  industry?: string;
 }
