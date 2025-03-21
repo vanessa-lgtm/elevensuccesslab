@@ -41,6 +41,12 @@ const WebinarPopup = () => {
     setVideoDialogOpen(true);
   };
 
+  // Force popup to be open during development for testing visibility
+  useEffect(() => {
+    // Remove this in production if you don't want the popup to appear immediately
+    setIsOpen(true);
+  }, []);
+
   return (
     <>
       {!isOpen && (
@@ -76,7 +82,7 @@ const WebinarPopup = () => {
       {isOpen && (
         <div 
           className={cn(
-            "fixed bottom-6 right-6 w-80 bg-background border rounded-lg shadow-xl z-50",
+            "fixed bottom-6 right-6 w-96 bg-background border rounded-lg shadow-xl z-50",
             "animate-in slide-in-from-bottom-5 duration-300"
           )}
         >
@@ -120,35 +126,37 @@ const WebinarPopup = () => {
               <div className="rounded-md bg-primary/5 p-3">
                 <div className="flex items-start gap-2">
                   <Sparkle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <div>
-                    <h4 className="font-medium text-sm">Video Resources</h4>
-                    <Tabs defaultValue="webinars" className="mt-2 w-full">
-                      <TabsList className="grid w-full grid-cols-2 text-xs">
-                        <TabsTrigger value="webinars">On-Demand Webinars</TabsTrigger>
-                        <TabsTrigger value="updates">What's New</TabsTrigger>
+                  <div className="w-full">
+                    <h4 className="font-medium text-sm mb-2">Video Resources</h4>
+                    <Tabs defaultValue="webinars" className="w-full">
+                      <TabsList className="grid w-full grid-cols-2 h-9">
+                        <TabsTrigger value="webinars" className="text-xs px-1 py-1.5">On-Demand Webinars</TabsTrigger>
+                        <TabsTrigger value="updates" className="text-xs px-1 py-1.5">What's New</TabsTrigger>
                       </TabsList>
-                      <TabsContent value="webinars" className="mt-2">
+                      
+                      <TabsContent value="webinars" className="mt-2 space-y-2">
                         <p className="text-xs text-muted-foreground">
                           Watch our latest webinar: ElevenLabs Next-Gen Digital and News Publishing
                         </p>
                         <Button 
                           size="sm" 
                           variant="outline" 
-                          className="mt-2 w-full text-xs h-8"
+                          className="w-full text-xs h-8"
                           onClick={() => handleOpenVideo("G-M0TQcTsZg", "ElevenLabs Next-Gen Digital and News Publishing")}
                         >
                           <Play className="h-3 w-3 mr-1" />
                           Watch Now
                         </Button>
                       </TabsContent>
-                      <TabsContent value="updates" className="mt-2">
+                      
+                      <TabsContent value="updates" className="mt-2 space-y-2">
                         <p className="text-xs text-muted-foreground">
                           See the latest product updates and new features in action
                         </p>
                         <Button 
                           size="sm" 
                           variant="outline" 
-                          className="mt-2 w-full text-xs h-8"
+                          className="w-full text-xs h-8"
                           onClick={() => handleOpenVideo("hIULRLEpp-E", "ElevenLabs Voice Library & Voice Design Updates")}
                         >
                           <Play className="h-3 w-3 mr-1" />
