@@ -13,7 +13,7 @@ const blogStories = [
     id: "blog1",
     title: "Convin: Revolutionizing B2B Sales with ElevenLabs' Voice AI",
     summary: "Discover how Convin enhances customer experience and streamlines sales training with AI-powered call analytics, leveraging ElevenLabs technology for more effective sales conversations.",
-    imageUrl: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?q=80&w=2564&auto=format&fit=crop",
+    imageUrl: "/lovable-uploads/1058e551-4983-40ac-be73-ae0eef68119d.png", // Updated to use the new Convin logo image
     link: "https://elevenlabs.io/blog/convin"
   },
   {
