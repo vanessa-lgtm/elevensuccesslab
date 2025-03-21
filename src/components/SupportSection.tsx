@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -121,6 +120,7 @@ const SupportSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const [openStrategyDialog, setOpenStrategyDialog] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   
   const successForm = useForm<FormValues>({
@@ -163,14 +163,43 @@ const SupportSection = () => {
     };
   }, []);
 
-  const onSuccessSubmit = (data: FormValues) => {
-    console.log('Sending email to success@elevenlabs.io with data:', data);
-    toast({
-      title: "Success!",
-      description: "Your information has been sent to our Customer Success team.",
-    });
-    setOpenSuccessDialog(false);
-    successForm.reset();
+  const onSuccessSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: 'vanessa@elevenlabs.io',
+          subject: 'New Customer Success Request',
+          name: data.name,
+          email: data.email,
+          message: data.message || 'No message provided',
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+
+      toast({
+        title: "Success!",
+        description: "Your information has been sent to our Customer Success team.",
+      });
+      setOpenSuccessDialog(false);
+      successForm.reset();
+    } catch (error) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error",
+        description: "There was an issue sending your request. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const onStrategySubmit = (data: FormValues) => {
@@ -304,9 +333,9 @@ const SupportSection = () => {
                 )}
               />
               <DialogFooter>
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
                   <Send className="mr-2 h-4 w-4" />
-                  Send Request
+                  {isSubmitting ? 'Sending...' : 'Send Request'}
                 </Button>
               </DialogFooter>
             </form>
