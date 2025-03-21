@@ -10,14 +10,24 @@ interface ChecklistSectionProps {
 }
 
 const ChecklistSection: React.FC<ChecklistSectionProps> = ({ title, items, onToggle }) => {
+  // Make sure we have items to display
+  if (!items || items.length === 0) {
+    return (
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold mb-4">{title}</h3>
+        <p className="text-muted-foreground">No items available for this section.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="mb-6">
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
-      {items.map((item, index, filteredItems) => (
+      {items.map((item, index) => (
         <ChecklistItem 
           key={item.id} 
           item={item} 
-          isLast={index === filteredItems.length - 1}
+          isLast={index === items.length - 1}
           onToggle={onToggle}
         />
       ))}
