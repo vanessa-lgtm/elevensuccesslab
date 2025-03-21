@@ -244,15 +244,15 @@ const SupportSection = () => {
   ];
 
   return (
-    <section id="support" className="section-padding" style={{
+    <section id="support" className="section-padding pb-8" style={{
       background: 'linear-gradient(to top, rgb(248, 250, 252), rgb(241, 245, 249))',
     }}>
       <div className="container mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="text-sm font-medium text-primary mb-3">Expert Assistance</div>
           <h2 
             ref={titleRef}
-            className="text-3xl md:text-4xl font-display font-bold mb-6 opacity-0 translate-y-10 transition-all duration-700 ease-out"
+            className="text-3xl md:text-4xl font-display font-bold mb-4 opacity-0 translate-y-10 transition-all duration-700 ease-out"
           >
             Support Tailored to Your Needs
           </h2>
@@ -262,7 +262,7 @@ const SupportSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {supportOptions.map((option, index) => (
             <SupportOption 
               key={index} 

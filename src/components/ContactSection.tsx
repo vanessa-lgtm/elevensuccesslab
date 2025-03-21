@@ -10,7 +10,7 @@ const ContactSection: React.FC = () => {
   return (
     <section 
       id="contact" 
-      className="py-10 px-4 md:px-8 lg:px-12 relative"
+      className="pt-6 pb-10 px-4 md:px-8 lg:px-12 relative"
       style={{
         background: 'linear-gradient(to bottom, rgb(241, 245, 249), rgb(248, 250, 252))',
       }}
