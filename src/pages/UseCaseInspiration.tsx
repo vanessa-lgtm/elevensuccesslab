@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, ExternalLink } from 'lucide-react';
@@ -39,24 +38,10 @@ const blogStories = [
   },
   {
     id: "blog5",
-    title: "Solda AI: Making Books Accessible Through Voice Technology",
-    summary: "Explore how Solda AI partnered with ElevenLabs to transform written content into natural-sounding audiobooks, increasing accessibility and engagement for readers worldwide.",
-    imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=2574&auto=format&fit=crop",
-    link: "https://elevenlabs.io/blog/solda-ai"
-  },
-  {
-    id: "blog6",
     title: "SynthFlow: Creating Realistic Voice Overs for Training Videos",
     summary: "See how SynthFlow uses ElevenLabs' voice technology to produce high-quality, multilingual training videos at scale, saving time and resources while maintaining natural-sounding narration.",
     imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2670&auto=format&fit=crop",
     link: "https://elevenlabs.io/blog/synthflow"
-  },
-  {
-    id: "blog7",
-    title: "Hedra: Enhancing Compliance Training with Voice AI",
-    summary: "Discover how Hedra leverages ElevenLabs' technology to transform compliance training through personalized, engaging voice content that improves learning outcomes and retention.",
-    imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2670&auto=format&fit=crop",
-    link: "https://elevenlabs.io/blog/hedra"
   }
 ];
 
