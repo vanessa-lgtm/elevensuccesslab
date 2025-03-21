@@ -318,6 +318,23 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
                   <VideoEmbed 
+                    videoId="NmRAhNTJ06M" 
+                    title="Meet Scribe: Speech Recognition"
+                  />
+                </CardContent>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">Meet Scribe: Speech Recognition</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Introduction to our newest speech recognition feature.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    12 min
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
+                <CardContent className="p-0">
+                  <VideoEmbed 
                     videoId="K-48RXyuRaY" 
                     title="Meet Scribe: Speech Recognition"
                   />
@@ -572,4 +589,3 @@ const ResourceSection = () => {
 };
 
 export default ResourceSection;
-
