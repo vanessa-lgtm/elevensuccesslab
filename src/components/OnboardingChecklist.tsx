@@ -23,8 +23,9 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     if (savedItems) {
       setChecklistItems(JSON.parse(savedItems));
     } else {
-      // Initialize with default items if no saved state
-      setChecklistItems(getDefaultChecklistItems(industry));
+      // Always load media checklist items regardless of industry
+      // This ensures the Media & Entertainment checklist is always shown
+      setChecklistItems(getDefaultChecklistItems("media"));
     }
   }, [industry]);
 
@@ -62,16 +63,10 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">
-        {industry === "media" ? "Media & Entertainment Onboarding" : 
-         industry === "conversational_ai" ? "Conversational AI Onboarding" : 
-         "Onboarding Checklist"}
+        Media & Entertainment Onboarding
       </h2>
       <p className="text-muted-foreground mb-6">
-        {industry === "media" 
-          ? "Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation."
-          : industry === "conversational_ai"
-          ? "Complete these steps to set up your ElevenLabs implementation for conversational AI and customer service applications. Each step includes an estimated time to complete and links to relevant documentation."
-          : "Complete these steps to get started with ElevenLabs. Each step includes an estimated time to complete."}
+        Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.
       </p>
       
       {orderedSections.length > 0 ? (
