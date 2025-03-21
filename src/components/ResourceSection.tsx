@@ -238,6 +238,25 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="overflow-hidden">
+                <div className="aspect-video relative">
+                  <iframe
+                    src="https://app.livestorm.co/elevenlabs/elevenlabs-ai-in-edtech-scaling-learning-experiences-with-innovation/live?s=3e4af1ad-e459-44b9-a7d9-2ced019ef600"
+                    title="AI in EdTech: Scaling Learning Experiences with Innovation"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    className="absolute inset-0 w-full h-full border-0"
+                  ></iframe>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">AI in EdTech: Scaling Learning Experiences with Innovation</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Explore how voice AI is transforming education technology.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    45 min
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
                 <CardContent className="p-0">
                   <VideoEmbed 
                     videoId="dQw4w9WgXcQ" 
@@ -585,4 +604,3 @@ const ResourceSection = () => {
 };
 
 export default ResourceSection;
-
