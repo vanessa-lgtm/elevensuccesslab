@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle } from 'lucide-react';
+import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -512,14 +512,18 @@ const ResourceSection = () => {
       comingSoon: true
     },
     {
+      icon: <TrendingUp size={20} />,
+      title: "Market Trends",
+      description: "Updates and trends about the Voice AI space.",
+      comingSoon: true
+    },
+    {
       icon: <RefreshCw size={20} />,
       title: "Process Templates",
       description: "Ready-to-use process templates to streamline your voice AI workflows.",
       comingSoon: true
     },
   ];
-
-  resources.pop();
 
   return (
     <section id="resources" className="section-padding bg-background relative">
