@@ -51,6 +51,8 @@ const Onboarding = () => {
     const tabParam = params.get('tab');
     if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
       setActiveTab(tabParam);
+    } else {
+      setActiveTab("checklist");
     }
 
     const savedCompletedActions = localStorage.getItem('completedActions');
@@ -527,3 +529,4 @@ const Onboarding = () => {
 };
 
 export default Onboarding;
+
