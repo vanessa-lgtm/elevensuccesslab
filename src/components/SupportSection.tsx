@@ -1,6 +1,5 @@
-
 import React, { useEffect, useRef, useState } from 'react';
-import { MessageSquare, Mail, Calendar, Clock, Headset, Send } from 'lucide-react';
+import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
@@ -161,7 +160,6 @@ const SupportSection = () => {
   }, []);
 
   const onSuccessSubmit = (data: FormValues) => {
-    // In a real implementation, this would send an email to success@elevenlabs.io
     console.log('Sending email to success@elevenlabs.io with data:', data);
     toast({
       title: "Success!",
@@ -172,7 +170,6 @@ const SupportSection = () => {
   };
 
   const onStrategySubmit = (data: FormValues) => {
-    // In a real implementation, this would send an email to success@elevenlabs.io
     console.log('Sending email to success@elevenlabs.io with data:', data);
     toast({
       title: "Success!",
@@ -210,13 +207,6 @@ const SupportSection = () => {
       title: "Real Time Product Support",
       description: "Get immediate assistance with our real time product assistance agent - Call El",
       buttonText: "Get Support",
-    },
-    {
-      icon: <Clock size={20} />,
-      title: "On-Demand Webinars",
-      description: "Access our library of internal and customer webinars to enhance your knowledge of our product or get inspired!",
-      buttonText: "Watch Now",
-      url: "https://elevenlabs.io/webinars",
     },
   ];
 
@@ -256,7 +246,6 @@ const SupportSection = () => {
         </div>
       </div>
 
-      {/* Contact Customer Success Dialog */}
       <Dialog open={openSuccessDialog} onOpenChange={setOpenSuccessDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -304,7 +293,6 @@ const SupportSection = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Strategy Session Dialog */}
       <Dialog open={openStrategyDialog} onOpenChange={setOpenStrategyDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
