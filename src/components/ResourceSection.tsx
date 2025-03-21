@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -517,12 +516,6 @@ const ResourceSection = () => {
       description: "Updates and trends about the Voice AI space.",
       comingSoon: true
     },
-    {
-      icon: <RefreshCw size={20} />,
-      title: "Process Templates",
-      description: "Ready-to-use process templates to streamline your voice AI workflows.",
-      comingSoon: true
-    },
   ];
 
   return (
@@ -579,3 +572,4 @@ const ResourceSection = () => {
 };
 
 export default ResourceSection;
+
