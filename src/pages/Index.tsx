@@ -7,7 +7,6 @@ import SupportSection from '@/components/SupportSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
-import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   useEffect(() => {
@@ -41,7 +40,6 @@ const Index = () => {
       <Hero />
       <ResourceSection />
       <SupportSection />
-      <ContactSection />
       <TestimonialSection />
       <Footer />
       <WebinarPopup />
