@@ -208,72 +208,143 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Video className="h-5 w-5 text-primary" />
-            On-Demand Webinars
+            Video Resources
           </DialogTitle>
           <DialogDescription>
-            Access our library of webinars to enhance your knowledge of our product
+            Explore our video library to learn more about our platform and stay updated
           </DialogDescription>
         </DialogHeader>
         
-        <div className="text-center mb-6">
-          <Button 
-            variant="default" 
-            size="lg" 
-            className="flex items-center gap-2"
-            onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}
-          >
-            View All Webinars
-            <ExternalLink className="h-4 w-4" />
-          </Button>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <Card className="overflow-hidden">
-            <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-              <Button 
-                variant="default" 
-                size="sm" 
-                className="absolute z-10 flex gap-2 items-center"
-                onClick={() => window.open('https://www.youtube.com/watch?v=0vyUwVR0vx0', '_blank')}
-              >
-                <Video className="h-4 w-4" />
-                Watch Now
-              </Button>
-              <div className="absolute inset-0 bg-black/50"></div>
-            </div>
-            <CardContent className="p-4">
-              <h3 className="font-semibold mb-2">Getting Started with ElevenLabs Voice AI</h3>
-              <p className="text-sm text-muted-foreground mb-2">A comprehensive introduction to ElevenLabs voice technology and its applications.</p>
-              <div className="flex items-center text-xs text-muted-foreground">
-                <Clock className="h-3 w-3 mr-1" />
-                45 min
-              </div>
-            </CardContent>
-          </Card>
+        <Tabs defaultValue="webinars" className="mt-4">
+          <TabsList className="grid grid-cols-2 mb-4">
+            <TabsTrigger value="webinars">On-Demand Webinars</TabsTrigger>
+            <TabsTrigger value="updates">What's New - Product Updates</TabsTrigger>
+          </TabsList>
           
-          <Card className="overflow-hidden">
-            <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
+          <TabsContent value="webinars" className="space-y-4">
+            <div className="text-center mb-6">
               <Button 
                 variant="default" 
-                size="sm" 
-                className="absolute z-10 flex gap-2 items-center"
+                size="lg" 
+                className="flex items-center gap-2"
                 onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}
               >
-                <Video className="h-4 w-4" />
-                Watch Now
+                View All Webinars
+                <ExternalLink className="h-4 w-4" />
               </Button>
-              <div className="absolute inset-0 bg-black/50"></div>
             </div>
-            <CardContent className="p-4">
-              <h3 className="font-semibold mb-2">Voice AI in Customer Service</h3>
-              <p className="text-sm text-muted-foreground mb-2">Learn how voice AI is revolutionizing customer service operations.</p>
-              <div className="flex items-center text-xs text-muted-foreground">
-                <Clock className="h-3 w-3 mr-1" />
-                38 min
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card className="overflow-hidden">
+                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    className="absolute z-10 flex gap-2 items-center"
+                    onClick={() => window.open('https://elevenlabs.io/webinars/elevenlabs-next-gen-digital-and-news-publishing', '_blank')}
+                  >
+                    <Video className="h-4 w-4" />
+                    Watch Now
+                  </Button>
+                  <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">Next-Gen Digital and News Publishing</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Explore how voice AI is transforming digital content and news publishing.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    40 min
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
+                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    className="absolute z-10 flex gap-2 items-center"
+                    onClick={() => window.open('https://www.youtube.com/watch?v=0vyUwVR0vx0', '_blank')}
+                  >
+                    <Video className="h-4 w-4" />
+                    Watch Now
+                  </Button>
+                  <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">Getting Started with ElevenLabs Voice AI</h3>
+                  <p className="text-sm text-muted-foreground mb-2">A comprehensive introduction to ElevenLabs voice technology and its applications.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    45 min
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+          
+          <TabsContent value="updates" className="space-y-4">
+            <div className="text-center mb-6">
+              <Button 
+                variant="default" 
+                size="lg" 
+                className="flex items-center gap-2"
+                onClick={() => window.open('https://elevenlabs.io/blog', '_blank')}
+              >
+                View All Updates
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card className="overflow-hidden">
+                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    className="absolute z-10 flex gap-2 items-center"
+                    onClick={() => window.open('https://www.youtube.com/watch?v=WSxMBBl_uS0', '_blank')}
+                  >
+                    <Video className="h-4 w-4" />
+                    Watch Now
+                  </Button>
+                  <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">Meet Scribe: Speech Recognition</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Introduction to our newest speech recognition feature.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    12 min
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
+                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    className="absolute z-10 flex gap-2 items-center"
+                    onClick={() => window.open('https://www.youtube.com/watch?v=h_H0ZOeWP9o', '_blank')}
+                  >
+                    <Video className="h-4 w-4" />
+                    Watch Now
+                  </Button>
+                  <div className="absolute inset-0 bg-black/50"></div>
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">ElevenLabs Voice Gen 3</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Explore the latest generation of our voice AI technology.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    15 min
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+        </Tabs>
       </DialogContent>
     </Dialog>
   );
@@ -418,7 +489,6 @@ const ResourceSection = () => {
     },
   ];
 
-  // Remove Templates
   resources.pop();
 
   return (
@@ -453,25 +523,21 @@ const ResourceSection = () => {
         </div>
       </div>
       
-      {/* Voice AI Basics Dialog */}
       <VoiceAIBasicsDialog 
         open={voiceAIBasicsOpen} 
         onOpenChange={setVoiceAIBasicsOpen} 
       />
       
-      {/* Webinars Dialog */}
       <WebinarsDialog 
         open={webinarsOpen} 
         onOpenChange={setWebinarsOpen} 
       />
       
-      {/* Success Stories Dialog */}
       <SuccessStoriesDialog 
         open={successStoriesOpen} 
         onOpenChange={setSuccessStoriesOpen} 
       />
       
-      {/* Background decorative elements */}
       <div className="absolute top-40 left-10 w-64 h-64 rounded-full bg-primary/5 blur-3xl -z-10"></div>
       <div className="absolute bottom-20 right-0 w-80 h-80 rounded-full bg-blue-100/30 blur-3xl -z-10"></div>
     </section>
