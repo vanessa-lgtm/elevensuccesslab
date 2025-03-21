@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,7 @@ import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
 
@@ -112,6 +114,7 @@ const SupportOption = ({
 interface FormValues {
   name: string;
   email: string;
+  message?: string;
 }
 
 const SupportSection = () => {
@@ -123,7 +126,8 @@ const SupportSection = () => {
   const successForm = useForm<FormValues>({
     defaultValues: {
       name: '',
-      email: ''
+      email: '',
+      message: ''
     }
   });
 
@@ -277,6 +281,23 @@ const SupportSection = () => {
                     <FormLabel>Email Address Associated with your ElevenLabs Account</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your email" type="email" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={successForm.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Your Message</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder="How can our Customer Success team help you?" 
+                        rows={4}
+                        {...field} 
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
