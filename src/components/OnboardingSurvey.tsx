@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -306,6 +307,11 @@ const OnboardingSurvey = () => {
     form.reset();
   };
 
+  const openVoiceAIBasicsDialog = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent any form submission
+    setVoiceAIBasicsOpen(true);
+  };
+  
   const renderStep = () => {
     switch(currentStep) {
       case 0:
@@ -416,7 +422,7 @@ const OnboardingSurvey = () => {
                   variant="outline" 
                   size="sm" 
                   className="mt-2"
-                  onClick={() => setVoiceAIBasicsOpen(true)}
+                  onClick={openVoiceAIBasicsDialog}
                 >
                   View Voice AI Basics
                 </Button>
@@ -807,6 +813,15 @@ const OnboardingSurvey = () => {
               </Card>
             </TabsContent>
           </Tabs>
+          
+          <div className="mt-6 flex justify-end">
+            <Button 
+              variant="outline" 
+              onClick={() => setVoiceAIBasicsOpen(false)}
+            >
+              Close
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     );
