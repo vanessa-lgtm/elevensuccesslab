@@ -23,9 +23,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     if (savedItems) {
       setChecklistItems(JSON.parse(savedItems));
     } else {
-      // Always load media checklist items regardless of industry
-      // This ensures the Media & Entertainment checklist is always shown
-      setChecklistItems(getDefaultChecklistItems("media"));
+      // Load the correct industry checklist items based on the prop
+      setChecklistItems(getDefaultChecklistItems(industry));
     }
   }, [industry]);
 
@@ -57,16 +56,45 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     return checklistItems.filter(item => item.section === section);
   };
 
-  // Order sections in a specific way for display
-  const orderedSections = ['admin', 'general', 'usecase'].filter(s => sections.includes(s));
+  // Order sections based on industry
+  let orderedSections: string[] = [];
+  
+  if (industry === 'conversational_ai') {
+    orderedSections = ['admin', 'general', 'usecase'].filter(s => sections.includes(s));
+  } else if (industry === 'media') {
+    orderedSections = ['admin', 'general', 'usecase'].filter(s => sections.includes(s));
+  } else {
+    // Default industry (general)
+    orderedSections = ['basics', 'general', 'implementation', 'admin'].filter(s => sections.includes(s));
+  }
+
+  // Display the correct title based on industry
+  const getIndustryTitle = () => {
+    if (industry === 'conversational_ai') {
+      return 'Conversational AI Onboarding';
+    } else if (industry === 'media') {
+      return 'Media & Entertainment Onboarding';
+    }
+    return 'ElevenLabs Onboarding';
+  };
+
+  // Display the correct description based on industry
+  const getIndustryDescription = () => {
+    if (industry === 'conversational_ai') {
+      return 'Complete these steps to set up your ElevenLabs implementation for conversational AI and customer service use cases. Each step includes an estimated time to complete and links to relevant documentation.';
+    } else if (industry === 'media') {
+      return 'Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.';
+    }
+    return 'Complete these steps to set up your ElevenLabs implementation. Each step includes an estimated time to complete and links to relevant documentation.';
+  };
 
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">
-        Media & Entertainment Onboarding
+        {getIndustryTitle()}
       </h2>
       <p className="text-muted-foreground mb-6">
-        Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.
+        {getIndustryDescription()}
       </p>
       
       {orderedSections.length > 0 ? (

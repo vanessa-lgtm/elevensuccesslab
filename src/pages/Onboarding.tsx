@@ -38,8 +38,12 @@ const Onboarding = () => {
     const planParam = params.get('plan');
     const useCaseParam = params.get('useCase');
     
-    if (industryParam && mediaIndustries.includes(industryParam)) {
-      setIndustry('media');
+    if (industryParam) {
+      if (mediaIndustries.includes(industryParam)) {
+        setIndustry('media');
+      } else if (conversationalAIUseCases.includes(industryParam)) {
+        setIndustry('conversational_ai');
+      }
     }
     
     if (planParam === 'conversational_ai' || 
@@ -529,4 +533,3 @@ const Onboarding = () => {
 };
 
 export default Onboarding;
-
