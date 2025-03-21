@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,55 +7,46 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
 import MediaUseCasesInspiration from '@/components/MediaUseCasesInspiration';
-import StoryPopup from '@/components/StoryPopup';
 
 const blogStories = [
   {
     id: "blog1",
     title: "Convin: Revolutionizing B2B Sales with ElevenLabs' Voice AI",
     summary: "Discover how Convin enhances customer experience and streamlines sales training with AI-powered call analytics, leveraging ElevenLabs technology for more effective sales conversations.",
-    imageUrl: "/lovable-uploads/1058e551-4983-40ac-be73-ae0eef68119d.png", // Updated to use the new Convin logo image
+    imageUrl: "/lovable-uploads/1058e551-4983-40ac-be73-ae0eef68119d.png", 
     link: "https://elevenlabs.io/blog/convin"
   },
   {
     id: "blog2",
     title: "TIME: Bringing Conversational AI to Journalism",
     summary: "Learn how TIME magazine uses ElevenLabs' voice AI to create interactive experiences that allow readers to engage with historical figures and contemporary leaders in a whole new way.",
-    imageUrl: "/lovable-uploads/0fc4a136-4ce5-4d5a-b696-ee1989029bb8.png", // Updated to use the new TIME logo image
+    imageUrl: "/lovable-uploads/0fc4a136-4ce5-4d5a-b696-ee1989029bb8.png", 
     link: "https://elevenlabs.io/blog/time-brings-conversational-ai-to-journalism"
   },
   {
     id: "blog3",
     title: "Bertelsmann: Transforming Media with AI Voice Technology",
     summary: "Explore how Bertelsmann, a global media powerhouse, is leveraging ElevenLabs' voice AI to innovate content creation, enhance accessibility, and deliver personalized experiences across their diverse media portfolio.",
-    imageUrl: "/lovable-uploads/f07ee88e-8621-44cb-8725-5f2b596912df.png", // Bertelsmann logo image
+    imageUrl: "/lovable-uploads/f07ee88e-8621-44cb-8725-5f2b596912df.png", 
     link: "https://elevenlabs.io/blog/bertelsmann"
   },
   {
     id: "blog4",
     title: "Wondercraft: Revolutionizing Audio Content Creation",
     summary: "See how Wondercraft partners with ElevenLabs to transform podcast and audio production, enabling creators to produce high-quality, engaging content with natural-sounding AI voices.",
-    imageUrl: "/lovable-uploads/da4f5fb2-1b10-4adf-9ddf-e0ecddbcff9c.png", // Wondercraft logo image
+    imageUrl: "/lovable-uploads/da4f5fb2-1b10-4adf-9ddf-e0ecddbcff9c.png", 
     link: "https://elevenlabs.io/blog/wondercraft"
   },
   {
     id: "blog5",
     title: "Rian: Preserving Cultural Heritage Through Voice AI",
     summary: "Learn how Rian uses ElevenLabs' technology to bring historical figures to life, creating immersive educational experiences that preserve cultural heritage and make history more accessible and engaging.",
-    imageUrl: "/lovable-uploads/436605c1-78f9-48da-b7e1-a8f1938838f9.png", // Rian logo image
+    imageUrl: "/lovable-uploads/436605c1-78f9-48da-b7e1-a8f1938838f9.png", 
     link: "https://elevenlabs.io/blog/rian"
   }
 ];
 
 const UseCaseInspiration = () => {
-  const [selectedStory, setSelectedStory] = useState<typeof blogStories[0] | null>(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const handleStoryClick = (story: typeof blogStories[0]) => {
-    setSelectedStory(story);
-    setIsPopupOpen(true);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -79,7 +70,7 @@ const UseCaseInspiration = () => {
             <Card 
               key={story.id} 
               className="overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
-              onClick={() => handleStoryClick(story)}
+              onClick={() => window.open(story.link, '_blank', 'noopener,noreferrer')}
             >
               <div className="aspect-video w-full overflow-hidden">
                 <img 
@@ -93,25 +84,15 @@ const UseCaseInspiration = () => {
               </CardHeader>
               <CardContent className="flex flex-col h-[calc(100%-theme(spacing.36))]">
                 <p className="text-sm text-muted-foreground mb-4 flex-grow line-clamp-3">{story.summary}</p>
-                <div className="flex justify-between w-full mt-auto">
+                <div className="flex justify-end w-full mt-auto">
                   <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleStoryClick(story);
-                    }}
-                  >
-                    Read Preview
-                  </Button>
-                  <Button 
-                    variant="outline" 
+                    variant="default" 
                     size="sm" 
                     asChild
                     onClick={(e) => e.stopPropagation()}
                   >
                     <a href={story.link} target="_blank" rel="noopener noreferrer">
-                      Full Article <ExternalLink className="ml-2 h-4 w-4" />
+                      Read Full Article <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
                 </div>
@@ -129,15 +110,6 @@ const UseCaseInspiration = () => {
           </Button>
         </div>
       </div>
-      
-      {selectedStory && (
-        <StoryPopup 
-          open={isPopupOpen}
-          setOpen={setIsPopupOpen}
-          title={selectedStory.title}
-          articleUrl={selectedStory.link}
-        />
-      )}
       
       <Footer />
       <WebinarPopup />
