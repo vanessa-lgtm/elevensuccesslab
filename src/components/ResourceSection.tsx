@@ -334,6 +334,23 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               </Card>
               
               <Card className="overflow-hidden">
+                <CardContent className="p-0">
+                  <VideoEmbed 
+                    videoId="kuWj4YbStUY" 
+                    title="ElevenLabs New Features"
+                  />
+                </CardContent>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">ElevenLabs New Features</h3>
+                  <p className="text-sm text-muted-foreground mb-2">Discover the latest features added to our voice AI platform.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    10 min
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
                 <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
                   <Button 
                     variant="default" 
