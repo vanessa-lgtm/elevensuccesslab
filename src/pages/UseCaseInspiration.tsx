@@ -25,20 +25,27 @@ const blogStories = [
   },
   {
     id: "blog3",
+    title: "Bertelsmann: Transforming Media with AI Voice Technology",
+    summary: "Explore how Bertelsmann, a global media powerhouse, is leveraging ElevenLabs' voice AI to innovate content creation, enhance accessibility, and deliver personalized experiences across their diverse media portfolio.",
+    imageUrl: "/lovable-uploads/f07ee88e-8621-44cb-8725-5f2b596912df.png", // Bertelsmann logo image
+    link: "https://elevenlabs.io/blog/bertelsmann"
+  },
+  {
+    id: "blog4",
     title: "Solda AI: Making Books Accessible Through Voice Technology",
     summary: "Explore how Solda AI partnered with ElevenLabs to transform written content into natural-sounding audiobooks, increasing accessibility and engagement for readers worldwide.",
     imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=2574&auto=format&fit=crop",
     link: "https://elevenlabs.io/blog/solda-ai"
   },
   {
-    id: "blog4",
+    id: "blog5",
     title: "SynthFlow: Creating Realistic Voice Overs for Training Videos",
     summary: "See how SynthFlow uses ElevenLabs' voice technology to produce high-quality, multilingual training videos at scale, saving time and resources while maintaining natural-sounding narration.",
     imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2670&auto=format&fit=crop",
     link: "https://elevenlabs.io/blog/synthflow"
   },
   {
-    id: "blog5",
+    id: "blog6",
     title: "Hedra: Enhancing Compliance Training with Voice AI",
     summary: "Discover how Hedra leverages ElevenLabs' technology to transform compliance training through personalized, engaging voice content that improves learning outcomes and retention.",
     imageUrl: "https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2670&auto=format&fit=crop",
