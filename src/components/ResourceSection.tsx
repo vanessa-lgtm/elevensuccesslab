@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -237,6 +238,23 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="overflow-hidden">
+                <CardContent className="p-0">
+                  <VideoEmbed 
+                    videoId="dQw4w9WgXcQ" 
+                    title="ElevenLabs Webinar"
+                  />
+                </CardContent>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">Special ElevenLabs Webinar</h3>
+                  <p className="text-sm text-muted-foreground mb-2">An important webinar about voice AI technology.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    45 min
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="overflow-hidden">
                 <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
                   <Button 
                     variant="default" 
@@ -334,23 +352,6 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
                   <div className="flex items-center text-xs text-muted-foreground">
                     <Clock className="h-3 w-3 mr-1" />
                     15 min
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="overflow-hidden">
-                <CardContent className="p-0">
-                  <VideoEmbed 
-                    videoId="K-48RXyuRaY" 
-                    title="ElevenLabs Product Updates"
-                  />
-                </CardContent>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">ElevenLabs Product Updates</h3>
-                  <p className="text-sm text-muted-foreground mb-2">Learn about the latest product updates and enhancements.</p>
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3 mr-1" />
-                    10 min
                   </div>
                 </CardContent>
               </Card>
