@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, ExternalLink } from 'lucide-react';
@@ -38,10 +39,10 @@ const blogStories = [
   },
   {
     id: "blog5",
-    title: "SynthFlow: Creating Realistic Voice Overs for Training Videos",
-    summary: "See how SynthFlow uses ElevenLabs' voice technology to produce high-quality, multilingual training videos at scale, saving time and resources while maintaining natural-sounding narration.",
-    imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2670&auto=format&fit=crop",
-    link: "https://elevenlabs.io/blog/synthflow"
+    title: "Rian: Preserving Cultural Heritage Through Voice AI",
+    summary: "Learn how Rian uses ElevenLabs' technology to bring historical figures to life, creating immersive educational experiences that preserve cultural heritage and make history more accessible and engaging.",
+    imageUrl: "/lovable-uploads/436605c1-78f9-48da-b7e1-a8f1938838f9.png", // Rian logo image
+    link: "https://elevenlabs.io/blog/rian"
   }
 ];
 
