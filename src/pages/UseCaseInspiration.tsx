@@ -20,7 +20,7 @@ const blogStories = [
     id: "blog2",
     title: "TIME: Bringing Conversational AI to Journalism",
     summary: "Learn how TIME magazine uses ElevenLabs' voice AI to create interactive experiences that allow readers to engage with historical figures and contemporary leaders in a whole new way.",
-    imageUrl: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=2670&auto=format&fit=crop",
+    imageUrl: "/lovable-uploads/0fc4a136-4ce5-4d5a-b696-ee1989029bb8.png", // Updated to use the new TIME logo image
     link: "https://elevenlabs.io/blog/time-brings-conversational-ai-to-journalism"
   },
   {
