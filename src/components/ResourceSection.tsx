@@ -299,18 +299,12 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="overflow-hidden">
-                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="absolute z-10 flex gap-2 items-center"
-                    onClick={() => window.open('https://www.youtube.com/watch?v=WSxMBBl_uS0', '_blank')}
-                  >
-                    <Video className="h-4 w-4" />
-                    Watch Now
-                  </Button>
-                  <div className="absolute inset-0 bg-black/50"></div>
-                </div>
+                <CardContent className="p-0">
+                  <VideoEmbed 
+                    videoId="K-48RXyuRaY" 
+                    title="Meet Scribe: Speech Recognition"
+                  />
+                </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">Meet Scribe: Speech Recognition</h3>
                   <p className="text-sm text-muted-foreground mb-2">Introduction to our newest speech recognition feature.</p>
