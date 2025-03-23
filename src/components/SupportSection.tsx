@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -114,6 +115,7 @@ interface FormValues {
   name: string;
   email: string;
   message?: string;
+  useCase?: string; // Added for the "Tell Us More" field
 }
 
 const SupportSection = () => {
@@ -134,7 +136,8 @@ const SupportSection = () => {
   const strategyForm = useForm<FormValues>({
     defaultValues: {
       name: '',
-      email: ''
+      email: '',
+      useCase: '' // Initialize the new field
     }
   });
   
@@ -379,6 +382,26 @@ const SupportSection = () => {
                   </FormItem>
                 )}
               />
+              
+              {/* New "Tell Us More" field */}
+              <FormField
+                control={strategyForm.control}
+                name="useCase"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Tell Us More</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder="Briefly describe your use case or what you'd like to discuss in the strategy session" 
+                        rows={4}
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              
               <DialogFooter>
                 <Button type="submit" className="w-full">
                   <Calendar className="mr-2 h-4 w-4" />
