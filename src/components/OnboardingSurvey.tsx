@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -66,6 +65,8 @@ const industries = [
   { value: 'broadcasting', label: 'Broadcasting and Media Production' },
   { value: 'streaming', label: 'Streaming Services and OTT Platforms' },
   { value: 'film', label: 'Film and Television Production' },
+  { value: 'animation', label: 'Animation' },
+  { value: 'sports', label: 'Sports' },
   { value: 'marketing', label: 'Marketing and Advertising Services' },
   { value: 'gaming', label: 'Video Game Development' },
   { value: 'digital_media', label: 'Digital Media and Publishing' },
@@ -106,7 +107,8 @@ const primaryGoals = [
 
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
-  'marketing', 'gaming', 'digital_media', 'audio_production'
+  'marketing', 'gaming', 'digital_media', 'audio_production',
+  'animation', 'sports'
 ];
 
 const conversationalAIUseCases = [
@@ -205,7 +207,7 @@ const determineOnboardingPlan = (formData: any) => {
   const primaryUseCase = formData.primary_use_case;
   const industry = formData.industry;
   
-  if (mediaIndustries.includes(industry)) {
+  if (mediaIndustries.includes(industry) || industry === 'animation' || industry === 'sports') {
     return 'media';
   } else if (industry === 'healthcare') {
     return 'healthcare';
