@@ -57,6 +57,8 @@ import {
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/components/ui/use-toast';
 
 const industries = [
   { value: 'localization', label: 'Localization and Translation Services' },
@@ -242,6 +244,8 @@ const OnboardingSurvey = () => {
   const [suggestResources, setSuggestResources] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [voiceAIBasicsOpen, setVoiceAIBasicsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
   
   const form = useForm<SurveyFormValues>({
     defaultValues: {
@@ -283,6 +287,40 @@ const OnboardingSurvey = () => {
       const planId = determineOnboardingPlan(formData);
       setSelectedPlan(planId);
       setShowResults(true);
+      
+      try {
+        setIsSubmitting(true);
+        
+        const { error } = await supabase
+          .from('Email')
+          .insert({
+            company_name: formData.company_name,
+            email: formData.email
+          });
+          
+        if (error) {
+          console.error('Error saving to Supabase:', error);
+          toast({
+            title: "Error",
+            description: "There was an issue saving your information. Please try again.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Success",
+            description: "Your information has been saved successfully.",
+          });
+        }
+      } catch (error) {
+        console.error('Error in Supabase operation:', error);
+        toast({
+          title: "Error",
+          description: "There was an issue saving your information. Please try again.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -305,7 +343,7 @@ const OnboardingSurvey = () => {
   };
 
   const openVoiceAIBasicsDialog = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent any form submission
+    e.preventDefault();
     setVoiceAIBasicsOpen(true);
   };
   
@@ -865,7 +903,7 @@ const OnboardingSurvey = () => {
                 
                 <div className="flex justify-between">
                   {currentStep > 0 && (
-                    <Button type="button" variant="outline" onClick={handleBack}>
+                    <Button type="button" variant="outline" onClick={handleBack} disabled={isSubmitting}>
                       <ArrowLeft className="mr-2 h-4 w-4" />
                       Back
                     </Button>
@@ -874,8 +912,17 @@ const OnboardingSurvey = () => {
                   <Button 
                     type="submit" 
                     className="ml-auto"
+                    disabled={isSubmitting}
                   >
-                    {currentStep < totalSteps - 1 ? (
+                    {isSubmitting ? (
+                      <span className="flex items-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Saving...
+                      </span>
+                    ) : currentStep < totalSteps - 1 ? (
                       <>
                         Next
                         <ArrowRight className="ml-2 h-4 w-4" />

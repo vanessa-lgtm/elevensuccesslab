@@ -11,21 +11,21 @@ export type Database = {
     Tables: {
       Email: {
         Row: {
-          "Company Name": Json | null
+          company_name: Json | null
           created_at: string
-          "email address": Json | null
+          email: Json | null
           id: number
         }
         Insert: {
-          "Company Name"?: Json | null
+          company_name?: Json | null
           created_at?: string
-          "email address"?: Json | null
+          email?: Json | null
           id?: number
         }
         Update: {
-          "Company Name"?: Json | null
+          company_name?: Json | null
           created_at?: string
-          "email address"?: Json | null
+          email?: Json | null
           id?: number
         }
         Relationships: []
