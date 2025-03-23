@@ -7,10 +7,12 @@ import { getSectionTitle, getDefaultChecklistItems } from './onboarding-checklis
 
 interface OnboardingChecklistProps {
   onProgressUpdate: (completed: number, total: number) => void;
+  industry?: string; // Added industry prop
 }
 
 const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ 
-  onProgressUpdate
+  onProgressUpdate,
+  industry = 'media' // Default to media if not provided
 }) => {
   const [checklistItems, setChecklistItems] = useState<ChecklistItem[]>([]);
 

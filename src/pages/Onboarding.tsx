@@ -19,7 +19,7 @@ const mediaIndustries = [
 ];
 
 const conversationalAIUseCases = [
-  'conversational_ai', 'customer_service', 'call_center'
+  'conversational_ai'
 ];
 
 const Onboarding = () => {
