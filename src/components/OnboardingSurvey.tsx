@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -70,7 +71,6 @@ const industries = [
   { value: 'digital_media', label: 'Digital Media and Publishing' },
   { value: 'audio_production', label: 'Audio Content Production and Publishing' },
   { value: 'media_software', label: 'Media and Content Creation Software' },
-  { value: 'ai_assistants', label: 'Consumer AI and Virtual Assistants' },
   { value: 'edtech', label: 'EdTech (Education Technology)' },
   { value: 'software', label: 'Software Development and SaaS Providers' },
   { value: 'customer_support', label: 'Customer Support and Call Center Operations' },

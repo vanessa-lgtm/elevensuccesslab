@@ -14,19 +14,28 @@ export type Database = {
           company_name: Json | null
           created_at: string
           email: Json | null
+          "How familiar are you with Voice AI?": number | null
           id: number
+          "Primary Goals": string | null
+          "Subscribe to product updates and company news": boolean | null
         }
         Insert: {
           company_name?: Json | null
           created_at?: string
           email?: Json | null
+          "How familiar are you with Voice AI?"?: number | null
           id?: number
+          "Primary Goals"?: string | null
+          "Subscribe to product updates and company news"?: boolean | null
         }
         Update: {
           company_name?: Json | null
           created_at?: string
           email?: Json | null
+          "How familiar are you with Voice AI?"?: number | null
           id?: number
+          "Primary Goals"?: string | null
+          "Subscribe to product updates and company news"?: boolean | null
         }
         Relationships: []
       }
