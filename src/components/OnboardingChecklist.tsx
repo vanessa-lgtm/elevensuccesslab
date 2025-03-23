@@ -32,8 +32,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     if (savedItems) {
       setChecklistItems(JSON.parse(savedItems));
     } else {
-      // Load the default checklist items
-      setChecklistItems(getDefaultChecklistItems());
+      // Load the default checklist items based on industry
+      setChecklistItems(getDefaultChecklistItems(industry));
     }
   }, [industry, localStorageKey]);
 
@@ -81,15 +81,27 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     return checklistItems.filter(item => item.section === section);
   };
 
-  const orderedSections = ['admin', 'general', 'usecase'].filter(s => sections.includes(s));
+  // Define ordered sections based on industry
+  const getOrderedSections = () => {
+    if (industry === 'conversational_ai') {
+      return ['admin', 'general', 'conversational_usecase'].filter(s => sections.includes(s));
+    }
+    return ['admin', 'general', 'media_usecase'].filter(s => sections.includes(s));
+  };
+
+  const orderedSections = getOrderedSections();
 
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">
-        Media & Entertainment Onboarding
+        {industry === 'conversational_ai' 
+          ? 'Conversational AI Onboarding' 
+          : 'Media & Entertainment Onboarding'}
       </h2>
       <p className="text-muted-foreground mb-6">
-        Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.
+        {industry === 'conversational_ai'
+          ? 'Complete these steps to set up your ElevenLabs implementation for conversational AI and customer service use cases. Each step includes an estimated time to complete and links to relevant documentation.'
+          : 'Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.'}
       </p>
       
       {orderedSections.length > 0 ? (
