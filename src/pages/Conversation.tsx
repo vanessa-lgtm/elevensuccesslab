@@ -22,8 +22,15 @@ const Conversation: React.FC = () => {
               <CardDescription>Click the button below to start chatting with our voice AI assistant</CardDescription>
             </CardHeader>
             <CardContent className="p-6 flex justify-center">
-              {/* ElevenLabs Convai Widget */}
-              <elevenlabs-convai agent-id="rtqTnlF6OIFHDLAwCbfSI"></elevenlabs-convai>
+              {/* ElevenLabs Convai Widget with customization */}
+              <elevenlabs-convai 
+                agent-id="rtqTnlF6OIFHDLAwCbfSI"
+                theme="light"
+                welcome-message="Hello! How can I help you with your media and entertainment needs today?"
+                placeholder-text="Type your message or click the mic to speak..."
+                header-text="ElevenLabs Voice Assistant"
+                expanded="true">
+              </elevenlabs-convai>
             </CardContent>
           </Card>
           
@@ -31,7 +38,7 @@ const Conversation: React.FC = () => {
             <h2 className="text-xl font-semibold">About this AI Assistant</h2>
             <p className="text-muted-foreground">
               This AI assistant uses ElevenLabs voice technology to provide natural-sounding conversations. 
-              You can ask questions about our products, services, or get general information.
+              You can ask questions about our products, services, or get general information about media and entertainment use cases.
             </p>
             <p className="text-muted-foreground">
               The assistant will respond to your voice inputs in real-time, providing helpful information through natural conversation.
