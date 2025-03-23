@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { TestimonialSection } from '@/components/TestimonialSection';
+import TestimonialSection from '@/components/TestimonialSection';
 
 interface ResourceSectionProps {
   showTestimonials?: boolean;
