@@ -1,9 +1,8 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ElevenLabsConversation } from '@/components/ElevenLabsConversation';
 
 const Conversation: React.FC = () => {
   return (
@@ -12,20 +11,32 @@ const Conversation: React.FC = () => {
       
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-6">ElevenLabs Conversational AI</h1>
+          <h1 className="text-3xl font-bold mb-6">ElevenLabs Voice AI Agent</h1>
           <p className="mb-8 text-muted-foreground">
-            Experience the power of ElevenLabs voice AI through this interactive conversation. Speak to our AI assistant using your microphone.
+            Interact with our AI assistant powered by ElevenLabs voice technology. Ask questions, get information, or just have a conversation.
           </p>
           
-          <Card className="w-full mx-auto overflow-hidden">
+          <Card className="w-full mx-auto overflow-hidden mb-8">
             <CardHeader>
               <CardTitle>AI Voice Chat</CardTitle>
-              <CardDescription>Use your microphone to talk with our AI assistant</CardDescription>
+              <CardDescription>Click the button below to start chatting with our voice AI assistant</CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
-              <ElevenLabsConversation />
+            <CardContent className="p-6 flex justify-center">
+              {/* ElevenLabs Convai Widget */}
+              <elevenlabs-convai agent-id="rtqTnlF6OIFHDLAwCbfSI"></elevenlabs-convai>
             </CardContent>
           </Card>
+          
+          <div className="space-y-4">
+            <h2 className="text-xl font-semibold">About this AI Assistant</h2>
+            <p className="text-muted-foreground">
+              This AI assistant uses ElevenLabs voice technology to provide natural-sounding conversations. 
+              You can ask questions about our products, services, or get general information.
+            </p>
+            <p className="text-muted-foreground">
+              The assistant will respond to your voice inputs in real-time, providing helpful information through natural conversation.
+            </p>
+          </div>
         </div>
       </main>
       
