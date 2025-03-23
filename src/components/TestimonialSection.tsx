@@ -23,12 +23,18 @@ const testimonials: Testimonial[] = [{
   company: "Bertelsmann"
 }];
 
-const TestimonialSection = () => {
+interface TestimonialSectionProps {
+  embedded?: boolean;
+}
+
+const TestimonialSection = ({ embedded = false }: TestimonialSectionProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (embedded) return; // Skip animation if embedded
+
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('opacity-100');
@@ -48,7 +54,7 @@ const TestimonialSection = () => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, [embedded]);
 
   useEffect(() => {
     if (testimonialRef.current) {
@@ -67,6 +73,49 @@ const TestimonialSection = () => {
     setActiveIndex(prev => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
+  // If embedded in another component, render a more compact version
+  if (embedded) {
+    return (
+      <div className="max-w-2xl mx-auto">
+        <div ref={testimonialRef} className="animate-fade-in">
+          <div className="flex justify-center mb-6">
+            <Quote className="w-8 h-8 text-primary" />
+          </div>
+          
+          <blockquote className="text-lg italic mb-6">
+            {testimonials[activeIndex].quote}
+          </blockquote>
+          
+          <div className="font-medium mb-4">
+            <p className="text-base font-bold">{testimonials[activeIndex].name}</p>
+            <p className="text-gray-600 text-sm">{testimonials[activeIndex].role}, {testimonials[activeIndex].company}</p>
+          </div>
+          
+          <div className="flex justify-center space-x-2">
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={prevTestimonial}
+              className="rounded-full h-8 w-8"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
+            
+            <Button 
+              variant="outline" 
+              size="icon"
+              onClick={nextTestimonial}
+              className="rounded-full h-8 w-8"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Regular standalone version
   return (
     <section ref={sectionRef} className="py-16 bg-gray-50 transition-opacity duration-1000 opacity-0">
       <div className="container mx-auto px-4">

@@ -474,6 +474,11 @@ const SuccessStoriesDialog = ({ open, onOpenChange }: { open: boolean; onOpenCha
             </Card>
           ))}
         </div>
+
+        <div className="mt-8 pt-8 border-t">
+          <h3 className="text-xl font-semibold mb-6 text-center">What Our Customers Say</h3>
+          <TestimonialSection embedded={true} />
+        </div>
       </DialogContent>
     </Dialog>
   );
