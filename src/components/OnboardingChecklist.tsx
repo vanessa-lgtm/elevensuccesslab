@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import ChecklistSection from './onboarding-checklist/ChecklistSection';
@@ -9,15 +8,16 @@ import { useToast } from '@/hooks/use-toast';
 
 interface OnboardingChecklistProps {
   onProgressUpdate: (completed: number, total: number) => void;
-  industry?: string; // Added industry prop
+  industry?: string;
+  onAllCompleted?: (completed: boolean) => void;
 }
 
 const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({ 
   onProgressUpdate,
-  industry = 'media' // Default to media if not provided
+  industry = 'media',
+  onAllCompleted
 }) => {
   const [checklistItems, setChecklistItems] = useState<ChecklistItem[]>([]);
-  const [celebrationOpen, setCelebrationOpen] = useState(false);
   const [allItemsCompleted, setAllItemsCompleted] = useState(false);
   const { toast } = useToast();
 
@@ -40,23 +40,23 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     // Check if all items are completed
     const allCompleted = completedCount === checklistItems.length && checklistItems.length > 0;
     
-    // Only show celebration if transitioning from incomplete to complete
-    if (allCompleted && !allItemsCompleted) {
-      // Small delay to allow progress bar to update first
-      setTimeout(() => {
-        setCelebrationOpen(true);
-        toast({
-          title: "All steps completed!",
-          description: "You've successfully completed all onboarding steps.",
-        });
-      }, 500);
+    // Update the state and notify parent component
+    setAllItemsCompleted(allCompleted);
+    if (onAllCompleted) {
+      onAllCompleted(allCompleted);
     }
     
-    setAllItemsCompleted(allCompleted);
+    // If all items just completed, show toast
+    if (allCompleted && !allItemsCompleted) {
+      toast({
+        title: "Onboarding steps completed!",
+        description: "You've successfully completed all onboarding checklist steps.",
+      });
+    }
     
     // Save to localStorage whenever items change
     localStorage.setItem('checklistItems-media', JSON.stringify(checklistItems));
-  }, [checklistItems, onProgressUpdate, allItemsCompleted, toast]);
+  }, [checklistItems, onProgressUpdate, allItemsCompleted, toast, onAllCompleted]);
 
   const toggleItemCompletion = (id: string) => {
     setChecklistItems(prevItems =>
@@ -73,12 +73,10 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     return acc;
   }, []);
 
-  // Get items for a specific section
   const getSectionItems = (section: string) => {
     return checklistItems.filter(item => item.section === section);
   };
 
-  // Order sections
   const orderedSections = ['admin', 'general', 'usecase'].filter(s => sections.includes(s));
 
   return (
@@ -106,11 +104,6 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           <p className="text-muted-foreground">No checklist items available.</p>
         </Card>
       )}
-      
-      <CelebrationPopup 
-        open={celebrationOpen} 
-        onOpenChange={setCelebrationOpen} 
-      />
     </div>
   );
 };

@@ -12,6 +12,8 @@ import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/component
 import { ChevronDown, ChevronRight, Shield, BookOpen, Film, Globe, Download, MicVocal, Music, Code, Check, MessageCircle, Phone, Headset } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
+import CelebrationPopup from '@/components/CelebrationPopup';
+import { useToast } from '@/hooks/use-toast';
 
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
@@ -28,6 +30,10 @@ const Onboarding = () => {
   const [industry, setIndustry] = useState<string>("media");
   const [useCase, setUseCase] = useState<string | null>(null);
   const [completedActions, setCompletedActions] = useState<Record<string, boolean>>({});
+  const [checklistCompleted, setChecklistCompleted] = useState(false);
+  const [keyActionsCompleted, setKeyActionsCompleted] = useState(false);
+  const [celebrationOpen, setCelebrationOpen] = useState(false);
+  const { toast } = useToast();
   
   const location = useLocation();
   const navigate = useNavigate();
@@ -83,8 +89,41 @@ const Onboarding = () => {
       
       localStorage.setItem('completedActions', JSON.stringify(newCompletedActions));
       
+      const keyActionsList = industry === 'conversational_ai' ? 
+        conversationalAIKeyActionSteps : mediaKeyActionSteps;
+      
+      const allKeyActionsCompleted = keyActionsList.every(
+        action => newCompletedActions[action.id]
+      );
+      
+      setKeyActionsCompleted(allKeyActionsCompleted);
+      
+      if (allKeyActionsCompleted && checklistCompleted && !celebrationOpen) {
+        setTimeout(() => {
+          setCelebrationOpen(true);
+          toast({
+            title: "All steps completed!",
+            description: "You've successfully completed all onboarding steps and key actions.",
+          });
+        }, 500);
+      }
+      
       return newCompletedActions;
     });
+  };
+
+  const handleChecklistCompletion = (completed: boolean) => {
+    setChecklistCompleted(completed);
+    
+    if (completed && keyActionsCompleted && !celebrationOpen) {
+      setTimeout(() => {
+        setCelebrationOpen(true);
+        toast({
+          title: "All steps completed!",
+          description: "You've successfully completed all onboarding steps and key actions.",
+        });
+      }, 500);
+    }
   };
   
   const mediaKeyActionSteps = [
@@ -481,7 +520,11 @@ const Onboarding = () => {
             
             <TabsContent value="checklist" className="mt-4 space-y-4 animate-fade-in">
               <div className="bg-card p-6 rounded-lg shadow-sm border border-muted">
-                <OnboardingChecklist onProgressUpdate={handleProgressUpdate} industry={industry} />
+                <OnboardingChecklist 
+                  onProgressUpdate={handleProgressUpdate} 
+                  industry={industry} 
+                  onAllCompleted={handleChecklistCompletion}
+                />
               </div>
             </TabsContent>
             
@@ -528,8 +571,13 @@ const Onboarding = () => {
       
       <Footer />
       <WebinarPopup />
+      <CelebrationPopup 
+        open={celebrationOpen} 
+        onOpenChange={setCelebrationOpen} 
+      />
     </div>
   );
 };
 
 export default Onboarding;
+

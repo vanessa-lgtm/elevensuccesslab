@@ -48,7 +48,7 @@ const CelebrationPopup: React.FC<CelebrationPopupProps> = ({
         
         <div className="flex justify-center mt-4">
           <Button 
-            onClick={() => onOpenChange(false)}
+            onClick={() => window.location.href = "https://elevenlabs.io/app"}
             className="w-full sm:w-auto"
           >
             Continue to platform
