@@ -64,7 +64,7 @@ const UseCaseInspiration = () => {
         <div className="max-w-3xl mx-auto mb-16 text-center mt-16">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary mb-4">
             <Sparkles className="h-4 w-4" />
-            <span className="text-sm font-medium">Customer Stories</span>
+            <span className="text-sm font-medium">Discover</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/80">
             Use Case Inspiration
