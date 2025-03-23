@@ -402,7 +402,17 @@ const SuccessStoriesDialog = ({
         </div>
         
         <div className="space-y-4 mt-4">
-          {testimonials.map((testimonial, index) => {})}
+          {testimonials.map((testimonial, index) => (
+            <Card key={index} className="p-4 border-l-4 border-l-primary">
+              <CardContent className="p-0">
+                <blockquote className="italic text-muted-foreground mb-4">"{testimonial.quote}"</blockquote>
+                <div className="font-medium">
+                  <p className="font-bold">{testimonial.name}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.role}, {testimonial.company}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         <div className="mt-8 pt-8 border-t">
