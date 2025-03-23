@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import ChecklistSection from './onboarding-checklist/ChecklistSection';
@@ -22,7 +21,11 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   const [allItemsCompleted, setAllItemsCompleted] = useState(false);
   const { toast } = useToast();
 
-  // Create a unique key for localStorage based on industry
+  // Always use 'media' for checklist items regardless of the industry prop
+  const checklistIndustry = 'media';
+  
+  // Create a unique key for localStorage based on displayed industry prop (for UI purposes)
+  // but always load 'media' checklist items
   const localStorageKey = `checklistItems-${industry}`;
 
   useEffect(() => {
@@ -32,8 +35,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     if (savedItems) {
       setChecklistItems(JSON.parse(savedItems));
     } else {
-      // Load the default checklist items based on industry
-      setChecklistItems(getDefaultChecklistItems(industry));
+      // Always load the media checklist items regardless of industry
+      setChecklistItems(getDefaultChecklistItems('media'));
     }
   }, [industry, localStorageKey]);
 
@@ -81,11 +84,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     return checklistItems.filter(item => item.section === section);
   };
 
-  // Define ordered sections based on industry
+  // Always use media sections ordering
   const getOrderedSections = () => {
-    if (industry === 'conversational_ai') {
-      return ['admin', 'general', 'conversational_usecase'].filter(s => sections.includes(s));
-    }
     return ['admin', 'general', 'media_usecase'].filter(s => sections.includes(s));
   };
 
@@ -94,14 +94,10 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">
-        {industry === 'conversational_ai' 
-          ? 'Conversational AI Onboarding' 
-          : 'Media & Entertainment Onboarding'}
+        Media & Entertainment Onboarding
       </h2>
       <p className="text-muted-foreground mb-6">
-        {industry === 'conversational_ai'
-          ? 'Complete these steps to set up your ElevenLabs implementation for conversational AI and customer service use cases. Each step includes an estimated time to complete and links to relevant documentation.'
-          : 'Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.'}
+        Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.
       </p>
       
       {orderedSections.length > 0 ? (
