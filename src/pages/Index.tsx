@@ -1,12 +1,11 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import ResourceSection from '@/components/ResourceSection';
 import SupportSection from '@/components/SupportSection';
+import TestimonialSection from '@/components/TestimonialSection';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
-
 const Index = () => {
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +37,7 @@ const Index = () => {
       
       <ResourceSection />
       <SupportSection />
+      <TestimonialSection />
       <Footer />
       <WebinarPopup />
     </div>;

@@ -7,8 +7,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import VideoEmbed from './VideoEmbed';
-import TestimonialSection from './TestimonialSection';
-
 interface ResourceCardProps {
   icon: React.ReactNode;
   title: string;
@@ -17,72 +15,61 @@ interface ResourceCardProps {
   onClick?: () => void;
   comingSoon?: boolean;
 }
-
-const ResourceCard = ({ icon, title, description, delay, onClick, comingSoon }: ResourceCardProps) => {
+const ResourceCard = ({
+  icon,
+  title,
+  description,
+  delay,
+  onClick,
+  comingSoon
+}: ResourceCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('opacity-100');
-            entry.target.classList.remove('opacity-0', 'translate-y-10');
-          }, delay);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px',
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('opacity-100');
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+        }, delay);
+        observer.unobserve(entry.target);
       }
-    );
-    
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    });
     if (cardRef.current) {
       observer.observe(cardRef.current);
     }
-    
     return () => {
       if (cardRef.current) {
         observer.unobserve(cardRef.current);
       }
     };
   }, [delay]);
-
-  return (
-    <div 
-      ref={cardRef}
-      className={cn(
-        "glass-card rounded-xl p-6 opacity-0 translate-y-10 transition-all duration-700 ease-out",
-        "transform hover:translate-y-[-5px] hover:shadow-lg transition-all duration-300",
-        comingSoon ? "cursor-default" : "cursor-pointer"
-      )}
-      onClick={comingSoon ? undefined : onClick}
-    >
+  return <div ref={cardRef} className={cn("glass-card rounded-xl p-6 opacity-0 translate-y-10 transition-all duration-700 ease-out", "transform hover:translate-y-[-5px] hover:shadow-lg transition-all duration-300", comingSoon ? "cursor-default" : "cursor-pointer")} onClick={comingSoon ? undefined : onClick}>
       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-5">
         {icon}
       </div>
       <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
         {title}
-        {comingSoon && (
-          <Badge variant="outline" className="text-xs font-normal bg-secondary/50">Coming Soon</Badge>
-        )}
+        {comingSoon && <Badge variant="outline" className="text-xs font-normal bg-secondary/50">Coming Soon</Badge>}
       </h3>
       <p className="text-foreground/70 mb-5">{description}</p>
       
-      {!comingSoon && (
-        <Button variant="ghost" className="group p-0 h-auto font-medium text-primary">
+      {!comingSoon && <Button variant="ghost" className="group p-0 h-auto font-medium text-primary">
           Learn more
           <ArrowUpRight className="ml-1 h-4 w-4 group-hover:translate-x-1 group-hover:translate-y-[-2px] transition-transform" />
-        </Button>
-      )}
-    </div>
-  );
+        </Button>}
+    </div>;
 };
-
-const VoiceAIBasicsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => {
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+const VoiceAIBasicsDialog = ({
+  open,
+  onOpenChange
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
+  return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -199,13 +186,16 @@ const VoiceAIBasicsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChan
           </TabsContent>
         </Tabs>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
-const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => {
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+const WebinarsDialog = ({
+  open,
+  onOpenChange
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
+  return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -225,12 +215,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
           
           <TabsContent value="updates" className="space-y-4">
             <div className="text-center mb-6">
-              <Button 
-                variant="default" 
-                size="lg" 
-                className="flex items-center gap-2"
-                onClick={() => window.open('https://elevenlabs.io/blog', '_blank')}
-              >
+              <Button variant="default" size="lg" className="flex items-center gap-2" onClick={() => window.open('https://elevenlabs.io/blog', '_blank')}>
                 View All Updates
                 <ExternalLink className="h-4 w-4" />
               </Button>
@@ -239,10 +224,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <VideoEmbed 
-                    videoId="NmRAhNTJ06M" 
-                    title="Studio is now available for everyone"
-                  />
+                  <VideoEmbed videoId="NmRAhNTJ06M" title="Studio is now available for everyone" />
                 </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">Studio is now available for everyone</h3>
@@ -256,10 +238,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <VideoEmbed 
-                    videoId="K-48RXyuRaY" 
-                    title="Meet Scribe: Speech Recognition"
-                  />
+                  <VideoEmbed videoId="K-48RXyuRaY" title="Meet Scribe: Speech Recognition" />
                 </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">Meet Scribe: Speech Recognition</h3>
@@ -273,10 +252,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <VideoEmbed 
-                    videoId="kuWj4YbStUY" 
-                    title="ElevenLabs New Features"
-                  />
+                  <VideoEmbed videoId="kuWj4YbStUY" title="ElevenLabs New Features" />
                 </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">ElevenLabs New Features</h3>
@@ -290,10 +266,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <VideoEmbed 
-                    videoId="x6ub-9HhxGU" 
-                    title="Smart Podcasts Produced by Generative AI"
-                  />
+                  <VideoEmbed videoId="x6ub-9HhxGU" title="Smart Podcasts Produced by Generative AI" />
                 </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">Smart Podcasts Produced by Generative AI</h3>
@@ -309,12 +282,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
           
           <TabsContent value="webinars" className="space-y-4">
             <div className="text-center mb-6">
-              <Button 
-                variant="default" 
-                size="lg" 
-                className="flex items-center gap-2"
-                onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}
-              >
+              <Button variant="default" size="lg" className="flex items-center gap-2" onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}>
                 View All Webinars
                 <ExternalLink className="h-4 w-4" />
               </Button>
@@ -323,12 +291,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="overflow-hidden">
                 <div className="aspect-video relative">
-                  <iframe
-                    src="https://app.livestorm.co/elevenlabs/elevenlabs-ai-in-edtech-scaling-learning-experiences-with-innovation/live?s=3e4af1ad-e459-44b9-a7d9-2ced019ef600"
-                    title="AI in EdTech: Scaling Learning Experiences with Innovation"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    className="absolute inset-0 w-full h-full border-0"
-                  ></iframe>
+                  <iframe src="https://app.livestorm.co/elevenlabs/elevenlabs-ai-in-edtech-scaling-learning-experiences-with-innovation/live?s=3e4af1ad-e459-44b9-a7d9-2ced019ef600" title="AI in EdTech: Scaling Learning Experiences with Innovation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" className="absolute inset-0 w-full h-full border-0"></iframe>
                 </div>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">AI in EdTech: Scaling Learning Experiences with Innovation</h3>
@@ -342,10 +305,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <VideoEmbed 
-                    videoId="dQw4w9WgXcQ" 
-                    title="ElevenLabs Webinar"
-                  />
+                  <VideoEmbed videoId="dQw4w9WgXcQ" title="ElevenLabs Webinar" />
                 </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">Special ElevenLabs Webinar</h3>
@@ -359,12 +319,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               
               <Card className="overflow-hidden">
                 <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="absolute z-10 flex gap-2 items-center"
-                    onClick={() => window.open('https://elevenlabs.io/webinars/elevenlabs-next-gen-digital-and-news-publishing', '_blank')}
-                  >
+                  <Button variant="default" size="sm" className="absolute z-10 flex gap-2 items-center" onClick={() => window.open('https://elevenlabs.io/webinars/elevenlabs-next-gen-digital-and-news-publishing', '_blank')}>
                     <Video className="h-4 w-4" />
                     Watch Now
                   </Button>
@@ -382,12 +337,7 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
               
               <Card className="overflow-hidden">
                 <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="absolute z-10 flex gap-2 items-center"
-                    onClick={() => window.open('https://www.youtube.com/watch?v=0vyUwVR0vx0', '_blank')}
-                  >
+                  <Button variant="default" size="sm" className="absolute z-10 flex gap-2 items-center" onClick={() => window.open('https://www.youtube.com/watch?v=0vyUwVR0vx0', '_blank')}>
                     <Video className="h-4 w-4" />
                     Watch Now
                   </Button>
@@ -406,34 +356,32 @@ const WebinarsDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (
           </TabsContent>
         </Tabs>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
-const SuccessStoriesDialog = ({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) => {
-  const testimonials = [
-    {
-      quote: "The resources provided helped us restructure our entire voice AI strategy, leading to a 35% increase in customer retention within just six months.",
-      name: "Sarah Johnson",
-      role: "VP of Voice Innovation",
-      company: "TechVision Inc."
-    },
-    {
-      quote: "The strategic frameworks and measurement tools allowed us to scale our voice AI operations efficiently while maintaining high quality interactions.",
-      name: "Michael Chen",
-      role: "Chief Voice Officer",
-      company: "GrowthWave"
-    },
-    {
-      quote: "Access to the training materials and expert consultation transformed how we approach voice AI. Our NPS score has increased by 28 points.",
-      name: "Elena Rodriguez",
-      role: "Voice AI Director",
-      company: "Innovate Solutions"
-    },
-  ];
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+const SuccessStoriesDialog = ({
+  open,
+  onOpenChange
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) => {
+  const testimonials = [{
+    quote: "The resources provided helped us restructure our entire voice AI strategy, leading to a 35% increase in customer retention within just six months.",
+    name: "Sarah Johnson",
+    role: "VP of Voice Innovation",
+    company: "TechVision Inc."
+  }, {
+    quote: "The strategic frameworks and measurement tools allowed us to scale our voice AI operations efficiently while maintaining high quality interactions.",
+    name: "Michael Chen",
+    role: "Chief Voice Officer",
+    company: "GrowthWave"
+  }, {
+    quote: "Access to the training materials and expert consultation transformed how we approach voice AI. Our NPS score has increased by 28 points.",
+    name: "Elena Rodriguez",
+    role: "Voice AI Director",
+    company: "Innovate Solutions"
+  }];
+  return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
@@ -446,23 +394,15 @@ const SuccessStoriesDialog = ({ open, onOpenChange }: { open: boolean; onOpenCha
         </DialogHeader>
         
         <div className="text-center mb-6">
-          <Button 
-            variant="default" 
-            size="lg" 
-            className="flex items-center gap-2"
-            onClick={() => window.open('https://elevenlabs.io/blog?category=customer-stories', '_blank')}
-          >
+          <Button variant="default" size="lg" className="flex items-center gap-2" onClick={() => window.open('https://elevenlabs.io/blog?category=customer-stories', '_blank')}>
             View All Customer Stories
             <ExternalLink className="h-4 w-4" />
           </Button>
         </div>
         
         <div className="space-y-4 mt-4">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="p-6">
-              <div className="text-primary mb-4">
-                <Quote size={24} className="opacity-30" />
-              </div>
+          {testimonials.map((testimonial, index) => <Card key={index} className="p-6">
+              
               <blockquote className="text-lg mb-4 font-medium text-balance">
                 "{testimonial.quote}"
               </blockquote>
@@ -472,98 +412,71 @@ const SuccessStoriesDialog = ({ open, onOpenChange }: { open: boolean; onOpenCha
                   {testimonial.role}, {testimonial.company}
                 </p>
               </div>
-            </Card>
-          ))}
-        </div>
-
-        <div className="mt-8 pt-8 border-t">
-          <h3 className="text-xl font-semibold mb-6 text-center">What Our Customers Say</h3>
-          <TestimonialSection embedded={true} />
+            </Card>)}
         </div>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
 const ResourceSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [voiceAIBasicsOpen, setVoiceAIBasicsOpen] = useState(false);
   const [webinarsOpen, setWebinarsOpen] = useState(false);
   const [successStoriesOpen, setSuccessStoriesOpen] = useState(false);
-  
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.1,
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('opacity-100');
+        entry.target.classList.remove('opacity-0', 'translate-y-10');
+        observer.unobserve(entry.target);
       }
-    );
-    
+    }, {
+      threshold: 0.1
+    });
     if (titleRef.current) {
       observer.observe(titleRef.current);
     }
-    
     return () => {
       if (titleRef.current) {
         observer.unobserve(titleRef.current);
       }
     };
   }, []);
-
-  const resources = [
-    {
-      icon: <BookOpen size={20} />,
-      title: "Voice AI Basics",
-      description: "Comprehensive resources on voice AI fundamentals, ideal for beginners.",
-      onClick: () => setVoiceAIBasicsOpen(true)
-    },
-    {
-      icon: <GraduationCap size={20} />,
-      title: "ElevenLabs Product Documentation",
-      description: "Comprehensive documentation to help you understand and implement our voice AI technology.",
-      onClick: () => window.open("https://elevenlabs.io/docs/overview", "_blank")
-    },
-    {
-      icon: <Video size={20} />,
-      title: "On-Demand Webinars",
-      description: "Access our library of webinars to enhance your knowledge of our product or get inspired!",
-      onClick: () => setWebinarsOpen(true)
-    },
-    {
-      icon: <Quote size={20} />,
-      title: "Success Stories",
-      description: "Discover how organizations are achieving success with our voice AI solutions.",
-      onClick: () => setSuccessStoriesOpen(true)
-    },
-    {
-      icon: <BarChart size={20} />,
-      title: "Measurement Frameworks",
-      description: "Tools and templates to measure the impact of your voice AI initiatives.",
-      comingSoon: true
-    },
-    {
-      icon: <TrendingUp size={20} />,
-      title: "Market Trends",
-      description: "Updates and trends about the Voice AI space.",
-      comingSoon: true
-    },
-  ];
-
-  return (
-    <section id="resources" className="section-padding bg-background relative">
+  const resources = [{
+    icon: <BookOpen size={20} />,
+    title: "Voice AI Basics",
+    description: "Comprehensive resources on voice AI fundamentals, ideal for beginners.",
+    onClick: () => setVoiceAIBasicsOpen(true)
+  }, {
+    icon: <GraduationCap size={20} />,
+    title: "ElevenLabs Product Documentation",
+    description: "Comprehensive documentation to help you understand and implement our voice AI technology.",
+    onClick: () => window.open("https://elevenlabs.io/docs/overview", "_blank")
+  }, {
+    icon: <Video size={20} />,
+    title: "On-Demand Webinars",
+    description: "Access our library of webinars to enhance your knowledge of our product or get inspired!",
+    onClick: () => setWebinarsOpen(true)
+  }, {
+    icon: <Quote size={20} />,
+    title: "Success Stories",
+    description: "Discover how organizations are achieving success with our voice AI solutions.",
+    onClick: () => setSuccessStoriesOpen(true)
+  }, {
+    icon: <BarChart size={20} />,
+    title: "Measurement Frameworks",
+    description: "Tools and templates to measure the impact of your voice AI initiatives.",
+    comingSoon: true
+  }, {
+    icon: <TrendingUp size={20} />,
+    title: "Market Trends",
+    description: "Updates and trends about the Voice AI space.",
+    comingSoon: true
+  }];
+  return <section id="resources" className="section-padding bg-background relative">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <div className="text-sm font-medium text-primary mb-3">Knowledge Hub</div>
-          <h2 
-            ref={titleRef}
-            className="text-3xl md:text-4xl font-display font-bold mb-6 opacity-0 translate-y-10 transition-all duration-700 ease-out"
-          >
+          <h2 ref={titleRef} className="text-3xl md:text-4xl font-display font-bold mb-6 opacity-0 translate-y-10 transition-all duration-700 ease-out">
             Resources for Voice AI Excellence
           </h2>
           <p className="text-foreground/70 max-w-2xl mx-auto">
@@ -573,39 +486,18 @@ const ResourceSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {resources.map((resource, index) => (
-            <ResourceCard 
-              key={index} 
-              icon={resource.icon} 
-              title={resource.title} 
-              description={resource.description} 
-              delay={index * 100}
-              onClick={resource.onClick}
-              comingSoon={resource.comingSoon}
-            />
-          ))}
+          {resources.map((resource, index) => <ResourceCard key={index} icon={resource.icon} title={resource.title} description={resource.description} delay={index * 100} onClick={resource.onClick} comingSoon={resource.comingSoon} />)}
         </div>
       </div>
       
-      <VoiceAIBasicsDialog 
-        open={voiceAIBasicsOpen} 
-        onOpenChange={setVoiceAIBasicsOpen} 
-      />
+      <VoiceAIBasicsDialog open={voiceAIBasicsOpen} onOpenChange={setVoiceAIBasicsOpen} />
       
-      <WebinarsDialog 
-        open={webinarsOpen} 
-        onOpenChange={setWebinarsOpen} 
-      />
+      <WebinarsDialog open={webinarsOpen} onOpenChange={setWebinarsOpen} />
       
-      <SuccessStoriesDialog 
-        open={successStoriesOpen} 
-        onOpenChange={setSuccessStoriesOpen} 
-      />
+      <SuccessStoriesDialog open={successStoriesOpen} onOpenChange={setSuccessStoriesOpen} />
       
       <div className="absolute top-40 left-10 w-64 h-64 rounded-full bg-primary/5 blur-3xl -z-10"></div>
       <div className="absolute bottom-20 right-0 w-80 h-80 rounded-full bg-blue-100/30 blur-3xl -z-10"></div>
-    </section>
-  );
+    </section>;
 };
-
 export default ResourceSection;
