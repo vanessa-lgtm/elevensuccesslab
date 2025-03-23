@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import ChecklistSection from './onboarding-checklist/ChecklistSection';
@@ -21,17 +22,20 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   const [allItemsCompleted, setAllItemsCompleted] = useState(false);
   const { toast } = useToast();
 
+  // Create a unique key for localStorage based on industry
+  const localStorageKey = `checklistItems-${industry}`;
+
   useEffect(() => {
     // Load saved state from localStorage
-    const savedItems = localStorage.getItem('checklistItems-media');
+    const savedItems = localStorage.getItem(localStorageKey);
     
     if (savedItems) {
       setChecklistItems(JSON.parse(savedItems));
     } else {
-      // Load the media checklist items
+      // Load the default checklist items
       setChecklistItems(getDefaultChecklistItems());
     }
-  }, []);
+  }, [industry, localStorageKey]);
 
   useEffect(() => {
     const completedCount = checklistItems.filter(item => item.completed).length;
@@ -55,8 +59,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     }
     
     // Save to localStorage whenever items change
-    localStorage.setItem('checklistItems-media', JSON.stringify(checklistItems));
-  }, [checklistItems, onProgressUpdate, allItemsCompleted, toast, onAllCompleted]);
+    localStorage.setItem(localStorageKey, JSON.stringify(checklistItems));
+  }, [checklistItems, onProgressUpdate, allItemsCompleted, toast, onAllCompleted, localStorageKey]);
 
   const toggleItemCompletion = (id: string) => {
     setChecklistItems(prevItems =>

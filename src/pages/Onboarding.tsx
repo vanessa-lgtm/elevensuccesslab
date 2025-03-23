@@ -38,6 +38,8 @@ const Onboarding = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
+  const localStorageKeyActions = `completedActions-${industry}`;
+  
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const industryParam = params.get('industry');
@@ -65,11 +67,13 @@ const Onboarding = () => {
       setActiveTab("checklist");
     }
 
-    const savedCompletedActions = localStorage.getItem('completedActions');
+    const savedCompletedActions = localStorage.getItem(localStorageKeyActions);
     if (savedCompletedActions) {
       setCompletedActions(JSON.parse(savedCompletedActions));
+    } else {
+      setCompletedActions({});
     }
-  }, [location]);
+  }, [location, localStorageKeyActions, industry]);
   
   const handleProgressUpdate = (completed: number, total: number) => {
     setCurrentStep(Math.round((completed / total) * 100));
@@ -87,7 +91,7 @@ const Onboarding = () => {
         [id]: !prev[id] 
       };
       
-      localStorage.setItem('completedActions', JSON.stringify(newCompletedActions));
+      localStorage.setItem(localStorageKeyActions, JSON.stringify(newCompletedActions));
       
       const keyActionsList = industry === 'conversational_ai' ? 
         conversationalAIKeyActionSteps : mediaKeyActionSteps;
@@ -580,4 +584,3 @@ const Onboarding = () => {
 };
 
 export default Onboarding;
-
