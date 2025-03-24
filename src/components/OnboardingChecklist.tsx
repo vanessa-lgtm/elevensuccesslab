@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import ChecklistSection from './onboarding-checklist/ChecklistSection';
@@ -22,17 +21,14 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   const [allItemsCompleted, setAllItemsCompleted] = useState(false);
   const { toast } = useToast();
   
-  // Create a unique key for localStorage based on displayed industry prop (for UI purposes)
   const localStorageKey = `checklistItems-${industry}`;
 
   useEffect(() => {
-    // Load saved state from localStorage
     const savedItems = localStorage.getItem(localStorageKey);
     
     if (savedItems) {
       setChecklistItems(JSON.parse(savedItems));
     } else {
-      // Load the checklist items for the selected industry
       setChecklistItems(getDefaultChecklistItems(industry));
     }
   }, [industry, localStorageKey]);
@@ -41,16 +37,13 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     const completedCount = checklistItems.filter(item => item.completed).length;
     onProgressUpdate(completedCount, checklistItems.length);
     
-    // Check if all items are completed
     const allCompleted = completedCount === checklistItems.length && checklistItems.length > 0;
     
-    // Update the state and notify parent component
     setAllItemsCompleted(allCompleted);
     if (onAllCompleted) {
       onAllCompleted(allCompleted);
     }
     
-    // If all items just completed, show toast
     if (allCompleted && !allItemsCompleted) {
       toast({
         title: "Onboarding steps completed!",
@@ -58,7 +51,6 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
       });
     }
     
-    // Save to localStorage whenever items change
     localStorage.setItem(localStorageKey, JSON.stringify(checklistItems));
   }, [checklistItems, onProgressUpdate, allItemsCompleted, toast, onAllCompleted, localStorageKey]);
 
@@ -81,22 +73,22 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     return checklistItems.filter(item => item.section === section);
   };
 
-  // Order sections with usecase_specific at the end
   const getOrderedSections = () => {
     const orderedSections = ['admin', 'general'];
     
-    // Add the industry-specific usecase section
     if (industry === 'media') {
       orderedSections.push('media_usecase');
     } else if (industry === 'conversational_ai') {
       orderedSections.push('conversational_usecase');
     }
     
-    // Add the universal usecase_specific section at the end
-    orderedSections.push('usecase_specific');
+    if (sections.includes('usecase_specific')) {
+      orderedSections.push('usecase_specific');
+    }
     
-    // Only include sections that exist in the data
-    return orderedSections.filter(s => sections.includes(s));
+    return orderedSections.filter(s => 
+      s === 'usecase_specific' || sections.includes(s)
+    );
   };
 
   const orderedSections = getOrderedSections();
