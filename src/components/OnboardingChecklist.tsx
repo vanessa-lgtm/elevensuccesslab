@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import ChecklistSection from './onboarding-checklist/ChecklistSection';
@@ -20,12 +21,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   const [checklistItems, setChecklistItems] = useState<ChecklistItem[]>([]);
   const [allItemsCompleted, setAllItemsCompleted] = useState(false);
   const { toast } = useToast();
-
-  // Always use 'media' for checklist items regardless of the industry prop
-  const checklistIndustry = 'media';
   
   // Create a unique key for localStorage based on displayed industry prop (for UI purposes)
-  // but always load 'media' checklist items
   const localStorageKey = `checklistItems-${industry}`;
 
   useEffect(() => {
@@ -35,8 +32,8 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     if (savedItems) {
       setChecklistItems(JSON.parse(savedItems));
     } else {
-      // Always load the media checklist items regardless of industry
-      setChecklistItems(getDefaultChecklistItems('media'));
+      // Load the checklist items for the selected industry
+      setChecklistItems(getDefaultChecklistItems(industry));
     }
   }, [industry, localStorageKey]);
 
@@ -84,9 +81,22 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
     return checklistItems.filter(item => item.section === section);
   };
 
-  // Always use media sections ordering
+  // Order sections with usecase_specific at the end
   const getOrderedSections = () => {
-    return ['admin', 'general', 'media_usecase'].filter(s => sections.includes(s));
+    const orderedSections = ['admin', 'general'];
+    
+    // Add the industry-specific usecase section
+    if (industry === 'media') {
+      orderedSections.push('media_usecase');
+    } else if (industry === 'conversational_ai') {
+      orderedSections.push('conversational_usecase');
+    }
+    
+    // Add the universal usecase_specific section at the end
+    orderedSections.push('usecase_specific');
+    
+    // Only include sections that exist in the data
+    return orderedSections.filter(s => sections.includes(s));
   };
 
   const orderedSections = getOrderedSections();
@@ -94,10 +104,14 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold mb-4">
-        Media & Entertainment Onboarding
+        {industry === 'conversational_ai' ? 
+          'Conversational AI Onboarding' :
+          'Media & Entertainment Onboarding'}
       </h2>
       <p className="text-muted-foreground mb-6">
-        Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.
+        {industry === 'conversational_ai' ?
+          'Complete these steps to set up your ElevenLabs implementation for conversational AI and customer service use cases. Each step includes an estimated time to complete and links to relevant documentation.' :
+          'Complete these steps to set up your ElevenLabs implementation for media and entertainment use cases. Each step includes an estimated time to complete and links to relevant documentation.'}
       </p>
       
       {orderedSections.length > 0 ? (

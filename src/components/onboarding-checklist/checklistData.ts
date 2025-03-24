@@ -7,20 +7,83 @@ export const getSectionTitle = (section: string): string => {
     'general': 'Product General Information',
     'usecase': 'Use Case Specific Steps',
     'media_usecase': 'Media & Entertainment Use Cases',
-    'conversational_usecase': 'Conversational AI Use Cases'
+    'conversational_usecase': 'Conversational AI Use Cases',
+    'usecase_specific': 'Use Case Specific Steps'
   };
   
   return sectionTitles[section] || section;
 };
 
 export const getDefaultChecklistItems = (industry: string = 'media'): ChecklistItem[] => {
+  // Get the common use case specific steps
+  const useCaseSpecificSteps = getUseCaseSpecificSteps();
+  
   // Return the appropriate checklist items based on industry
   if (industry === 'conversational_ai') {
-    return getConversationalAIChecklistItems();
+    return [...getConversationalAIChecklistItems(), ...useCaseSpecificSteps];
   }
   
   // Default to media industry checklist items
-  return getMediaChecklistItems();
+  return [...getMediaChecklistItems(), ...useCaseSpecificSteps];
+};
+
+const getUseCaseSpecificSteps = (): ChecklistItem[] => {
+  return [
+    {
+      id: 'voice-selection',
+      title: 'Selecting the Right Voice',
+      description: 'Choose from pre-designed voices, clone existing ones, or create custom voices to match your brand, character, or audience needs.',
+      timeEstimate: '30 min',
+      completed: false,
+      section: 'usecase_specific',
+      link: 'https://elevenlabs.io/voices'
+    },
+    {
+      id: 'voice-cloning-overview',
+      title: 'Creating Custom Voice Clones',
+      description: 'Develop personalized voice clones using Instant Voice Cloning (IVC) for quick results or Professional Voice Cloning (PVC) for high-accuracy and customization.',
+      timeEstimate: '45 min',
+      completed: false,
+      section: 'usecase_specific',
+      link: 'https://elevenlabs.io/docs/product-guides/voices/voice-cloning'
+    },
+    {
+      id: 'instant-voice-cloning',
+      title: 'Learn Instant Voice Cloning Techniques',
+      description: 'Master the art of creating quick voice clones for rapid content production and iteration.',
+      timeEstimate: '25 min',
+      completed: false,
+      section: 'usecase_specific',
+      link: 'https://elevenlabs.io/docs/product-guides/voices/voice-cloning/instant-voice-cloning'
+    },
+    {
+      id: 'tts-workflow',
+      title: 'Delivering Natural, High-Quality Speech',
+      description: 'Configure your text-to-speech settings to deliver natural, high-quality speech for your content.',
+      timeEstimate: '30 min',
+      completed: false,
+      section: 'usecase_specific',
+      link: 'https://elevenlabs.io/docs/product-guides/playground/text-to-speech'
+    },
+    {
+      id: 'voice-transformation',
+      title: 'Transform Any Voice with Voice Changer',
+      description: 'Learn how to transform any voice with Voice Changer for creative audio productions.',
+      timeEstimate: '20 min',
+      completed: false,
+      section: 'usecase_specific',
+      link: 'https://elevenlabs.io/docs/product-guides/playground/voice-changer'
+    },
+    {
+      id: 'sound-effects',
+      title: 'Enhancing Content with AI-Generated Sound Effects',
+      description: 'Enhance your content with AI-generated sound effects for immersive audio experiences.',
+      timeEstimate: '25 min',
+      completed: false,
+      section: 'usecase_specific',
+      link: 'https://elevenlabs.io/docs/product-guides/playground/sound-effects'
+    },
+  ];
 };
 
 const getMediaChecklistItems = (): ChecklistItem[] => {
