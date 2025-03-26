@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import ChecklistSection from './onboarding-checklist/ChecklistSection';
@@ -25,11 +26,37 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
 
   useEffect(() => {
     const savedItems = localStorage.getItem(localStorageKey);
+    const defaultItems = getDefaultChecklistItems(industry);
     
     if (savedItems) {
-      setChecklistItems(JSON.parse(savedItems));
+      const parsedSavedItems = JSON.parse(savedItems) as ChecklistItem[];
+      
+      // Check if saved items have "usecase_specific" section
+      const hasUseCaseSpecific = parsedSavedItems.some(item => 
+        item.section === 'usecase_specific'
+      );
+      
+      if (hasUseCaseSpecific) {
+        setChecklistItems(parsedSavedItems);
+      } else {
+        // If saved items don't have "usecase_specific", merge with default items
+        const useCaseSpecificItems = defaultItems.filter(item => 
+          item.section === 'usecase_specific'
+        );
+        
+        // Create a new merged array with the usecase_specific items from default and saved items for other sections
+        const mergedItems = [
+          ...parsedSavedItems,
+          ...useCaseSpecificItems
+        ];
+        
+        setChecklistItems(mergedItems);
+        
+        // Update localStorage with the merged items
+        localStorage.setItem(localStorageKey, JSON.stringify(mergedItems));
+      }
     } else {
-      setChecklistItems(getDefaultChecklistItems(industry));
+      setChecklistItems(defaultItems);
     }
   }, [industry, localStorageKey]);
 
@@ -82,10 +109,11 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
       orderedSections.push('conversational_usecase');
     }
     
-    if (sections.includes('usecase_specific')) {
-      orderedSections.push('usecase_specific');
-    }
+    // Always include usecase_specific section, regardless of whether it's in sections array
+    orderedSections.push('usecase_specific');
     
+    // Filter out any sections that don't exist in the data, except for usecase_specific
+    // which should always be included
     return orderedSections.filter(s => 
       s === 'usecase_specific' || sections.includes(s)
     );
