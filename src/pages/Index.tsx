@@ -30,6 +30,7 @@ const Index = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
   return <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
@@ -48,12 +49,16 @@ const Index = () => {
                     Experience our conversational AI powered by ElevenLabs. Ask questions, get information, or just chat naturally with our voice assistant.
                   </p>
                 </div>
-                <div className="min-h-[400px] flex items-center justify-center">
+                <div className="min-h-[400px] flex items-center justify-center bg-gray-50 rounded-lg p-4">
                   <elevenlabs-convai 
-                    agent-id="tqTnlF6OIFHDLAwCbfSI"
+                    agent-id="rtqTnlF6OIFHDLAwCbfSI"
                     theme="light"
                     position="bottom-right" 
-                    expanded="true">
+                    expanded="true"
+                    button-text="Chat with our AI"
+                    welcome-message="Hello! How can I help you today?"
+                    placeholder-text="Type your message here..."
+                    header-text="ElevenLabs Voice AI Assistant">
                   </elevenlabs-convai>
                 </div>
               </div>
