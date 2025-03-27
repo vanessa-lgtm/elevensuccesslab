@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -70,7 +69,7 @@ const Index = () => {
       {/* Floating ElevenLabs widget */}
       <div className="fixed bottom-6 right-6 z-50">
         <elevenlabs-convai 
-          agent-id="rtqTnlF6OIFHDLAwCbfSI"
+          agent-id="tqTnlF6OIFHDLAwCbfSI"
           theme="light"
           position="bottom-right" 
           expanded="false"
