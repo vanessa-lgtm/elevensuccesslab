@@ -50,16 +50,11 @@ const Index = () => {
                   </p>
                 </div>
                 <div className="min-h-[400px] flex items-center justify-center bg-gray-50 rounded-lg p-4">
-                  <elevenlabs-convai 
-                    agent-id="rtqTnlF6OIFHDLAwCbfSI"
-                    theme="light"
-                    position="bottom-right" 
-                    expanded="true"
-                    button-text="Chat with our AI"
-                    welcome-message="Hello! How can I help you today?"
-                    placeholder-text="Type your message here..."
-                    header-text="ElevenLabs Voice AI Assistant">
-                  </elevenlabs-convai>
+                  <div className="flex flex-col items-center justify-center text-center">
+                    <img src="/public/placeholder.svg" alt="Voice AI" className="mb-4 w-32 h-32" />
+                    <p className="text-lg font-medium">Try our AI assistant</p>
+                    <p className="text-muted-foreground mt-2">Click the chat icon in the bottom right corner to start a conversation</p>
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -71,6 +66,20 @@ const Index = () => {
       <SupportSection />
       <Footer />
       <WebinarPopup />
+      
+      {/* Floating ElevenLabs widget */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <elevenlabs-convai 
+          agent-id="rtqTnlF6OIFHDLAwCbfSI"
+          theme="light"
+          position="bottom-right" 
+          expanded="false"
+          button-text="Chat with our AI"
+          welcome-message="Hello! How can I help you today?"
+          placeholder-text="Type your message here..."
+          header-text="ElevenLabs Voice AI Assistant">
+        </elevenlabs-convai>
+      </div>
     </div>;
 };
 export default Index;
