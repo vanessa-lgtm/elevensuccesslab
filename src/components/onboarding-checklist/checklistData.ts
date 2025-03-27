@@ -14,19 +14,35 @@ export const getSectionTitle = (section: string): string => {
 };
 
 export const getDefaultChecklistItems = (industry: string = 'media'): ChecklistItem[] => {
-  // Get the common use case specific steps
+  // Get the common administrative items
+  const adminItems = getCommonAdminItems();
+  
+  // Get the common general information items
+  const generalItems = getCommonGeneralItems();
+  
+  // Get the use case specific steps
   const useCaseSpecificSteps = getUseCaseSpecificSteps();
   
   // Return the appropriate checklist items based on industry
   if (industry === 'conversational_ai') {
-    return [...getCommonAdminItems(), ...getCommonGeneralItems(), ...getConversationalAIChecklistItems(), ...useCaseSpecificSteps];
+    return [
+      ...adminItems,
+      ...generalItems,
+      ...getConversationalAIChecklistItems(), 
+      ...useCaseSpecificSteps
+    ];
   }
   
   // Default to media industry checklist items
-  return [...getCommonAdminItems(), ...getCommonGeneralItems(), ...getMediaChecklistItems(), ...useCaseSpecificSteps];
+  return [
+    ...adminItems,
+    ...generalItems,
+    ...getMediaChecklistItems(), 
+    ...useCaseSpecificSteps
+  ];
 };
 
-// New function for common administration items
+// Common administration items
 const getCommonAdminItems = (): ChecklistItem[] => {
   return [
     {
@@ -85,7 +101,7 @@ const getCommonAdminItems = (): ChecklistItem[] => {
   ];
 };
 
-// New function for common general information items
+// Common general information items
 const getCommonGeneralItems = (): ChecklistItem[] => {
   return [
     {
@@ -109,6 +125,7 @@ const getCommonGeneralItems = (): ChecklistItem[] => {
   ];
 };
 
+// Use case specific steps
 const getUseCaseSpecificSteps = (): ChecklistItem[] => {
   return [
     {
@@ -168,6 +185,7 @@ const getUseCaseSpecificSteps = (): ChecklistItem[] => {
   ];
 };
 
+// Media industry checklist items
 const getMediaChecklistItems = (): ChecklistItem[] => {
   return [
     {
@@ -176,7 +194,7 @@ const getMediaChecklistItems = (): ChecklistItem[] => {
       description: 'Learn how to optimize API usage for high-volume media production environments.',
       timeEstimate: '25 min',
       completed: false,
-      section: 'general',
+      section: 'media_usecase',
       link: 'https://elevenlabs.io/docs/api-reference/overview'
     },
     {
@@ -185,7 +203,7 @@ const getMediaChecklistItems = (): ChecklistItem[] => {
       description: 'Work with our team to scale high-throughput applications for your media content generation needs.',
       timeEstimate: '30 min',
       completed: false,
-      section: 'general'
+      section: 'media_usecase'
     },
     
     {
@@ -245,6 +263,7 @@ const getMediaChecklistItems = (): ChecklistItem[] => {
   ];
 };
 
+// Conversational AI checklist items
 const getConversationalAIChecklistItems = (): ChecklistItem[] => {
   return [
     {
@@ -253,7 +272,7 @@ const getConversationalAIChecklistItems = (): ChecklistItem[] => {
       description: 'Learn how to optimize API usage for conversational AI applications.',
       timeEstimate: '25 min',
       completed: false,
-      section: 'general',
+      section: 'conversational_usecase',
       link: 'https://elevenlabs.io/docs/api-reference/overview'
     },
     {
@@ -262,7 +281,7 @@ const getConversationalAIChecklistItems = (): ChecklistItem[] => {
       description: 'Work with our team to scale real-time voice applications in call centers and customer service.',
       timeEstimate: '30 min',
       completed: false,
-      section: 'general'
+      section: 'conversational_usecase'
     },
     
     {
