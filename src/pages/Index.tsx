@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -6,6 +7,7 @@ import SupportSection from '@/components/SupportSection';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
 import { Card, CardContent, CardTitle } from '@/components/ui/card';
+
 const Index = () => {
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +30,7 @@ const Index = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
@@ -48,9 +51,10 @@ const Index = () => {
       
       {/* Floating ElevenLabs widget */}
       <div className="fixed bottom-6 right-6 z-50">
-        <elevenlabs-convai agent-id="tqTnlF6OIFHDLAwCbfSI" theme="light" position="bottom-right" expanded="false" button-text="Chat with our AI" welcome-message="Hello! How can I help you today?" placeholder-text="Type your message here..." header-text="ElevenLabs Voice AI Assistant">
+        <elevenlabs-convai agent-id="sVj20Vdiohi2hKyMGZt8" theme="light" position="bottom-right" expanded="false" button-text="Chat with our AI" welcome-message="Hello! How can I help you today?" placeholder-text="Type your message here..." header-text="ElevenLabs Voice AI Assistant">
         </elevenlabs-convai>
       </div>
     </div>;
 };
+
 export default Index;
