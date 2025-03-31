@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Check, Clock, ExternalLink } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+
 interface CourseContentDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
+
 const CourseContentDialog = ({
   open,
   onOpenChange
 }: CourseContentDialogProps) => {
+  const [activeTab, setActiveTab] = useState('module1');
+  
   // Helper function to safely trigger click on tab elements
   const navigateToTab = (tabValue: string) => {
     const tabElement = document.querySelector(`[data-value="${tabValue}"]`) as HTMLElement | null;
     if (tabElement) {
       tabElement.click();
+      setActiveTab(tabValue);
     }
   };
+  
+  // Helper function to navigate to previous module
+  const navigateToPrevious = () => {
+    const modules = ['module1', 'module2', 'module3', 'module4', 'module5'];
+    const currentIndex = modules.indexOf(activeTab);
+    if (currentIndex > 0) {
+      navigateToTab(modules[currentIndex - 1]);
+    }
+  };
+
+  // Helper function to navigate to next module
+  const navigateToNext = () => {
+    const modules = ['module1', 'module2', 'module3', 'module4', 'module5'];
+    const currentIndex = modules.indexOf(activeTab);
+    if (currentIndex < modules.length - 1) {
+      navigateToTab(modules[currentIndex + 1]);
+    }
+  };
+  
   return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
@@ -39,7 +63,7 @@ const CourseContentDialog = ({
           </div>
         </DialogHeader>
         
-        <Tabs defaultValue="module1" className="mt-4">
+        <Tabs defaultValue="module1" value={activeTab} onValueChange={setActiveTab} className="mt-4">
           <TabsList className="grid grid-cols-5 mb-4">
             <TabsTrigger value="module1">Module 1</TabsTrigger>
             <TabsTrigger value="module2">Module 2</TabsTrigger>
@@ -118,7 +142,7 @@ const CourseContentDialog = ({
             
             <div className="flex justify-between">
               <Button variant="outline" disabled>Previous</Button>
-              <Button variant="default" onClick={() => navigateToTab('module2')}>
+              <Button variant="default" onClick={navigateToNext}>
                 Next Module
               </Button>
             </div>
@@ -203,8 +227,8 @@ const CourseContentDialog = ({
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => navigateToTab('module1')}>Previous</Button>
-              <Button variant="default" onClick={() => navigateToTab('module3')}>
+              <Button variant="outline" onClick={navigateToPrevious}>Previous</Button>
+              <Button variant="default" onClick={navigateToNext}>
                 Next Module
               </Button>
             </div>
@@ -273,8 +297,8 @@ const CourseContentDialog = ({
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => navigateToTab('module2')}>Previous</Button>
-              <Button variant="default" onClick={() => navigateToTab('module4')}>
+              <Button variant="outline" onClick={navigateToPrevious}>Previous</Button>
+              <Button variant="default" onClick={navigateToNext}>
                 Next Module
               </Button>
             </div>
@@ -355,8 +379,8 @@ const CourseContentDialog = ({
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => navigateToTab('module3')}>Previous</Button>
-              <Button variant="default" onClick={() => navigateToTab('module5')}>
+              <Button variant="outline" onClick={navigateToPrevious}>Previous</Button>
+              <Button variant="default" onClick={navigateToNext}>
                 Next Module
               </Button>
             </div>
@@ -473,7 +497,7 @@ const CourseContentDialog = ({
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => navigateToTab('module4')}>Previous</Button>
+              <Button variant="outline" onClick={navigateToPrevious}>Previous</Button>
               <Button variant="outline" disabled>Next</Button>
             </div>
           </TabsContent>
@@ -481,4 +505,5 @@ const CourseContentDialog = ({
       </DialogContent>
     </Dialog>;
 };
+
 export default CourseContentDialog;
