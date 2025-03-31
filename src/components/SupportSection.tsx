@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -111,14 +110,18 @@ const SupportOption = ({
   );
 };
 
+interface SupportSectionProps {
+  onGetSupportClick?: () => void;
+}
+
 interface FormValues {
   name: string;
   email: string;
   message?: string;
-  useCase?: string; // Added for the "Tell Us More" field
+  useCase?: string;
 }
 
-const SupportSection = () => {
+const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const [openStrategyDialog, setOpenStrategyDialog] = useState(false);
@@ -137,7 +140,7 @@ const SupportSection = () => {
     defaultValues: {
       name: '',
       email: '',
-      useCase: '' // Initialize the new field
+      useCase: ''
     }
   });
   
@@ -243,6 +246,7 @@ const SupportSection = () => {
       title: "Real Time Product Support",
       description: "Get immediate assistance with our real time product assistance agent - Call El",
       buttonText: "Get Support",
+      onClick: onGetSupportClick,
     },
   ];
 
@@ -383,7 +387,6 @@ const SupportSection = () => {
                 )}
               />
               
-              {/* New "Tell Us More" field */}
               <FormField
                 control={strategyForm.control}
                 name="useCase"
