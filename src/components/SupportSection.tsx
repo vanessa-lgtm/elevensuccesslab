@@ -174,7 +174,7 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
     {
       icon: <Headset size={20} />,
       title: "Real Time Product Support",
-      description: "Get immediate assistance with our real time product assistance agent - Call El",
+      description: "Chat with El, our real time voice agent",
       buttonText: "Get Support",
       onClick: handleSupportClick,
     },
@@ -264,14 +264,14 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
 
       {/* Support Widget Sheet */}
       <Sheet open={openSupportWidget} onOpenChange={setOpenSupportWidget}>
-        <SheetContent className="w-full md:max-w-md overflow-auto">
+        <SheetContent className="w-full md:max-w-sm overflow-auto">
           <SheetHeader className="mb-4">
-            <SheetTitle>Real-Time Support</SheetTitle>
+            <SheetTitle>Chat with El</SheetTitle>
             <SheetDescription>
-              Get immediate assistance with our AI support agent
+              Our real time voice agent
             </SheetDescription>
           </SheetHeader>
-          <div className="flex justify-center items-center h-[80vh]">
+          <div className="flex justify-center items-center h-[70vh]">
             <elevenlabs-convai 
               agent-id="EjyrOV3coaKtG6NF5NmV"
               theme="light"
