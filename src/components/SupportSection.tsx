@@ -264,7 +264,7 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
 
       {/* Support Widget Sheet */}
       <Sheet open={openSupportWidget} onOpenChange={setOpenSupportWidget}>
-        <SheetContent className="w-full md:max-w-sm overflow-auto">
+        <SheetContent className="w-[90%] h-[80%] max-h-[500px] md:max-w-sm overflow-auto rounded-lg mx-auto my-auto inset-0 fixed" side="right">
           <SheetHeader className="mb-4">
             <SheetTitle>Chat with El</SheetTitle>
             <SheetDescription>
