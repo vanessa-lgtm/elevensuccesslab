@@ -3,10 +3,6 @@ import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { useForm } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
 
 interface SupportOptionProps {
@@ -114,35 +110,11 @@ interface SupportSectionProps {
   onGetSupportClick?: () => void;
 }
 
-interface FormValues {
-  name: string;
-  email: string;
-  message?: string;
-  useCase?: string;
-}
-
 const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const [openStrategyDialog, setOpenStrategyDialog] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-  
-  const successForm = useForm<FormValues>({
-    defaultValues: {
-      name: '',
-      email: '',
-      message: ''
-    }
-  });
-
-  const strategyForm = useForm<FormValues>({
-    defaultValues: {
-      name: '',
-      email: '',
-      useCase: ''
-    }
-  });
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -168,55 +140,6 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
       }
     };
   }, []);
-
-  const onSuccessSubmit = async (data: FormValues) => {
-    setIsSubmitting(true);
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          to: 'vanessa@elevenlabs.io',
-          subject: 'New Customer Success Request',
-          name: data.name,
-          email: data.email,
-          message: data.message || 'No message provided',
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send email');
-      }
-
-      toast({
-        title: "Success!",
-        description: "Your information has been sent to our Customer Success team.",
-      });
-      setOpenSuccessDialog(false);
-      successForm.reset();
-    } catch (error) {
-      console.error('Error sending email:', error);
-      toast({
-        title: "Error",
-        description: "There was an issue sending your request. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const onStrategySubmit = (data: FormValues) => {
-    console.log('Sending email to success@elevenlabs.io with data:', data);
-    toast({
-      title: "Success!",
-      description: "Your strategy session request has been sent.",
-    });
-    setOpenStrategyDialog(false);
-    strategyForm.reset();
-  };
 
   const supportOptions = [
     {
@@ -291,62 +214,20 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
           <DialogHeader>
             <DialogTitle>Contact Customer Success</DialogTitle>
             <DialogDescription>
-              Please provide your information to contact our customer success team.
+              Please use the following contact information to reach our customer success team:
             </DialogDescription>
           </DialogHeader>
-          <Form {...successForm}>
-            <form onSubmit={successForm.handleSubmit(onSuccessSubmit)} className="space-y-4">
-              <FormField
-                control={successForm.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={successForm.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address Associated with your ElevenLabs Account</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your email" type="email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={successForm.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Your Message</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="How can our Customer Success team help you?" 
-                        rows={4}
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <DialogFooter>
-                <Button type="submit" className="w-full" disabled={isSubmitting}>
-                  <Send className="mr-2 h-4 w-4" />
-                  {isSubmitting ? 'Sending...' : 'Send Request'}
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
+          <div className="py-6 text-center">
+            <p className="mb-4">Email <strong>success@elevenlabs.io</strong> to contact Customer Success and book a complementary strategy session.</p>
+          </div>
+          <DialogFooter>
+            <Button 
+              onClick={() => setOpenSuccessDialog(false)} 
+              className="w-full"
+            >
+              Close
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -355,64 +236,20 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
           <DialogHeader>
             <DialogTitle>Book a Strategy Session</DialogTitle>
             <DialogDescription>
-              Please provide your information to schedule a complementary strategy session.
+              Please use the following contact information to book your complementary strategy session:
             </DialogDescription>
           </DialogHeader>
-          <Form {...strategyForm}>
-            <form onSubmit={strategyForm.handleSubmit(onStrategySubmit)} className="space-y-4">
-              <FormField
-                control={strategyForm.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Name</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your name" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={strategyForm.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email Address Associated with your ElevenLabs Account</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Enter your email" type="email" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={strategyForm.control}
-                name="useCase"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Tell Us More</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Briefly describe your use case or what you'd like to discuss in the strategy session" 
-                        rows={4}
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <DialogFooter>
-                <Button type="submit" className="w-full">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Book Session
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
+          <div className="py-6 text-center">
+            <p className="mb-4">Email <strong>success@elevenlabs.io</strong> to contact Customer Success and book a complementary strategy session.</p>
+          </div>
+          <DialogFooter>
+            <Button 
+              onClick={() => setOpenStrategyDialog(false)} 
+              className="w-full"
+            >
+              Close
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </section>
