@@ -82,7 +82,7 @@ const Index = () => {
           onClick={() => setShowSupportWidget(false)}
         >
           <div 
-            className="p-6 bg-white rounded-xl shadow-xl relative" 
+            className="p-6 bg-white rounded-xl shadow-xl relative w-[400px] h-[500px]" 
             onClick={(e) => e.stopPropagation()}
           >
             <button 
@@ -92,7 +92,9 @@ const Index = () => {
               ✕
             </button>
             <h3 className="text-xl font-semibold mb-4">Real-Time Product Support</h3>
-            <div className="w-[350px] h-[400px]">
+            
+            {/* ElevenLabs ConVAI widget directly embedded in the popup */}
+            <div className="w-full h-[400px] overflow-hidden">
               <elevenlabs-convai 
                 agent-id="EjyrOV3coaKtG6NF5NmV" 
                 theme="light" 
@@ -101,7 +103,7 @@ const Index = () => {
                 welcome-message="Hello! I'm here to provide real-time product support. How can I help you today?"
                 placeholder-text="Type your message here..." 
                 header-text="Product Support Assistant"
-              ></elevenlabs-convai>
+              />
             </div>
           </div>
         </div>
