@@ -13,6 +13,14 @@ interface CourseContentDialogProps {
 }
 
 const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) => {
+  // Helper function to safely trigger click on tab elements
+  const navigateToTab = (tabValue: string) => {
+    const tabElement = document.querySelector(`[data-value="${tabValue}"]`) as HTMLElement | null;
+    if (tabElement) {
+      tabElement.click();
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
@@ -120,7 +128,7 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             
             <div className="flex justify-between">
               <Button variant="outline" disabled>Previous</Button>
-              <Button variant="default" onClick={() => document.querySelector('[data-value="module2"]')?.click()}>
+              <Button variant="default" onClick={() => navigateToTab('module2')}>
                 Next Module
               </Button>
             </div>
@@ -213,8 +221,8 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => document.querySelector('[data-value="module1"]')?.click()}>Previous</Button>
-              <Button variant="default" onClick={() => document.querySelector('[data-value="module3"]')?.click()}>
+              <Button variant="outline" onClick={() => navigateToTab('module1')}>Previous</Button>
+              <Button variant="default" onClick={() => navigateToTab('module3')}>
                 Next Module
               </Button>
             </div>
@@ -291,8 +299,8 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => document.querySelector('[data-value="module2"]')?.click()}>Previous</Button>
-              <Button variant="default" onClick={() => document.querySelector('[data-value="module4"]')?.click()}>
+              <Button variant="outline" onClick={() => navigateToTab('module2')}>Previous</Button>
+              <Button variant="default" onClick={() => navigateToTab('module4')}>
                 Next Module
               </Button>
             </div>
@@ -381,8 +389,8 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => document.querySelector('[data-value="module3"]')?.click()}>Previous</Button>
-              <Button variant="default" onClick={() => document.querySelector('[data-value="module5"]')?.click()}>
+              <Button variant="outline" onClick={() => navigateToTab('module3')}>Previous</Button>
+              <Button variant="default" onClick={() => navigateToTab('module5')}>
                 Next Module
               </Button>
             </div>
@@ -507,7 +515,7 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             </Card>
             
             <div className="flex justify-between">
-              <Button variant="outline" onClick={() => document.querySelector('[data-value="module4"]')?.click()}>Previous</Button>
+              <Button variant="outline" onClick={() => navigateToTab('module4')}>Previous</Button>
               <Button variant="outline" disabled>Next</Button>
             </div>
           </TabsContent>
