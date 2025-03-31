@@ -17,34 +17,24 @@ const CourseContentDialog = ({
 }: CourseContentDialogProps) => {
   const [activeTab, setActiveTab] = useState('module1');
   
-  // Helper function to safely trigger click on tab elements
-  const navigateToTab = (tabValue: string) => {
-    const tabElement = document.querySelector(`[data-value="${tabValue}"]`) as HTMLElement | null;
-    if (tabElement) {
-      tabElement.click();
-      setActiveTab(tabValue);
-    }
-  };
+  const modules = ['module1', 'module2', 'module3', 'module4', 'module5'];
   
-  // Helper function to navigate to previous module
   const navigateToPrevious = () => {
-    const modules = ['module1', 'module2', 'module3', 'module4', 'module5'];
     const currentIndex = modules.indexOf(activeTab);
     if (currentIndex > 0) {
-      navigateToTab(modules[currentIndex - 1]);
+      setActiveTab(modules[currentIndex - 1]);
     }
   };
 
-  // Helper function to navigate to next module
   const navigateToNext = () => {
-    const modules = ['module1', 'module2', 'module3', 'module4', 'module5'];
     const currentIndex = modules.indexOf(activeTab);
     if (currentIndex < modules.length - 1) {
-      navigateToTab(modules[currentIndex + 1]);
+      setActiveTab(modules[currentIndex + 1]);
     }
   };
   
-  return <Dialog open={open} onOpenChange={onOpenChange}>
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
@@ -63,7 +53,7 @@ const CourseContentDialog = ({
           </div>
         </DialogHeader>
         
-        <Tabs defaultValue="module1" value={activeTab} onValueChange={setActiveTab} className="mt-4">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-4">
           <TabsList className="grid grid-cols-5 mb-4">
             <TabsTrigger value="module1">Module 1</TabsTrigger>
             <TabsTrigger value="module2">Module 2</TabsTrigger>
@@ -76,7 +66,6 @@ const CourseContentDialog = ({
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 1: Introduction to AI and Voice AI</h3>
-                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -152,7 +141,6 @@ const CourseContentDialog = ({
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 2: How Voice AI Works</h3>
-                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -239,7 +227,6 @@ const CourseContentDialog = ({
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 3: Voice AI Use Cases by Persona</h3>
                 
-                
                 <div className="space-y-6 mb-6">
                   <div>
                     <h4 className="font-semibold mb-2">Voice AI Impact by Role</h4>
@@ -308,7 +295,6 @@ const CourseContentDialog = ({
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 4: Data, Privacy & Ethical Considerations</h3>
-                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -390,7 +376,6 @@ const CourseContentDialog = ({
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 5: Voice AI in Practice – Platform Overview</h3>
-                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -503,7 +488,8 @@ const CourseContentDialog = ({
           </TabsContent>
         </Tabs>
       </DialogContent>
-    </Dialog>;
+    </Dialog>
+  );
 };
 
 export default CourseContentDialog;
