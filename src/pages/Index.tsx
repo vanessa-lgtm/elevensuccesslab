@@ -33,15 +33,6 @@ const Index = () => {
     };
   }, []);
 
-  const handleSupportClick = () => {
-    // Find the elevenlabs-convai widget and programmatically expand it
-    const elevenlabsWidget = document.querySelector('elevenlabs-convai[agent-id="sVj20Vdiohi2hKyMGZt8"]');
-    if (elevenlabsWidget) {
-      // Set expanded attribute to true
-      elevenlabsWidget.setAttribute('expanded', 'true');
-    }
-  };
-
   return <div className="min-h-screen bg-background">
       <Navbar />
       <Hero />
@@ -56,7 +47,7 @@ const Index = () => {
       </section>
       
       <ResourceSection />
-      <SupportSection onGetSupportClick={handleSupportClick} />
+      <SupportSection />
       <Footer />
       <WebinarPopup />
       

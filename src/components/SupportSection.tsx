@@ -1,8 +1,10 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { useToast } from '@/components/ui/use-toast';
 
 interface SupportOptionProps {
@@ -114,6 +116,7 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const [openStrategyDialog, setOpenStrategyDialog] = useState(false);
+  const [openSupportWidget, setOpenSupportWidget] = useState(false);
   const { toast } = useToast();
   
   useEffect(() => {
@@ -140,6 +143,10 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
       }
     };
   }, []);
+
+  const handleSupportClick = () => {
+    setOpenSupportWidget(true);
+  };
 
   const supportOptions = [
     {
@@ -169,7 +176,7 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
       title: "Real Time Product Support",
       description: "Get immediate assistance with our real time product assistance agent - Call El",
       buttonText: "Get Support",
-      onClick: onGetSupportClick,
+      onClick: handleSupportClick,
     },
   ];
 
@@ -209,6 +216,7 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
         </div>
       </div>
 
+      {/* Contact Success Dialog */}
       <Dialog open={openSuccessDialog} onOpenChange={setOpenSuccessDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -231,6 +239,7 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
         </DialogContent>
       </Dialog>
 
+      {/* Strategy Session Dialog */}
       <Dialog open={openStrategyDialog} onOpenChange={setOpenStrategyDialog}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -252,6 +261,30 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Support Widget Sheet */}
+      <Sheet open={openSupportWidget} onOpenChange={setOpenSupportWidget}>
+        <SheetContent className="w-full md:max-w-md overflow-auto">
+          <SheetHeader className="mb-4">
+            <SheetTitle>Real-Time Support</SheetTitle>
+            <SheetDescription>
+              Get immediate assistance with our AI support agent
+            </SheetDescription>
+          </SheetHeader>
+          <div className="flex justify-center items-center h-[80vh]">
+            <elevenlabs-convai 
+              agent-id="EjyrOV3coaKtG6NF5NmV"
+              theme="light"
+              position="center"
+              expanded="true"
+              button-text="Chat with our AI"
+              welcome-message="Hello! How can I help you today?"
+              placeholder-text="Type your message here..."
+              header-text="ElevenLabs Voice AI Assistant"
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
     </section>
   );
 };
