@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Check, Clock, ExternalLink } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -6,13 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-
 interface CourseContentDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
-
-const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) => {
+const CourseContentDialog = ({
+  open,
+  onOpenChange
+}: CourseContentDialogProps) => {
   // Helper function to safely trigger click on tab elements
   const navigateToTab = (tabValue: string) => {
     const tabElement = document.querySelector(`[data-value="${tabValue}"]`) as HTMLElement | null;
@@ -20,9 +20,7 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
       tabElement.click();
     }
   };
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+  return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl">
@@ -54,15 +52,7 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 1: Introduction to AI and Voice AI</h3>
-                <div className="aspect-video bg-slate-100 rounded-md mb-6 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-muted-foreground mb-3">Video content would appear here</p>
-                    <Button variant="outline" size="sm" className="gap-1">
-                      <ExternalLink className="h-3 w-3" />
-                      Watch on ElevenLabs Academy
-                    </Button>
-                  </div>
-                </div>
+                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -138,15 +128,7 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 2: How Voice AI Works</h3>
-                <div className="aspect-video bg-slate-100 rounded-md mb-6 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-muted-foreground mb-3">Video content would appear here</p>
-                    <Button variant="outline" size="sm" className="gap-1">
-                      <ExternalLink className="h-3 w-3" />
-                      Watch on ElevenLabs Academy
-                    </Button>
-                  </div>
-                </div>
+                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -232,15 +214,7 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 3: Voice AI Use Cases by Persona</h3>
-                <div className="aspect-video bg-slate-100 rounded-md mb-6 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-muted-foreground mb-3">Video content would appear here</p>
-                    <Button variant="outline" size="sm" className="gap-1">
-                      <ExternalLink className="h-3 w-3" />
-                      Watch on ElevenLabs Academy
-                    </Button>
-                  </div>
-                </div>
+                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -310,15 +284,7 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 4: Data, Privacy & Ethical Considerations</h3>
-                <div className="aspect-video bg-slate-100 rounded-md mb-6 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-muted-foreground mb-3">Video content would appear here</p>
-                    <Button variant="outline" size="sm" className="gap-1">
-                      <ExternalLink className="h-3 w-3" />
-                      Watch on ElevenLabs Academy
-                    </Button>
-                  </div>
-                </div>
+                
                 
                 <div className="space-y-6 mb-6">
                   <div>
@@ -521,8 +487,6 @@ const CourseContentDialog = ({ open, onOpenChange }: CourseContentDialogProps) =
           </TabsContent>
         </Tabs>
       </DialogContent>
-    </Dialog>
-  );
+    </Dialog>;
 };
-
 export default CourseContentDialog;
