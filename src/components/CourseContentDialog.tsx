@@ -366,15 +366,7 @@ const CourseContentDialog = ({
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-xl font-semibold mb-4">Module 5: Voice AI in Practice – Platform Overview</h3>
-                <div className="aspect-video bg-slate-100 rounded-md mb-6 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-muted-foreground mb-3">Video content would appear here</p>
-                    <Button variant="outline" size="sm" className="gap-1">
-                      <ExternalLink className="h-3 w-3" />
-                      Watch on ElevenLabs Academy
-                    </Button>
-                  </div>
-                </div>
+                
                 
                 <div className="space-y-6 mb-6">
                   <div>
