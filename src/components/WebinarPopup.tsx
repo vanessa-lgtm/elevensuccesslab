@@ -27,9 +27,7 @@ const WebinarPopup = () => {
           
           <Popover>
             <PopoverTrigger asChild>
-              <Button className="rounded-full h-14 w-14 shadow-lg hover:shadow-xl" onClick={() => setIsOpen(true)}>
-                <Megaphone className="h-6 w-6" />
-              </Button>
+              
             </PopoverTrigger>
             <PopoverContent className="w-80 p-0" side="top" align="end">
               <div className="p-4">
