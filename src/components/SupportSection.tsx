@@ -1,11 +1,10 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { MessageSquare, Mail, Calendar, Headset, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { useToast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface SupportOptionProps {
   icon: React.ReactNode;
@@ -116,8 +115,8 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [openSuccessDialog, setOpenSuccessDialog] = useState(false);
   const [openStrategyDialog, setOpenStrategyDialog] = useState(false);
-  const [openSupportWidget, setOpenSupportWidget] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -145,7 +144,7 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
   }, []);
 
   const handleSupportClick = () => {
-    setOpenSupportWidget(true);
+    navigate('/conversation');
   };
 
   const supportOptions = [
@@ -261,33 +260,6 @@ const SupportSection = ({ onGetSupportClick }: SupportSectionProps) => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-
-      {/* Support Widget Sheet */}
-      <Sheet open={openSupportWidget} onOpenChange={setOpenSupportWidget}>
-        <SheetContent 
-          className="w-[90%] h-[80%] max-h-[500px] md:max-w-sm overflow-auto rounded-lg mx-auto my-auto inset-0 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" 
-          side="bottom"
-        >
-          <SheetHeader className="mb-4">
-            <SheetTitle>Chat with El</SheetTitle>
-            <SheetDescription>
-              Our real time voice agent
-            </SheetDescription>
-          </SheetHeader>
-          <div className="flex justify-center items-center h-[70vh]">
-            <elevenlabs-convai 
-              agent-id="EjyrOV3coaKtG6NF5NmV"
-              theme="light"
-              position="center"
-              expanded="true"
-              button-text="Chat with our AI"
-              welcome-message="Hello! How can I help you today?"
-              placeholder-text="Type your message here..."
-              header-text="ElevenLabs Voice AI Assistant"
-            />
-          </div>
-        </SheetContent>
-      </Sheet>
     </section>
   );
 };
