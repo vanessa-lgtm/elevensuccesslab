@@ -52,7 +52,7 @@ const Index = () => {
       <WebinarPopup />
       
       {/* Floating ElevenLabs widget */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-6 right-6 z-40">
         <elevenlabs-convai 
           agent-id="sVj20Vdiohi2hKyMGZt8" 
           theme="light" 
