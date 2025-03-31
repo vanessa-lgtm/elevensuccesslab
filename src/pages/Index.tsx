@@ -33,14 +33,14 @@ const Index = () => {
     };
   }, []);
 
-  // Ensure the support widget is removed properly when closed
-  useEffect(() => {
-    if (showSupportWidget) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
+  const handleSupportClick = () => {
+    // Find the elevenlabs-convai widget and programmatically expand it
+    const elevenlabsWidget = document.querySelector('elevenlabs-convai[agent-id="sVj20Vdiohi2hKyMGZt8"]');
+    if (elevenlabsWidget) {
+      // Set expanded attribute to true
+      elevenlabsWidget.setAttribute('expanded', 'true');
     }
-  }, [showSupportWidget]);
+  };
 
   return <div className="min-h-screen bg-background">
       <Navbar />
@@ -56,7 +56,7 @@ const Index = () => {
       </section>
       
       <ResourceSection />
-      <SupportSection onGetSupportClick={() => setShowSupportWidget(true)} />
+      <SupportSection onGetSupportClick={handleSupportClick} />
       <Footer />
       <WebinarPopup />
       
@@ -74,40 +74,6 @@ const Index = () => {
         >
         </elevenlabs-convai>
       </div>
-
-      {/* Support specific widget that appears when Get Support is clicked */}
-      {showSupportWidget && (
-        <div 
-          className="fixed inset-0 bg-black/40 flex items-center justify-center z-[100]" 
-          onClick={() => setShowSupportWidget(false)}
-        >
-          <div 
-            className="p-6 bg-white rounded-xl shadow-xl relative w-[400px] h-[500px]" 
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button 
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800" 
-              onClick={() => setShowSupportWidget(false)}
-            >
-              ✕
-            </button>
-            <h3 className="text-xl font-semibold mb-4">Real-Time Product Support</h3>
-            
-            {/* ElevenLabs ConVAI widget directly embedded in the popup */}
-            <div className="w-full h-[400px] overflow-hidden">
-              <elevenlabs-convai 
-                agent-id="EjyrOV3coaKtG6NF5NmV" 
-                theme="light" 
-                position="bottom-right" 
-                expanded="true" 
-                welcome-message="Hello! I'm here to provide real-time product support. How can I help you today?"
-                placeholder-text="Type your message here..." 
-                header-text="Product Support Assistant"
-              />
-            </div>
-          </div>
-        </div>
-      )}
     </div>;
 };
 
