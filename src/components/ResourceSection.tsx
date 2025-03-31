@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import VideoEmbed from './VideoEmbed';
 import TestimonialSection from './TestimonialSection';
+import CourseContentDialog from './CourseContentDialog';
 
 interface ResourceCardProps {
   icon: React.ReactNode;
@@ -73,6 +74,8 @@ const VoiceAIBasicsDialog = ({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) => {
+  const [courseContentOpen, setCourseContentOpen] = useState(false);
+  
   return <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
@@ -162,7 +165,7 @@ const VoiceAIBasicsDialog = ({
                     <Clock className="h-3 w-3 mr-1" />
                     30 min total
                   </div>
-                  <Button size="sm" variant="default" className="gap-1">
+                  <Button size="sm" variant="default" className="gap-1" onClick={() => setCourseContentOpen(true)}>
                     Access Course
                     <ExternalLink className="h-3 w-3" />
                   </Button>
@@ -236,6 +239,8 @@ const VoiceAIBasicsDialog = ({
             </Card>
           </TabsContent>
         </Tabs>
+        
+        <CourseContentDialog open={courseContentOpen} onOpenChange={setCourseContentOpen} />
       </DialogContent>
     </Dialog>;
 };
