@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight, Calendar, Newspaper } from 'lucide-react';
 import VideoEmbed from '@/components/VideoEmbed';
 
 const ProductUpdates = () => {
@@ -28,7 +28,7 @@ const ProductUpdates = () => {
                     <CardTitle className="text-2xl">Scribe: Advanced Speech-to-Text Technology</CardTitle>
                     <div className="flex items-center text-sm text-muted-foreground gap-2">
                       <Calendar className="h-3.5 w-3.5" />
-                      <span>March 2024</span>
+                      <span>March 2025</span>
                     </div>
                   </div>
                 </CardHeader>
@@ -94,6 +94,33 @@ const ProductUpdates = () => {
                     </a>
                   </Button>
                 </CardFooter>
+              </Card>
+            </div>
+            
+            {/* All Updates Widget */}
+            <div className="mt-12 text-center">
+              <Card className="bg-primary/5 border-primary/20">
+                <CardContent className="py-6">
+                  <div className="flex flex-col items-center gap-4">
+                    <Newspaper className="h-10 w-10 text-primary" />
+                    <div>
+                      <h3 className="text-xl font-medium mb-2">Want to see more?</h3>
+                      <p className="text-muted-foreground mb-4">
+                        Explore all product and company updates from the ElevenLabs team
+                      </p>
+                    </div>
+                    <Button asChild>
+                      <a 
+                        href="https://elevenlabs.io/blog" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="gap-2"
+                      >
+                        See All Updates <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
+                </CardContent>
               </Card>
             </div>
           </div>
