@@ -40,7 +40,7 @@ const ProductUpdates = () => {
                   </CardDescription>
                   <div className="mt-4">
                     <img 
-                      src="/lovable-uploads/f07ee88e-8621-44cb-8725-5f2b596912df.png" 
+                      src="/lovable-uploads/199e69b1-12be-4de7-b1b2-ebf2fc007809.png" 
                       alt="Scribe Speech-to-Text Feature" 
                       className="rounded-lg w-full object-cover" 
                     />
