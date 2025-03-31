@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Lightbulb } from 'lucide-react';
+import { Menu, X, Lightbulb, Megaphone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -61,9 +61,12 @@ const Navbar = () => {
           >
             Support
           </Link>
-          <a href="https://elevenlabs.io/blog?category=product" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
+          <Link 
+            to="/product-updates" 
+            className="text-foreground/80 hover:text-primary transition-colors"
+          >
             Product Updates
-          </a>
+          </Link>
           <Link to="/use-case-inspiration" className="text-foreground/80 hover:text-primary transition-colors flex items-center gap-1">
             <Lightbulb className="h-4 w-4" />
             Use Case Inspiration
@@ -113,15 +116,13 @@ const Navbar = () => {
           >
             Support
           </Link>
-          <a 
-            href="https://elevenlabs.io/blog?category=product" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <Link 
+            to="/product-updates" 
             className="text-foreground/80 text-lg font-medium"
             onClick={() => setMobileMenuOpen(false)}
           >
             Product Updates
-          </a>
+          </Link>
           <Link 
             to="/use-case-inspiration" 
             className="text-foreground/80 text-lg font-medium flex items-center gap-1"
