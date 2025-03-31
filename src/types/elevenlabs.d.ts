@@ -4,7 +4,7 @@ declare namespace JSX {
     'elevenlabs-convai': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & {
       'agent-id': string;
       'theme'?: 'light' | 'dark';
-      'position'?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left';
+      'position'?: 'bottom-right' | 'bottom-left' | 'top-right' | 'top-left' | 'center';
       'button-text'?: string;
       'welcome-message'?: string;
       'placeholder-text'?: string;
