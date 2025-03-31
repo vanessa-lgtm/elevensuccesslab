@@ -8,56 +8,48 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
 import { useToast } from '@/components/ui/use-toast';
-
 interface FormValues {
   name: string;
   email: string;
 }
-
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const [openNewsletterDialog, setOpenNewsletterDialog] = useState(false);
-  const { toast } = useToast();
-  
+  const {
+    toast
+  } = useToast();
   const newsletterForm = useForm<FormValues>({
     defaultValues: {
       name: '',
       email: ''
     }
   });
-  
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        threshold: 0.1,
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('opacity-100');
+        entry.target.classList.remove('opacity-0', 'translate-y-10');
+        observer.unobserve(entry.target);
       }
-    );
-    
+    }, {
+      threshold: 0.1
+    });
     if (heroRef.current) {
       observer.observe(heroRef.current);
     }
-    
     return () => {
       if (heroRef.current) {
         observer.unobserve(heroRef.current);
       }
     };
   }, []);
-
   const onNewsletterSubmit = async (data: FormValues) => {
     try {
       // Send data to our contact API endpoint with newsletter tag
       const response = await fetch('/api/contacts', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           ...data,
@@ -65,16 +57,14 @@ const Hero = () => {
           source: 'newsletter_dialog',
           optIn: true,
           tags: ['newsletter_subscriber']
-        }),
+        })
       });
-
       if (!response.ok) {
         throw new Error('Failed to submit newsletter signup');
       }
-
       toast({
         title: "Success!",
-        description: "Thank you for subscribing to our newsletter.",
+        description: "Thank you for subscribing to our newsletter."
       });
       setOpenNewsletterDialog(false);
       newsletterForm.reset();
@@ -83,23 +73,20 @@ const Hero = () => {
       toast({
         title: "Error",
         description: "There was a problem with your subscription. Please try again.",
-        variant: "destructive",
+        variant: "destructive"
       });
     }
   };
-
   const scrollToResources = (e: React.MouseEvent) => {
     e.preventDefault();
     const resourcesSection = document.getElementById('resources');
     if (resourcesSection) {
-      resourcesSection.scrollIntoView({ behavior: 'smooth' });
+      resourcesSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section 
-      className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden bg-background"
-    >
+  return <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden bg-background">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-[10%] w-64 h-64 rounded-full bg-primary/5 blur-3xl"></div>
@@ -107,10 +94,7 @@ const Hero = () => {
       </div>
       
       <div className="container mx-auto px-4">
-        <div 
-          ref={heroRef}
-          className="max-w-4xl mx-auto text-center opacity-0 translate-y-10 transition-all duration-1000 ease-out"
-        >
+        <div ref={heroRef} className="max-w-4xl mx-auto text-center opacity-0 translate-y-10 transition-all duration-1000 ease-out">
           <div className="inline-block mb-6 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-medium">
             Welcome to Your ElevenLabs Journey
           </div>
@@ -136,10 +120,7 @@ const Hero = () => {
           
           
           <div className="mt-6">
-            <Button variant="outline" size="lg" className="group" onClick={() => setOpenNewsletterDialog(true)}>
-              <Bell className="mr-2 h-4 w-4" />
-              Sign up for Product Updates and Company News
-            </Button>
+            
           </div>
         </div>
       </div>
@@ -155,32 +136,24 @@ const Hero = () => {
           </DialogHeader>
           <Form {...newsletterForm}>
             <form onSubmit={newsletterForm.handleSubmit(onNewsletterSubmit)} className="space-y-4">
-              <FormField
-                control={newsletterForm.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
+              <FormField control={newsletterForm.control} name="name" render={({
+              field
+            }) => <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your name" {...field} />
                     </FormControl>
                     <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={newsletterForm.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
+                  </FormItem>} />
+              <FormField control={newsletterForm.control} name="email" render={({
+              field
+            }) => <FormItem>
                     <FormLabel>Email Address Associated with your ElevenLabs Account</FormLabel>
                     <FormControl>
                       <Input placeholder="Enter your email" type="email" {...field} />
                     </FormControl>
                     <FormMessage />
-                  </FormItem>
-                )}
-              />
+                  </FormItem>} />
               <DialogFooter>
                 <Button type="submit" className="w-full">
                   <Bell className="mr-2 h-4 w-4" />
@@ -193,12 +166,10 @@ const Hero = () => {
       </Dialog>
       
       {/* Abstract shape at the bottom */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-secondary" style={{ 
-        clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)',
-        opacity: 0.5,
-      }}></div>
-    </section>
-  );
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-secondary" style={{
+      clipPath: 'polygon(0 100%, 100% 100%, 100% 0, 0 100%)',
+      opacity: 0.5
+    }}></div>
+    </section>;
 };
-
 export default Hero;
