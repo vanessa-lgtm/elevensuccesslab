@@ -8,6 +8,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import VideoEmbed from './VideoEmbed';
 import TestimonialSection from './TestimonialSection';
+
 interface ResourceCardProps {
   icon: React.ReactNode;
   title: string;
@@ -16,6 +17,7 @@ interface ResourceCardProps {
   onClick?: () => void;
   comingSoon?: boolean;
 }
+
 const ResourceCard = ({
   icon,
   title,
@@ -63,6 +65,7 @@ const ResourceCard = ({
         </Button>}
     </div>;
 };
+
 const VoiceAIBasicsDialog = ({
   open,
   onOpenChange
@@ -120,6 +123,53 @@ const VoiceAIBasicsDialog = ({
           </TabsContent>
           
           <TabsContent value="courses" className="space-y-4">
+            <Card>
+              <CardContent className="pt-6">
+                <h3 className="text-lg font-semibold mb-2">AI Fundamentals for Voice AI: A 30-Minute Onboarding Primer</h3>
+                <Badge variant="outline" className="bg-primary/10 text-primary">New</Badge>
+                <Badge variant="outline" className="mb-3">ElevenLabs Academy</Badge>
+                <p className="text-muted-foreground mb-3">A fast-track primer on Voice AI fundamentals designed for developers, AI strategists, and business leaders.</p>
+                
+                <div className="space-y-4 mb-4">
+                  <div className="border-l-2 border-l-primary/30 pl-4 py-1">
+                    <h4 className="font-medium text-sm">Module 1: Introduction to AI and Voice AI (5 min)</h4>
+                    <p className="text-xs text-muted-foreground">AI basics, key subfields, and Voice AI introduction</p>
+                  </div>
+                  
+                  <div className="border-l-2 border-l-primary/30 pl-4 py-1">
+                    <h4 className="font-medium text-sm">Module 2: How Voice AI Works (7 min)</h4>
+                    <p className="text-xs text-muted-foreground">ASR, NLP, TTS components and complete workflow explanation</p>
+                  </div>
+                  
+                  <div className="border-l-2 border-l-primary/30 pl-4 py-1">
+                    <h4 className="font-medium text-sm">Module 3: Voice AI Use Cases by Persona (5 min)</h4>
+                    <p className="text-xs text-muted-foreground">Role-specific applications for developers, strategists, and marketing/sales</p>
+                  </div>
+                  
+                  <div className="border-l-2 border-l-primary/30 pl-4 py-1">
+                    <h4 className="font-medium text-sm">Module 4: Data, Privacy & Ethical Considerations (5 min)</h4>
+                    <p className="text-xs text-muted-foreground">Voice data handling, compliance, and ethical design principles</p>
+                  </div>
+                  
+                  <div className="border-l-2 border-l-primary/30 pl-4 py-1">
+                    <h4 className="font-medium text-sm">Module 5: Voice AI in Practice – Platform Overview (5 min)</h4>
+                    <p className="text-xs text-muted-foreground">Platform onboarding prep, terminology, and role-specific guidance</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    30 min total
+                  </div>
+                  <Button size="sm" variant="default" className="gap-1">
+                    Access Course
+                    <ExternalLink className="h-3 w-3" />
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+            
             <Card>
               <CardContent className="pt-6">
                 <h3 className="text-lg font-semibold mb-2">AI for Everyone (Coursera by Andrew Ng)</h3>
@@ -189,6 +239,7 @@ const VoiceAIBasicsDialog = ({
       </DialogContent>
     </Dialog>;
 };
+
 const WebinarsDialog = ({
   open,
   onOpenChange
@@ -359,6 +410,7 @@ const WebinarsDialog = ({
       </DialogContent>
     </Dialog>;
 };
+
 const SuccessStoriesDialog = ({
   open,
   onOpenChange
@@ -422,6 +474,7 @@ const SuccessStoriesDialog = ({
       </DialogContent>
     </Dialog>;
 };
+
 const ResourceSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [voiceAIBasicsOpen, setVoiceAIBasicsOpen] = useState(false);
@@ -505,4 +558,5 @@ const ResourceSection = () => {
       <div className="absolute bottom-20 right-0 w-80 h-80 rounded-full bg-blue-100/30 blur-3xl -z-10"></div>
     </section>;
 };
+
 export default ResourceSection;
