@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -232,7 +233,6 @@ interface SurveyFormValues {
   other_industry?: string;
   primary_use_case: string;
   primary_goals: string[];
-  subscribe: boolean;
 }
 
 const OnboardingSurvey = () => {
@@ -252,7 +252,6 @@ const OnboardingSurvey = () => {
       other_industry: '',
       primary_use_case: '',
       primary_goals: [],
-      subscribe: false,
     }
   });
 
@@ -540,29 +539,6 @@ const OnboardingSurvey = () => {
                 </Button>
               </div>
             )}
-            
-            <FormField
-              control={form.control}
-              name="subscribe"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 mt-6">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      Subscribe to product updates and company news
-                    </FormLabel>
-                    <FormDescription>
-                      Stay up to date with the latest features and improvements
-                    </FormDescription>
-                  </div>
-                </FormItem>
-              )}
-            />
           </div>
         );
       
