@@ -3,7 +3,6 @@ import React from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ElevenLabsConversation } from '@/components/ElevenLabsConversation';
 
 const Conversation: React.FC = () => {
   return (
@@ -26,8 +25,15 @@ const Conversation: React.FC = () => {
                 Speak naturally with our AI assistant or type your questions
               </CardDescription>
             </CardHeader>
-            <CardContent className="pt-6">
-              <ElevenLabsConversation />
+            <CardContent className="pt-6 flex justify-center">
+              <elevenlabs-convai 
+                agent-id="7UDgnecvOFub56zYK2Pu"
+                theme="light"
+                position="center"
+                expanded="true"
+                header-text="Voice Assistant"
+                placeholder-text="Type or speak your question...">
+              </elevenlabs-convai>
             </CardContent>
           </Card>
           
@@ -38,11 +44,11 @@ const Conversation: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 list-disc list-inside text-sm">
-                  <li>Click "Start Chat" and allow microphone access</li>
+                  <li>Click the microphone to start speaking</li>
                   <li>Speak naturally with the assistant</li>
                   <li>The assistant will respond with natural voice</li>
-                  <li>Use the mute button if needed</li>
-                  <li>Click "Stop Chat" when finished</li>
+                  <li>You can also type your questions</li>
+                  <li>Click the X to end the conversation</li>
                 </ul>
               </CardContent>
             </Card>
