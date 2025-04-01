@@ -78,7 +78,7 @@ const ProductUpdates = () => {
                   </CardDescription>
                   <div className="mt-4">
                     <VideoEmbed 
-                      videoId="hDhgcQBKP8" 
+                      videoId="Kj2dgXITrPw" 
                       title="Actor Mode Demonstration" 
                     />
                   </div>
