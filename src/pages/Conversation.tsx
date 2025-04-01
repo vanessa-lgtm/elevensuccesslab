@@ -44,10 +44,10 @@ const Conversation: React.FC = () => {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 list-disc list-inside text-sm">
-                  <li>Click the microphone to start speaking</li>
+                  <li>Click 'Start a call' to start conversation</li>
                   <li>Speak naturally with the assistant</li>
                   <li>The assistant will respond with natural voice</li>
-                  <li>Click the X to end the conversation</li>
+                  <li>Click 'End call' to end conversation</li>
                 </ul>
               </CardContent>
             </Card>
