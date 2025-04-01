@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -54,11 +53,13 @@ import {
   Stethoscope,
   Film,
   MessageCircle,
-  ExternalLink
+  ExternalLink,
+  Check,
+  Clock
 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 const industries = [
   { value: 'localization', label: 'Localization and Translation Services' },
@@ -610,171 +611,382 @@ const OnboardingSurvey = () => {
   const VoiceAIBasicsDialog = () => {
     return (
       <Dialog open={voiceAIBasicsOpen} onOpenChange={setVoiceAIBasicsOpen}>
-        <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="sm:max-w-4xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Brain className="h-5 w-5 text-primary" />
-              Voice AI Basics
+            <DialogTitle className="flex items-center gap-2 text-2xl">
+              AI Fundamentals for Voice AI: A 30-Minute Onboarding Primer
             </DialogTitle>
             <DialogDescription>
-              Explore our curated resources to help you learn the fundamentals of voice AI technology
+              A fast-track primer on Voice AI fundamentals designed for developers, AI strategists, and business leaders.
             </DialogDescription>
+            <div className="flex items-center gap-2 mt-2">
+              <Badge variant="outline" className="bg-primary/10 text-primary">New</Badge>
+              <Badge variant="outline">ElevenLabs Academy</Badge>
+              <div className="flex items-center text-xs text-muted-foreground ml-auto">
+                <Clock className="h-3 w-3 mr-1" />
+                30 min total
+              </div>
+            </div>
           </DialogHeader>
           
-          <Tabs defaultValue="articles">
-            <TabsList className="grid grid-cols-4 mb-4">
-              <TabsTrigger value="articles">Articles</TabsTrigger>
-              <TabsTrigger value="courses">Online Courses</TabsTrigger>
-              <TabsTrigger value="books">Books</TabsTrigger>
-              <TabsTrigger value="websites">Websites & Blogs</TabsTrigger>
+          <Tabs defaultValue="module1" className="mt-4">
+            <TabsList className="grid grid-cols-5 mb-4">
+              <TabsTrigger value="module1">Module 1</TabsTrigger>
+              <TabsTrigger value="module2">Module 2</TabsTrigger>
+              <TabsTrigger value="module3">Module 3</TabsTrigger>
+              <TabsTrigger value="module4">Module 4</TabsTrigger>
+              <TabsTrigger value="module5">Module 5</TabsTrigger>
             </TabsList>
             
-            <TabsContent value="articles" className="space-y-4">
+            <TabsContent value="module1" className="space-y-4">
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">What is Voice AI?</h3>
-                  <Badge variant="outline" className="mb-2">TechCrunch</Badge>
-                  <p className="text-muted-foreground mb-4">This article introduces the concept of voice AI, how it works, and its applications across various industries.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://techcrunch.com/category/artificial-intelligence/', '_blank')}
-                  >
-                    Read Article <ExternalLink className="h-3 w-3" />
-                  </Button>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">The Fundamentals of Voice AI: What You Need to Know</h3>
-                  <Badge variant="outline" className="mb-2">Voicebot.ai</Badge>
-                  <p className="text-muted-foreground mb-4">This article provides an overview of voice AI, exploring key technologies like speech recognition, natural language processing (NLP), and voice assistants.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://voicebot.ai/voice-assistant-technology/', '_blank')}
-                  >
-                    Read Article <ExternalLink className="h-3 w-3" />
-                  </Button>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">How Voice AI is Transforming Customer Experience</h3>
-                  <Badge variant="outline" className="mb-2">Forbes</Badge>
-                  <p className="text-muted-foreground mb-4">An in-depth article on how businesses are leveraging voice AI to enhance customer interactions, automate tasks, and improve service delivery.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://www.forbes.com/sites/forbestechcouncil/2020/05/07/how-voice-technology-is-transforming-healthcare/', '_blank')}
-                  >
-                    Read Article <ExternalLink className="h-3 w-3" />
-                  </Button>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="courses" className="space-y-4">
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">AI for Everyone (Coursera by Andrew Ng)</h3>
-                  <Badge variant="outline" className="mb-2">Coursera</Badge>
-                  <p className="text-muted-foreground mb-4">While this course is not specifically about voice AI, it covers the basics of AI and machine learning, which is crucial for understanding voice AI technology.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://www.coursera.org/learn/ai-for-everyone', '_blank')}
-                  >
-                    View Course <ExternalLink className="h-3 w-3" />
-                  </Button>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">Introduction to Speech Recognition</h3>
-                  <Badge variant="outline" className="mb-2">Udemy</Badge>
-                  <p className="text-muted-foreground mb-4">A beginner-level course that covers the basics of speech recognition, which is essential for working with voice AI.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://www.udemy.com/course/speech-recognition/', '_blank')}
-                  >
-                    View Course <ExternalLink className="h-3 w-3" />
-                  </Button>
+                  <h3 className="text-xl font-semibold mb-4">Module 1: Introduction to AI and Voice AI</h3>
+                  
+                  <div className="space-y-6 mb-6">
+                    <div>
+                      <h4 className="font-semibold mb-2">What is Artificial Intelligence?</h4>
+                      <p className="text-muted-foreground">
+                        Artificial Intelligence (AI) refers to the ability of machines to perform tasks that typically require human intelligence.
+                        This includes learning from data, understanding language, recognizing images, and making decisions.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Key AI Subfields</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>
+                          <span className="font-medium text-foreground">Machine Learning (ML)</span> – algorithms that learn from data to make predictions or decisions.
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Natural Language Processing (NLP)</span> – enables machines to understand and interact using human language.
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Speech Processing</span> – focuses on understanding and generating spoken language.
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">What is Voice AI?</h4>
+                      <p className="text-muted-foreground">
+                        Voice AI combines machine learning, NLP, and speech processing to create systems that can listen to what we say, 
+                        understand it, and respond meaningfully. Examples include voice assistants like Alexa, Siri, 
+                        or customer service bots that talk back intelligently.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Why Voice AI Matters</h4>
+                      <p className="text-muted-foreground">
+                        Voice interfaces are becoming the new norm across industries because they're fast, natural, and increasingly 
+                        expected by users—from customer support to sales automation.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-md">
+                    <h4 className="font-semibold mb-2">Key Takeaways</h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>AI enables machines to perform tasks requiring human-like intelligence</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Voice AI combines ML, NLP, and speech processing</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Voice interfaces are becoming standard across industries</span>
+                      </li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
             
-            <TabsContent value="books" className="space-y-4">
+            <TabsContent value="module2" className="space-y-4">
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">Voice User Interface Design</h3>
-                  <Badge variant="outline" className="mb-2">Michael H. Cohen, James P. Giangola, and Jennifer Balogh</Badge>
-                  <p className="text-muted-foreground mb-4">This book explores the principles of voice interface design and the technical aspects of developing voice-enabled applications.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://www.amazon.com/Voice-User-Interface-Design/dp/0321185765', '_blank')}
-                  >
-                    Find Book <ExternalLink className="h-3 w-3" />
-                  </Button>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">Designing Voice User Interfaces</h3>
-                  <Badge variant="outline" className="mb-2">Cathy Pearl</Badge>
-                  <p className="text-muted-foreground mb-4">Focuses on the design and user experience of voice-based applications, helping developers build more intuitive voice interfaces.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://www.amazon.com/Designing-Voice-User-Interfaces-Conversational/dp/1491955414', '_blank')}
-                  >
-                    Find Book <ExternalLink className="h-3 w-3" />
-                  </Button>
+                  <h3 className="text-xl font-semibold mb-4">Module 2: How Voice AI Works</h3>
+                  
+                  <div className="space-y-6 mb-6">
+                    <div>
+                      <h4 className="font-semibold mb-2">Voice AI Pipeline</h4>
+                      <p className="text-muted-foreground">
+                        Voice AI runs through a clear pipeline with several components working together:
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Core Components</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>
+                          <span className="font-medium text-foreground">Automatic Speech Recognition (ASR)</span> – 
+                          Converts your spoken words into text. This is the "hearing" part.
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Natural Language Processing (NLP)</span> – 
+                          Takes the converted text and extracts meaning. It figures out what you meant, not just what you said.
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Natural Language Understanding (NLU)</span> – 
+                          A subfield of NLP—identifies intent ("book a flight") and entities ("New York to LA").
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Dialogue Management</span> – 
+                          Decides what the AI should say or do next. It's like the AI's brain making a decision.
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Text-to-Speech (TTS)</span> – 
+                          Converts the response text back into spoken language—this is how the AI "talks" back to you.
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Example Workflow</h4>
+                      <p className="text-muted-foreground mb-2">
+                        Let's walk through a complete example:
+                      </p>
+                      <ol className="list-decimal pl-5 space-y-2 text-muted-foreground">
+                        <li>User says: "What's the weather in Chicago today?"</li>
+                        <li>ASR transcribes the spoken words into text</li>
+                        <li>NLP/NLU extracts that you're asking for weather info, and identifies "Chicago" as the location</li>
+                        <li>Dialogue Management queries a weather API for Chicago's forecast</li>
+                        <li>TTS responds audibly: "The forecast in Chicago is 65 degrees and sunny."</li>
+                      </ol>
+                      <p className="text-muted-foreground mt-2">
+                        This entire Voice AI loop happens in under a second.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-md">
+                    <h4 className="font-semibold mb-2">Key Takeaways</h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Voice AI uses a pipeline: ASR → NLP → Dialogue → TTS</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Each component has a specific role in understanding and responding to speech</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>The entire process happens quickly, creating a natural conversation flow</span>
+                      </li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
             
-            <TabsContent value="websites" className="space-y-4">
+            <TabsContent value="module3" className="space-y-4">
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">ElevenLabs Blog</h3>
-                  <p className="text-muted-foreground mb-4">The official ElevenLabs blog featuring the latest updates on voice AI technology, use cases, and industry insights.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://elevenlabs.io/blog', '_blank')}
-                  >
-                    Visit Website <ExternalLink className="h-3 w-3" />
-                  </Button>
+                  <h3 className="text-xl font-semibold mb-4">Module 3: Voice AI Use Cases by Persona</h3>
+                  
+                  <div className="space-y-6 mb-6">
+                    <div>
+                      <h4 className="font-semibold mb-2">Voice AI Impact by Role</h4>
+                      <p className="text-muted-foreground">
+                        How Voice AI impacts different professionals varies by their role and responsibilities:
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">For Developers</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>Work with Voice AI through APIs and SDKs</li>
+                        <li>Set up voice flows, integrate with CRMs, or customize voice bots</li>
+                        <li>Leverage existing speech engines rather than building from scratch</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">For AI Strategists</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>Treat Voice AI as a scalable channel within the organization</li>
+                        <li>Design customer journeys, user experiences, and touchpoints</li>
+                        <li>Align voice experiences with broader AI goals across the organization</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">For Marketing & Sales Leaders</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>Drive conversion through conversational commerce</li>
+                        <li>Implement lead generation bots that qualify leads and book demos 24/7</li>
+                        <li>Use voice interfaces to deepen engagement and gather rich customer insights</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-md">
+                    <h4 className="font-semibold mb-2">Key Takeaways</h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Each role has a unique perspective on Voice AI implementation</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Developers focus on technical implementation through APIs and SDKs</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Strategists and business leaders leverage Voice AI for engagement and conversion</span>
+                      </li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
-              
+            </TabsContent>
+            
+            <TabsContent value="module4" className="space-y-4">
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="text-lg font-semibold mb-2">Voicebot.ai</h3>
-                  <p className="text-muted-foreground mb-4">A comprehensive source for news, research, and analysis on the voice AI industry. It includes reports, blog posts, and case studies.</p>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="mt-2 flex items-center gap-1"
-                    onClick={() => window.open('https://www.voicebot.ai', '_blank')}
-                  >
-                    Visit Website <ExternalLink className="h-3 w-3" />
-                  </Button>
+                  <h3 className="text-xl font-semibold mb-4">Module 4: Data, Privacy & Ethical Considerations</h3>
+                  
+                  <div className="space-y-6 mb-6">
+                    <div>
+                      <h4 className="font-semibold mb-2">Voice Data Sensitivity</h4>
+                      <p className="text-muted-foreground">
+                        Voice AI deals with sensitive data—often personal, sometimes regulated. Understanding the key considerations is crucial.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Data Collection & Storage</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>Voice data is often recorded or transcribed</li>
+                        <li>Only store what's necessary for the service</li>
+                        <li>Implement security best practices for storage and access</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Privacy Compliance</h4>
+                      <p className="text-muted-foreground mb-2">
+                        Regulations like GDPR (in the EU) and CCPA (in California) require:
+                      </p>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>User consent for voice data collection</li>
+                        <li>Clear privacy policies that explain data usage</li>
+                        <li>Ability to delete or export user data upon request</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Ethical Design in Voice AI</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>
+                          <span className="font-medium text-foreground">Transparency</span>: 
+                          Don't let users think they're talking to a human if it's AI
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Avoiding bias</span>: 
+                          Ensure your AI performs equally well across accents, genders, and languages
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Fallback strategies</span>: 
+                          If the AI doesn't understand, offer a way to escalate or repeat
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-md">
+                    <h4 className="font-semibold mb-2">Key Takeaways</h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Voice data requires careful handling and protection</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Privacy compliance is mandatory in many jurisdictions</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Ethical design focuses on transparency, fairness, and user experience</span>
+                      </li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="module5" className="space-y-4">
+              <Card>
+                <CardContent className="pt-6">
+                  <h3 className="text-xl font-semibold mb-4">Module 5: Voice AI in Practice – Platform Overview</h3>
+                  
+                  <div className="space-y-6 mb-6">
+                    <div>
+                      <h4 className="font-semibold mb-2">Preparing for Platform Onboarding</h4>
+                      <p className="text-muted-foreground">
+                        Now that you understand the fundamentals, let's prepare for using a Voice AI platform effectively.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Key Terminology to Know</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>
+                          <span className="font-medium text-foreground">Intents</span>: 
+                          What the user wants to do (e.g., "book a demo")
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Entities</span>: 
+                          Specific data points (e.g., date, location, product name)
+                        </li>
+                        <li>
+                          <span className="font-medium text-foreground">Flows or Dialogues</span>: 
+                          Structured conversations designed to guide users to an outcome
+                        </li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Platform Tools You'll Encounter</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>Visual conversation builders</li>
+                        <li>Analytics dashboards for performance monitoring</li>
+                        <li>Integration options (CRM, calendar, help desk, etc.)</li>
+                      </ul>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-2">Role-Specific Preparation</h4>
+                      <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                        <li>Developers: Prepare to build flows and integrate with other systems</li>
+                        <li>Strategists: Define use cases, success metrics, and KPIs</li>
+                        <li>Marketing/Sales: Plan campaigns and analyze results</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-slate-50 p-4 rounded-md">
+                    <h4 className="font-semibold mb-2">Key Takeaways</h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Understand platform terminology before diving in</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Each role has specific responsibilities in Voice AI implementation</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                        <span>Platform tools help you build, monitor, and integrate Voice AI solutions</span>
+                      </li>
+                    </ul>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>
