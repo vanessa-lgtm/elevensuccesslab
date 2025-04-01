@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -227,8 +226,6 @@ const determineOnboardingPlan = (formData: any) => {
 };
 
 interface SurveyFormValues {
-  company_name: string;
-  email: string;
   knowledge_level: 'low' | 'medium' | 'high';
   industry: string;
   other_industry?: string;
@@ -249,8 +246,6 @@ const OnboardingSurvey = () => {
   
   const form = useForm<SurveyFormValues>({
     defaultValues: {
-      company_name: '',
-      email: '',
       knowledge_level: 'medium',
       industry: '',
       other_industry: '',
@@ -260,21 +255,19 @@ const OnboardingSurvey = () => {
     }
   });
 
-  const totalSteps = 3;
+  const totalSteps = 2;
   const progress = ((currentStep + 1) / totalSteps) * 100;
   
   const handleNext = async () => {
     const isCurrentStepValid = await form.trigger(
       currentStep === 0 
-        ? ['company_name', 'email'] 
-        : currentStep === 1 
-          ? ['knowledge_level']
-          : ['industry', 'primary_use_case', 'primary_goals']
+        ? ['knowledge_level']
+        : ['industry', 'primary_use_case', 'primary_goals']
     );
 
     if (!isCurrentStepValid) return;
     
-    if (currentStep === 1 && form.getValues('knowledge_level') === 'low') {
+    if (currentStep === 0 && form.getValues('knowledge_level') === 'low') {
       setSuggestResources(true);
     } else {
       setSuggestResources(false);
@@ -291,31 +284,15 @@ const OnboardingSurvey = () => {
       try {
         setIsSubmitting(true);
         
-        const { error } = await supabase
-          .from('Email')
-          .insert({
-            company_name: formData.company_name,
-            email: formData.email
-          });
-          
-        if (error) {
-          console.error('Error saving to Supabase:', error);
-          toast({
-            title: "Error",
-            description: "There was an issue saving your information. Please try again.",
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Success",
-            description: "Your information has been saved successfully.",
-          });
-        }
+        toast({
+          title: "Success",
+          description: "Your preferences have been saved successfully.",
+        });
       } catch (error) {
-        console.error('Error in Supabase operation:', error);
+        console.error('Error processing onboarding:', error);
         toast({
           title: "Error",
-          description: "There was an issue saving your information. Please try again.",
+          description: "There was an issue processing your preferences. Please try again.",
           variant: "destructive",
         });
       } finally {
@@ -350,52 +327,6 @@ const OnboardingSurvey = () => {
   const renderStep = () => {
     switch(currentStep) {
       case 0:
-        return (
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium">Let's get to know you better</h3>
-            
-            <FormField
-              control={form.control}
-              name="company_name"
-              rules={{ required: "Company name is required" }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Company Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Acme Corp" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="email"
-              rules={{ 
-                required: "Email is required",
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: "Invalid email address"
-                }
-              }}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email Address</FormLabel>
-                  <FormDescription>
-                    Associated with your ElevenLabs account
-                  </FormDescription>
-                  <FormControl>
-                    <Input type="email" placeholder="contact@acmecorp.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-        );
-      
-      case 1:
         return (
           <div className="space-y-4">
             <h3 className="text-lg font-medium">How familiar are you with Voice AI?</h3>
@@ -466,7 +397,7 @@ const OnboardingSurvey = () => {
           </div>
         );
       
-      case 2:
+      case 1:
         return (
           <div className="space-y-6">
             <h3 className="text-lg font-medium">Your Industry & Use Cases</h3>
