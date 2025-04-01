@@ -12,7 +12,7 @@ const Conversation: React.FC = () => {
       <main className="flex-grow container mx-auto px-4 py-16 max-w-4xl">
         <div className="space-y-8 mt-10">
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold">Voice AI Assistant</h1>
+            <h1 className="text-3xl md:text-4xl font-bold">Chat with El</h1>
             <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">
               Get real-time support through our conversational voice AI assistant powered by ElevenLabs technology
             </p>
@@ -47,7 +47,6 @@ const Conversation: React.FC = () => {
                   <li>Click the microphone to start speaking</li>
                   <li>Speak naturally with the assistant</li>
                   <li>The assistant will respond with natural voice</li>
-                  <li>You can also type your questions</li>
                   <li>Click the X to end the conversation</li>
                 </ul>
               </CardContent>
