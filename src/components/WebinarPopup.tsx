@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { X, Sparkle, Megaphone, Mic, ArrowRight, PhoneCall } from 'lucide-react';
@@ -7,15 +6,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Link } from 'react-router-dom';
 import CourseContentDialog from './CourseContentDialog';
-
 const POPUP_DISPLAY_LIMIT = 2;
 const LOCAL_STORAGE_KEY = 'webinarPopupShownCount';
-
 const WebinarPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [hasBeenShown, setHasBeenShown] = useState(false);
   const [showCourseDialog, setShowCourseDialog] = useState(false);
-
   useEffect(() => {
     const popupShownCount = parseInt(localStorage.getItem(LOCAL_STORAGE_KEY) || '0');
     if (popupShownCount < POPUP_DISPLAY_LIMIT && !hasBeenShown) {
@@ -27,14 +23,11 @@ const WebinarPopup = () => {
       return () => clearTimeout(timer);
     }
   }, [hasBeenShown]);
-
   return <>
       {!isOpen && <div className="fixed bottom-6 right-6 flex gap-4 items-center z-50">
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline" size="icon" className="rounded-full shadow-md bg-background hover:bg-primary/10">
-                <Megaphone className="h-5 w-5" />
-              </Button>
+              
             </PopoverTrigger>
             <PopoverContent className="w-80 p-0" side="top" align="end">
               <div className="p-4">
@@ -77,11 +70,7 @@ const WebinarPopup = () => {
           </div>
         </div>}
 
-      <CourseContentDialog 
-        open={showCourseDialog} 
-        onOpenChange={setShowCourseDialog} 
-      />
+      <CourseContentDialog open={showCourseDialog} onOpenChange={setShowCourseDialog} />
     </>;
 };
-
 export default WebinarPopup;
