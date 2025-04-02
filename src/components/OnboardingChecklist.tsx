@@ -104,6 +104,25 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
           onToggle={toggleItemCompletion}
         />
       ))}
+      
+      <div className="mt-10 pt-6 border-t border-border">
+        <h3 className="text-xl font-semibold mb-4 text-primary">Need Help?</h3>
+        <p className="text-muted-foreground mb-6">
+          Have questions about ElevenLabs? Speak directly with our AI voice assistant for immediate help and guidance.
+        </p>
+        <div className="flex justify-center py-4">
+          <div className="w-full">
+            <elevenlabs-convai 
+              agent-id="sVj20Vdiohi2hKyMGZt8"
+              theme="light"
+              position="center"
+              expanded="true"
+              header-text="Voice Assistant"
+              placeholder-text="Type or speak your question about ElevenLabs...">
+            </elevenlabs-convai>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

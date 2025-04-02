@@ -61,7 +61,7 @@ const Onboarding = () => {
     }
     
     const tabParam = params.get('tab');
-    if (tabParam && ['checklist', 'key-actions', 'resources', 'assistant'].includes(tabParam)) {
+    if (tabParam && ['checklist', 'key-actions', 'resources'].includes(tabParam)) {
       setActiveTab(tabParam);
     } else {
       setActiveTab("checklist");
@@ -516,11 +516,10 @@ const Onboarding = () => {
           </div>
           
           <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-8">
+            <TabsList className="grid w-full grid-cols-3 mb-8">
               <TabsTrigger value="checklist" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">Onboarding Checklist</TabsTrigger>
               <TabsTrigger value="key-actions" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">Key Actions</TabsTrigger>
               <TabsTrigger value="resources" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">Resources</TabsTrigger>
-              <TabsTrigger value="assistant" className="data-[state=active]:bg-primary/10 data-[state=active]:text-primary">AI Assistant</TabsTrigger>
             </TabsList>
             
             <TabsContent value="checklist" className="mt-4 space-y-4 animate-fade-in">
@@ -567,28 +566,6 @@ const Onboarding = () => {
                   {resources.map((resource, index) => (
                     <ResourceCard key={index} resource={resource} />
                   ))}
-                </div>
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="assistant" className="mt-4 animate-fade-in">
-              <div className="bg-card p-6 rounded-lg shadow-sm border border-muted">
-                <h2 className="text-2xl font-bold mb-4 text-primary">AI Voice Assistant</h2>
-                <p className="text-muted-foreground mb-6">
-                  Have questions about ElevenLabs? Speak directly with our AI voice assistant for immediate help and guidance.
-                </p>
-                
-                <div className="flex justify-center py-4">
-                  <div className="w-full max-w-xl">
-                    <elevenlabs-convai 
-                      agent-id="sVj20Vdiohi2hKyMGZt8"
-                      theme="light"
-                      position="center"
-                      expanded="true"
-                      header-text="Voice Assistant"
-                      placeholder-text="Type or speak your question about ElevenLabs...">
-                    </elevenlabs-convai>
-                  </div>
                 </div>
               </div>
             </TabsContent>
