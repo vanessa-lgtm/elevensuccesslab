@@ -27,7 +27,7 @@ const Conversation: React.FC = () => {
             </CardHeader>
             <CardContent className="pt-6 flex justify-center">
               <elevenlabs-convai 
-                agent-id="7UDgnecvOFub56zYK2Pu"
+                agent-id="sVj20Vdiohi2hKyMGZt8"
                 theme="light"
                 position="center"
                 expanded="true"
