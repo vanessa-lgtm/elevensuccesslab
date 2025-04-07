@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -7,7 +8,9 @@ import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Flag } from 'lucide-react';
+import { Flag, AlertTriangle } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+
 const Index = () => {
   const [showSupportWidget, setShowSupportWidget] = useState(false);
   useEffect(() => {
@@ -33,6 +36,18 @@ const Index = () => {
   }, []);
   return <div className="min-h-screen bg-background">
       <Navbar />
+      
+      {/* Beta Banner */}
+      <div className="bg-purple-600 text-white py-2 px-4 sticky top-16 z-40 shadow-md">
+        <div className="container mx-auto flex items-center justify-center gap-2">
+          <AlertTriangle className="h-4 w-4" />
+          <span className="font-medium">This is a BETA version. Features may change or be removed.</span>
+          <Badge variant="outline" className="bg-white text-purple-600 border-white ml-2 flex items-center gap-1">
+            <span>BETA</span>
+          </Badge>
+        </div>
+      </div>
+      
       <Hero />
       
       {/* Voice AI Feature Banner */}
