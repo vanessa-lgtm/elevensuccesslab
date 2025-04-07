@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { BookOpen, FileText, Video, ArrowUpRight, GraduationCap, BarChart, RefreshCw, Brain, X, Clock, ExternalLink, Quote, AlertCircle, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -348,7 +349,7 @@ const WebinarsDialog = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="overflow-hidden">
                 <div className="aspect-video relative">
-                  <iframe src="https://app.livestorm.co/elevenlabs/elevenlabs-ai-in-edtech-scaling-learning-experiences-with-innovation/live?s=3e4af1ad-e459-44b9-a7d9-2ced019ef600" title="AI in EdTech: Scaling Learning Experiences with Innovation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" className="absolute inset-0 w-full h-full border-0"></iframe>
+                  <iframe src="https://elevenlabs.io/webinars/transforming-education-with-ai" title="AI in EdTech: Scaling Learning Experiences with Innovation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" className="absolute inset-0 w-full h-full border-0"></iframe>
                 </div>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">AI in EdTech: Scaling Learning Experiences with Innovation</h3>
