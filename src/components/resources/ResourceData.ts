@@ -22,7 +22,7 @@ export const resources: Resource[] = [
     icon: GraduationCap,
     title: "ElevenLabs Product Documentation",
     description: "Comprehensive documentation to help you understand and implement our voice AI technology.",
-    externalLink: "https://elevenlabs.io/docs/overview"
+    dialogType: "productDocumentation" // Changed from externalLink to dialogType
   }, 
   {
     icon: Video,

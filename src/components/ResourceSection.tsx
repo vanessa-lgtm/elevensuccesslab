@@ -5,6 +5,7 @@ import ResourceCard from './resources/ResourceCard';
 import VoiceAIBasicsDialog from './resources/VoiceAIBasicsDialog';
 import WebinarsDialog from './resources/WebinarsDialog';
 import SuccessStoriesDialog from './resources/SuccessStoriesDialog';
+import ProductDocumentationDialog from './resources/ProductDocumentationDialog';
 import { Resource } from './resources/ResourceData';
 
 const ResourceSection = () => {
@@ -12,6 +13,7 @@ const ResourceSection = () => {
   const [voiceAIBasicsOpen, setVoiceAIBasicsOpen] = useState(false);
   const [webinarsOpen, setWebinarsOpen] = useState(false);
   const [successStoriesOpen, setSuccessStoriesOpen] = useState(false);
+  const [productDocumentationOpen, setProductDocumentationOpen] = useState(false);
   
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -42,6 +44,8 @@ const ResourceSection = () => {
       setWebinarsOpen(true);
     } else if (resource.dialogType === 'successStories') {
       setSuccessStoriesOpen(true);
+    } else if (resource.dialogType === 'productDocumentation') {
+      setProductDocumentationOpen(true);
     } else if (resource.externalLink) {
       window.open(resource.externalLink, "_blank");
     }
@@ -82,6 +86,7 @@ const ResourceSection = () => {
       <VoiceAIBasicsDialog open={voiceAIBasicsOpen} onOpenChange={setVoiceAIBasicsOpen} />
       <WebinarsDialog open={webinarsOpen} onOpenChange={setWebinarsOpen} />
       <SuccessStoriesDialog open={successStoriesOpen} onOpenChange={setSuccessStoriesOpen} />
+      <ProductDocumentationDialog open={productDocumentationOpen} onOpenChange={setProductDocumentationOpen} />
       
       <div className="absolute top-40 left-10 w-64 h-64 rounded-full bg-primary/5 blur-3xl -z-10"></div>
       <div className="absolute bottom-20 right-0 w-80 h-80 rounded-full bg-blue-100/30 blur-3xl -z-10"></div>
