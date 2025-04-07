@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Video, Clock, ExternalLink } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -41,6 +42,20 @@ const WebinarsDialog = ({
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card className="overflow-hidden">
+                <CardContent className="p-0">
+                  <VideoEmbed videoId="Kj2dgXITrPw" title="Actor Mode Demonstration" />
+                </CardContent>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold mb-2">Actor Mode: Voice-Guided AI Delivery</h3>
+                  <p className="text-sm text-muted-foreground mb-2">New feature allowing voice guidance for AI speech delivery.</p>
+                  <div className="flex items-center text-xs text-muted-foreground">
+                    <Clock className="h-3 w-3 mr-1" />
+                    14 min
+                  </div>
+                </CardContent>
+              </Card>
+              
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
                   <VideoEmbed videoId="NmRAhNTJ06M" title="Studio is now available for everyone" />
