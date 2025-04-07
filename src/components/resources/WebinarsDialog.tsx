@@ -115,73 +115,21 @@ const WebinarsDialog = ({
           </TabsContent>
           
           <TabsContent value="webinars" className="space-y-4">
-            <div className="text-center mb-6">
-              <Button variant="default" size="lg" className="flex items-center gap-2" onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}>
+            <div className="flex flex-col items-center justify-center py-12">
+              <Video className="h-16 w-16 text-primary mb-4" />
+              <h3 className="text-xl font-medium mb-3">Access On-Demand Webinars</h3>
+              <p className="text-center text-muted-foreground mb-6 max-w-md">
+                Watch expert-led webinars on voice AI technology, use cases, and best practices from the ElevenLabs team.
+              </p>
+              <Button 
+                variant="default" 
+                size="lg" 
+                className="flex items-center gap-2" 
+                onClick={() => window.open('https://elevenlabs.io/webinars', '_blank')}
+              >
                 View All Webinars
                 <ExternalLink className="h-4 w-4" />
               </Button>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card className="overflow-hidden">
-                <div className="aspect-video relative">
-                  <iframe src="https://elevenlabs.io/webinars/transforming-education-with-ai" title="AI in EdTech: Scaling Learning Experiences with Innovation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" className="absolute inset-0 w-full h-full border-0"></iframe>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">AI in EdTech: Scaling Learning Experiences with Innovation</h3>
-                  <p className="text-sm text-muted-foreground mb-2">Explore how voice AI is transforming education technology.</p>
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3 mr-1" />
-                    45 min
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="overflow-hidden">
-                <CardContent className="p-0">
-                  <VideoEmbed videoId="dQw4w9WgXcQ" title="ElevenLabs Webinar" />
-                </CardContent>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">Special ElevenLabs Webinar</h3>
-                  <p className="text-sm text-muted-foreground mb-2">An important webinar about voice AI technology.</p>
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3 mr-1" />
-                    45 min
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="overflow-hidden">
-                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-                  <Button variant="default" size="sm" className="absolute z-10 flex gap-2 items-center" onClick={() => window.open('https://elevenlabs.io/webinars/elevenlabs-next-gen-digital-and-news-publishing', '_blank')}>
-                    <Video className="h-4 w-4" />
-                    Watch Now
-                  </Button>
-                  <div className="absolute inset-0 bg-black/50"></div>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">Next-Gen Digital and News Publishing</h3>
-                  <p className="text-sm text-muted-foreground mb-2">Explore how voice AI is transforming digital content and news publishing.</p>
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3 mr-1" />
-                    40 min
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card className="overflow-hidden">
-                <CardContent className="p-0">
-                  <VideoEmbed videoId="0vyUwVR0vx0" title="Conversational AI Office Hours" />
-                </CardContent>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">Conversational AI Office Hours</h3>
-                  <p className="text-sm text-muted-foreground mb-2">A comprehensive introduction to ElevenLabs voice technology and its applications.</p>
-                  <div className="flex items-center text-xs text-muted-foreground">
-                    <Clock className="h-3 w-3 mr-1" />
-                    45 min
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </TabsContent>
         </Tabs>
