@@ -5,6 +5,7 @@ import ResourceCard from './resources/ResourceCard';
 import VoiceAIBasicsDialog from './resources/VoiceAIBasicsDialog';
 import WebinarsDialog from './resources/WebinarsDialog';
 import SuccessStoriesDialog from './resources/SuccessStoriesDialog';
+import { Resource } from './resources/ResourceData';
 
 const ResourceSection = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -34,7 +35,7 @@ const ResourceSection = () => {
     };
   }, []);
   
-  const handleCardClick = (resource: any) => {
+  const handleCardClick = (resource: Resource) => {
     if (resource.dialogType === 'voiceAIBasics') {
       setVoiceAIBasicsOpen(true);
     } else if (resource.dialogType === 'webinars') {

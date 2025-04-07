@@ -4,9 +4,10 @@ import { cn } from '@/lib/utils';
 import { ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { LucideIcon } from 'lucide-react';
 
 interface ResourceCardProps {
-  icon: React.ReactNode;
+  icon: LucideIcon;
   title: string;
   description: string;
   delay: number;
@@ -15,7 +16,7 @@ interface ResourceCardProps {
 }
 
 const ResourceCard = ({
-  icon,
+  icon: Icon,
   title,
   description,
   delay,
@@ -60,7 +61,7 @@ const ResourceCard = ({
       onClick={comingSoon ? undefined : onClick}
     >
       <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-5">
-        {icon}
+        <Icon size={20} />
       </div>
       <h3 className="text-xl font-semibold mb-3 flex items-center gap-2">
         {title}
