@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { ChecklistItem } from './onboarding-checklist/types';
 import ChecklistSection from './onboarding-checklist/ChecklistSection';
 import { getDefaultChecklistItems, getSectionTitle } from './onboarding-checklist/checklistData';
+import { Badge } from '@/components/ui/badge';
+import { Flag } from 'lucide-react';
 
 interface OnboardingChecklistProps {
   onProgressUpdate: (completed: number, total: number) => void;
@@ -90,7 +92,13 @@ const OnboardingChecklist: React.FC<OnboardingChecklistProps> = ({
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6 text-primary">Onboarding Checklist</h2>
+      <div className="flex items-center gap-3 mb-6">
+        <h2 className="text-2xl font-bold text-primary">Onboarding Checklist</h2>
+        <Badge variant="outline" className="bg-purple-600 text-white border-purple-600 flex items-center gap-1 py-1">
+          <Flag className="h-3 w-3" />
+          <span>BETA</span>
+        </Badge>
+      </div>
       <p className="text-muted-foreground mb-6">
         Complete these steps to set up and get the most out of ElevenLabs. 
         Track your progress as you go.

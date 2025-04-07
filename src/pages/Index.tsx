@@ -7,6 +7,8 @@ import SupportSection from '@/components/SupportSection';
 import Footer from '@/components/Footer';
 import WebinarPopup from '@/components/WebinarPopup';
 import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Flag } from 'lucide-react';
 
 const Index = () => {
   const [showSupportWidget, setShowSupportWidget] = useState(false);
@@ -41,7 +43,15 @@ const Index = () => {
       <section className="py-12 px-4">
         <div className="container mx-auto max-w-6xl">
           <Card className="overflow-hidden fade-in-view">
-            
+            <CardContent className="flex items-center p-4">
+              <div className="flex gap-2 items-center">
+                <h3 className="font-semibold">Voice AI Onboarding</h3>
+                <Badge variant="outline" className="bg-purple-600 text-white border-purple-600 flex items-center gap-1">
+                  <Flag className="h-3 w-3" />
+                  <span>BETA</span>
+                </Badge>
+              </div>
+            </CardContent>
           </Card>
         </div>
       </section>
