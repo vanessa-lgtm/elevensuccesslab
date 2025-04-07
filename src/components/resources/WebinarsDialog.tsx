@@ -44,7 +44,7 @@ const WebinarsDialog = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <VideoEmbed videoId="Kj2dgXITrPw" title="Actor Mode Demonstration" />
+                  <VideoEmbed videoId="IWPjpE8shZw" title="Actor Mode Demonstration" />
                 </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">Actor Mode: Voice-Guided AI Delivery</h3>
