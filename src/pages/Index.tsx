@@ -13,6 +13,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const Index = () => {
   const [showSupportWidget, setShowSupportWidget] = useState(false);
+  
   useEffect(() => {
     const handleScroll = () => {
       const elements = document.querySelectorAll('.fade-in-view');
@@ -34,7 +35,9 @@ const Index = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  return <div className="min-h-screen bg-background">
+  
+  return (
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Beta Banner */}
@@ -66,9 +69,19 @@ const Index = () => {
       
       {/* Floating ElevenLabs widget */}
       <div className="fixed bottom-6 right-6 z-40">
-        <elevenlabs-convai agent-id="sVj20Vdiohi2hKyMGZt8" theme="light" position="bottom-right" expanded="false" button-text="Chat with our AI" welcome-message="Hello! How can I help you today?" placeholder-text="Type your message here..." header-text="ElevenLabs Voice AI Assistant">
+        <elevenlabs-convai 
+          agent-id="sVj20Vdiohi2hKyMGZt8" 
+          theme="light" 
+          position="bottom-right" 
+          expanded="false" 
+          button-text="Chat with our AI" 
+          welcome-message="Hello! How can I help you today?" 
+          placeholder-text="Type your message here..." 
+          header-text="ElevenLabs Voice AI Assistant">
         </elevenlabs-convai>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
