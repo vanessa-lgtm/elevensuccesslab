@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Video, Clock, ExternalLink } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -156,13 +155,9 @@ const WebinarsDialog = ({
               </Card>
               
               <Card className="overflow-hidden">
-                <div className="bg-slate-200 aspect-video relative flex items-center justify-center">
-                  <Button variant="default" size="sm" className="absolute z-10 flex gap-2 items-center" onClick={() => window.open('https://www.youtube.com/watch?v=0vyUwVR0vx0', '_blank')}>
-                    <Video className="h-4 w-4" />
-                    Watch Now
-                  </Button>
-                  <div className="absolute inset-0 bg-black/50"></div>
-                </div>
+                <CardContent className="p-0">
+                  <VideoEmbed videoId="0vyUwVR0vx0" title="Getting Started with ElevenLabs Voice AI" />
+                </CardContent>
                 <CardContent className="p-4">
                   <h3 className="font-semibold mb-2">Getting Started with ElevenLabs Voice AI</h3>
                   <p className="text-sm text-muted-foreground mb-2">A comprehensive introduction to ElevenLabs voice technology and its applications.</p>
