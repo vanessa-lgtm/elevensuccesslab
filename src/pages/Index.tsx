@@ -41,7 +41,7 @@ const Index = () => {
       <div className="bg-purple-600 text-white py-2 px-4 sticky top-16 z-40 shadow-md">
         <div className="container mx-auto flex items-center justify-center gap-2">
           <AlertTriangle className="h-4 w-4" />
-          <span className="font-medium">This is a BETA version. Features may change or be removed.</span>
+          <span className="font-medium">SuccessLab is a BETA. Features may change or be removed.</span>
           <Badge variant="outline" className="bg-white text-purple-600 border-white ml-2 flex items-center gap-1">
             <span>BETA</span>
           </Badge>
