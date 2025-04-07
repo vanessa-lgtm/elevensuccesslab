@@ -156,10 +156,10 @@ const WebinarsDialog = ({
               
               <Card className="overflow-hidden">
                 <CardContent className="p-0">
-                  <VideoEmbed videoId="0vyUwVR0vx0" title="Getting Started with ElevenLabs Voice AI" />
+                  <VideoEmbed videoId="0vyUwVR0vx0" title="Conversational AI Office Hours" />
                 </CardContent>
                 <CardContent className="p-4">
-                  <h3 className="font-semibold mb-2">Getting Started with ElevenLabs Voice AI</h3>
+                  <h3 className="font-semibold mb-2">Conversational AI Office Hours</h3>
                   <p className="text-sm text-muted-foreground mb-2">A comprehensive introduction to ElevenLabs voice technology and its applications.</p>
                   <div className="flex items-center text-xs text-muted-foreground">
                     <Clock className="h-3 w-3 mr-1" />
