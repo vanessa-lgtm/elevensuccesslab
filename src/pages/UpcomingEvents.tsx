@@ -24,7 +24,7 @@ const UpcomingEvents = () => {
       description: 'Connect with the Irish AI community and participate in an Agentic AI workshop.',
       location: 'Dublin',
       ctaText: 'RSVP here',
-      ctaLink: 'https://www.eventbrite.com/e/elevenlabs-dublin-drinks-ai-workshop-tickets-873710174077'
+      ctaLink: 'https://lu.ma/mt7sshl6?utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email&utm_source=brevo'
     },
     {
       id: 3,
@@ -42,7 +42,7 @@ const UpcomingEvents = () => {
       description: 'Learn how to integrate Conversational AI into your documentation.',
       location: 'Online',
       ctaText: 'Join here',
-      ctaLink: 'https://app.livestorm.co/elevenlabs/documentation-agents'
+      ctaLink: 'https://app.livestorm.co/elevenlabs/elevenlabs-launch-an-ai-voice-agent-on-your-support-docs?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email'
     },
     {
       id: 5,
@@ -60,7 +60,7 @@ const UpcomingEvents = () => {
       description: 'Learn how to create effective customer support agents with AI.',
       location: 'Online',
       ctaText: 'Register here',
-      ctaLink: 'https://app.livestorm.co/elevenlabs/customer-support-agents'
+      ctaLink: 'https://app.livestorm.co/elevenlabs/how-to-build-your-own-support-agent-elevenlabs-convai-series?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email'
     },
     {
       id: 7,
