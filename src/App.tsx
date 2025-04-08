@@ -10,6 +10,7 @@ import UseCaseInspiration from "./pages/UseCaseInspiration";
 import Onboarding from "./pages/Onboarding";
 import Conversation from "./pages/Conversation";
 import ProductUpdates from "./pages/ProductUpdates";
+import UpcomingEvents from "./pages/UpcomingEvents";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/conversation" element={<Conversation />} />
           <Route path="/product-updates" element={<ProductUpdates />} />
+          <Route path="/upcoming-events" element={<UpcomingEvents />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

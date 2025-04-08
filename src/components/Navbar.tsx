@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Lightbulb, Megaphone } from 'lucide-react';
+import { Menu, X, Lightbulb, Megaphone, Calendar } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -51,9 +51,13 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a href="https://elevenlabs.io/webinars" target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition-colors">
+          <Link 
+            to="/upcoming-events" 
+            className="text-foreground/80 hover:text-primary transition-colors flex items-center gap-1"
+          >
+            <Calendar className="h-4 w-4" />
             Upcoming Events
-          </a>
+          </Link>
           <Link 
             to="/#support" 
             onClick={handleSupportClick}
@@ -94,15 +98,14 @@ const Navbar = () => {
         )}
       >
         <nav className="flex flex-col space-y-6 items-center">
-          <a 
-            href="https://elevenlabs.io/webinars"
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-foreground/80 text-lg font-medium"
+          <Link 
+            to="/upcoming-events" 
+            className="text-foreground/80 text-lg font-medium flex items-center gap-2"
             onClick={() => setMobileMenuOpen(false)}
           >
+            <Calendar className="h-4 w-4" />
             Upcoming Events
-          </a>
+          </Link>
           <Link 
             to="/#support" 
             className="text-foreground/80 text-lg font-medium"
