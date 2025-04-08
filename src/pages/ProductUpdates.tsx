@@ -146,22 +146,57 @@ const ProductUpdates = () => {
                         <li className="border-b pb-3">
                           <p className="font-medium">Twilio</p>
                           <p>Twilio integrates ElevenLabs' AI Voices into ConversationRelay for more natural customer interactions</p>
+                          <Button variant="link" className="h-auto p-0 text-primary" asChild>
+                            <a href="https://elevenlabs.io/blog/twilio-conversation-relay?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email" 
+                              target="_blank" 
+                              rel="noopener noreferrer">
+                              Learn more
+                            </a>
+                          </Button>
                         </li>
                         <li className="border-b pb-3">
                           <p className="font-medium">Supernova</p>
                           <p>Supernova launches AI English tutor that actually talks to you. Making learning feel human with ElevenLabs</p>
+                          <Button variant="link" className="h-auto p-0 text-primary" asChild>
+                            <a href="https://r.contact.elevenlabs.io/mk/cl/f/sh/8qyleR3u7gnBrBfBRwk9IKBHPoUY3moHSQY/Q-i0hUoAFhwU" 
+                              target="_blank" 
+                              rel="noopener noreferrer">
+                              Learn more
+                            </a>
+                          </Button>
                         </li>
                         <li className="border-b pb-3">
                           <p className="font-medium">Lex Fridman</p>
                           <p>A three hour interview with Narendra Modi dubbed into English with ElevenLabs' audio AI</p>
+                          <Button variant="link" className="h-auto p-0 text-primary" asChild>
+                            <a href="https://www.youtube.com/watch?v=ZPUtA3W-7_I" 
+                              target="_blank" 
+                              rel="noopener noreferrer">
+                              Watch the interview
+                            </a>
+                          </Button>
                         </li>
                         <li className="border-b pb-3">
                           <p className="font-medium">Google Cloud</p>
                           <p>We've partnered with Google Cloud to bring our AI tools to a wider audience</p>
+                          <Button variant="link" className="h-auto p-0 text-primary" asChild>
+                            <a href="https://elevenlabs.io/blog/elevenlabs-and-google-cloud?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email" 
+                              target="_blank" 
+                              rel="noopener noreferrer">
+                              Learn more
+                            </a>
+                          </Button>
                         </li>
                         <li>
                           <p className="font-medium">Deutsche Telekom</p>
                           <p>Strengthening our strategic partnership with cutting-edge voice AI solutions for Magenta AI</p>
+                          <Button variant="link" className="h-auto p-0 text-primary" asChild>
+                            <a href="https://elevenlabs.io/blog/deutsche-telekom-magenta-ai?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email" 
+                              target="_blank" 
+                              rel="noopener noreferrer">
+                              Learn more
+                            </a>
+                          </Button>
                         </li>
                       </ul>
                     </AccordionContent>
