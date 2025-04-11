@@ -491,7 +491,7 @@ const Onboarding = () => {
             
             <div className="mb-8">
               <VideoEmbed 
-                videoId={industry === 'conversational_ai' ? 'dQw4w9WgXcQ' : 'z0sD2BvUfM0'} 
+                videoId={industry === 'conversational_ai' ? 'IWPjpE8shZw' : 'IWPjpE8shZw'} 
                 title={industry === 'conversational_ai' ? 
                   'ElevenLabs Conversational AI Onboarding Video' : 
                   'ElevenLabs Onboarding Video'}
