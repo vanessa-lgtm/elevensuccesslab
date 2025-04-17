@@ -1,13 +1,16 @@
+
 import { Code, MicVocal, MessageCircle, Phone, Globe, Headset, Film, BookOpen, Shield, Music, Download } from 'lucide-react';
 import { KeyActionStep } from './KeyActionItem';
 import { Resource } from './ResourceCard';
 
+// Create icon references instead of JSX elements
+// We'll render these components in the respective components that use the data
 export const mediaKeyActionSteps: KeyActionStep[] = [
   {
     id: 'api-request',
     title: 'Make Your First API Request',
     description: 'Start integrating ElevenLabs into your applications and workflows.',
-    icon: <Code className="h-8 w-8 text-primary" />,
+    icon: Code,
     steps: [
       'Generate your API key in your account settings',
       'Install the API client library for your programming language',
@@ -21,7 +24,7 @@ export const mediaKeyActionSteps: KeyActionStep[] = [
     id: 'add-voice',
     title: 'Add a Voice to Your Library',
     description: 'Choose from our diverse catalog of pre-made voices for your productions.',
-    icon: <Download className="h-8 w-8 text-primary" />,
+    icon: Download,
     steps: [
       'Visit the Voice Library page',
       'Browse the available voices by category, language, or style',
@@ -35,7 +38,7 @@ export const mediaKeyActionSteps: KeyActionStep[] = [
     id: 'create-clone',
     title: 'Create Your First Voice Clone',
     description: 'Clone a voice for consistent branding or character development.',
-    icon: <Globe className="h-8 w-8 text-primary" />,
+    icon: Globe,
     steps: [
       'Go to the Voice Cloning page',
       'Click "Add Voice" to start the cloning process',
@@ -50,7 +53,7 @@ export const mediaKeyActionSteps: KeyActionStep[] = [
     id: 'sound-effects',
     title: 'Generate AI Sound Effects',
     description: 'Create custom sound effects to enhance your media productions.',
-    icon: <Music className="h-8 w-8 text-primary" />,
+    icon: Music,
     steps: [
       'Navigate to the Sound Effects page',
       'Describe the sound effect you want to generate',
@@ -64,7 +67,7 @@ export const mediaKeyActionSteps: KeyActionStep[] = [
     id: 'generate-tts',
     title: 'Generate Your First TTS Audio',
     description: 'Create your first AI-generated voice clip in just a few minutes.',
-    icon: <MicVocal className="h-8 w-8 text-primary" />,
+    icon: MicVocal,
     steps: [
       'Log in to your ElevenLabs account',
       'Navigate to the Speech Synthesis page',
@@ -82,7 +85,7 @@ export const conversationalAIKeyActionSteps: KeyActionStep[] = [
     id: 'api-request',
     title: 'Make Your First API Request',
     description: 'Start integrating ElevenLabs into your conversational AI applications.',
-    icon: <Code className="h-8 w-8 text-primary" />,
+    icon: Code,
     steps: [
       'Generate your API key in your account settings',
       'Install the API client library for your programming language',
@@ -96,7 +99,7 @@ export const conversationalAIKeyActionSteps: KeyActionStep[] = [
     id: 'voice-selection',
     title: 'Select the Right AI Voice',
     description: 'Choose the perfect voice for your conversational assistant or call center application.',
-    icon: <MicVocal className="h-8 w-8 text-primary" />,
+    icon: MicVocal,
     steps: [
       'Visit the Voice Library page',
       'Listen to different voice samples',
@@ -110,7 +113,7 @@ export const conversationalAIKeyActionSteps: KeyActionStep[] = [
     id: 'conversation-design',
     title: 'Design Your Conversation Flows',
     description: 'Create natural, engaging conversation flows for your AI assistant.',
-    icon: <MessageCircle className="h-8 w-8 text-primary" />,
+    icon: MessageCircle,
     steps: [
       'Map out common user intents and questions',
       'Design conversation branches and responses',
@@ -124,7 +127,7 @@ export const conversationalAIKeyActionSteps: KeyActionStep[] = [
     id: 'call-center-integration',
     title: 'Set Up Call Center Integration',
     description: 'Integrate ElevenLabs voice technology with your existing call center infrastructure.',
-    icon: <Phone className="h-8 w-8 text-primary" />,
+    icon: Phone,
     steps: [
       'Identify integration points in your current system',
       'Configure API webhooks and endpoints',
@@ -138,7 +141,7 @@ export const conversationalAIKeyActionSteps: KeyActionStep[] = [
     id: 'multilingual-support',
     title: 'Configure Multilingual Support',
     description: 'Expand your conversational AI to support multiple languages.',
-    icon: <Globe className="h-8 w-8 text-primary" />,
+    icon: Globe,
     steps: [
       'Select multilingual voice models',
       'Configure language detection',
@@ -152,7 +155,7 @@ export const conversationalAIKeyActionSteps: KeyActionStep[] = [
     id: 'generate-tts',
     title: 'Test Real-Time Voice Responses',
     description: 'Configure and test real-time voice synthesis for conversational applications.',
-    icon: <Headset className="h-8 w-8 text-primary" />,
+    icon: Headset,
     steps: [
       'Set up low-latency audio streaming',
       'Configure voice parameters for real-time use',
@@ -168,37 +171,37 @@ export const mediaResources: Resource[] = [
   {
     title: 'Product Guide',
     description: 'Comprehensive guide for implementing ElevenLabs in media production workflows.',
-    icon: <Film className="h-6 w-6 text-primary" />,
+    icon: Film,
     link: 'https://elevenlabs.io/docs/guides/media'
   },
   {
     title: 'Voice Cloning Best Practices',
     description: 'Learn techniques for getting the best results with voice cloning technology.',
-    icon: <MicVocal className="h-6 w-6 text-primary" />,
+    icon: MicVocal,
     link: 'https://elevenlabs.io/docs/product-guides/voices/voice-cloning'
   },
   {
     title: 'API Integration for Media Applications',
     description: 'Technical documentation for integrating with the ElevenLabs API.',
-    icon: <BookOpen className="h-6 w-6 text-primary" />,
+    icon: BookOpen,
     link: 'https://elevenlabs.io/docs/api-reference/overview'
   },
   {
     title: 'Security & Compliance Guide',
     description: 'Information about our security features and compliance certifications.',
-    icon: <Shield className="h-6 w-6 text-primary" />,
+    icon: Shield,
     link: 'https://elevenlabs.io/docs/guides/security'
   },
   {
     title: 'Customer Story: Bertelsmann',
     description: 'Learn how Bertelsmann is using ElevenLabs to transform their media business.',
-    icon: <BookOpen className="h-6 w-6 text-primary" />,
+    icon: BookOpen,
     link: 'https://elevenlabs.io/blog/bertelsmann'
   },
   {
     title: 'Customer Story: Star Sports',
     description: 'See how Star Sports leverages AI voice technology for sports broadcasting.',
-    icon: <Film className="h-6 w-6 text-primary" />,
+    icon: Film,
     link: 'https://elevenlabs.io/blog/starsports'
   }
 ];
@@ -207,37 +210,37 @@ export const conversationalAIResources: Resource[] = [
   {
     title: 'Conversational AI Implementation Guide',
     description: 'Comprehensive guide for implementing voice-based conversational AI systems.',
-    icon: <MessageCircle className="h-6 w-6 text-primary" />,
+    icon: MessageCircle,
     link: 'https://elevenlabs.io/docs/guides/conversational-ai'
   },
   {
     title: 'Call Center Automation Best Practices',
     description: 'Learn techniques for effective call center automation with AI voice technology.',
-    icon: <Phone className="h-6 w-6 text-primary" />,
+    icon: Phone,
     link: 'https://elevenlabs.io/docs/call-center-automation'
   },
   {
     title: 'Voice Design for Customer Service',
     description: 'Guidelines for creating natural and helpful voice interactions for customer service.',
-    icon: <Headset className="h-6 w-6 text-primary" />,
+    icon: Headset,
     link: 'https://elevenlabs.io/docs/guides/voice-design'
   },
   {
     title: 'API Integration for Real-Time Voice Applications',
     description: 'Technical documentation for integrating with the ElevenLabs API for real-time use.',
-    icon: <Code className="h-6 w-6 text-primary" />,
+    icon: Code,
     link: 'https://elevenlabs.io/docs/api-reference/overview'
   },
   {
     title: 'Security & Compliance for Voice Assistants',
     description: 'Information about security features and compliance for handling customer conversations.',
-    icon: <Shield className="h-6 w-6 text-primary" />,
+    icon: Shield,
     link: 'https://elevenlabs.io/docs/guides/security'
   },
   {
     title: 'Customer Story: ABC Financial',
     description: 'Learn how ABC Financial transformed their customer service with AI voice technology.',
-    icon: <BookOpen className="h-6 w-6 text-primary" />,
+    icon: BookOpen,
     link: 'https://elevenlabs.io/blog/abc-financial'
   }
 ];

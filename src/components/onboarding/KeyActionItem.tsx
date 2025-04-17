@@ -9,14 +9,14 @@ import {
   CollapsibleTrigger 
 } from '@/components/ui/collapsible';
 import { CardContent } from '@/components/ui/card';
-import { Check, ChevronDown, ChevronRight } from 'lucide-react';
+import { Check, ChevronDown, ChevronRight, LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export interface KeyActionStep {
   id: string;
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: LucideIcon;
   steps: string[];
   link: string;
 }
@@ -29,6 +29,7 @@ interface KeyActionItemProps {
 
 const KeyActionItem = ({ step, isCompleted, onToggle }: KeyActionItemProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const Icon = step.icon;
   
   return (
     <Card className={cn(
@@ -37,7 +38,9 @@ const KeyActionItem = ({ step, isCompleted, onToggle }: KeyActionItemProps) => {
     )}>
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <div className="flex items-start p-4">
-          <div className="mr-4 bg-primary/10 p-3 rounded-full">{step.icon}</div>
+          <div className="mr-4 bg-primary/10 p-3 rounded-full">
+            <Icon className="h-8 w-8 text-primary" />
+          </div>
           <div className="flex-1">
             <div className="flex items-center gap-3">
               <Checkbox 
