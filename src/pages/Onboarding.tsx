@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 import CelebrationPopup from '@/components/CelebrationPopup';
 import { useToast } from '@/hooks/use-toast';
+import ModelsDialog from '@/components/ModelsDialog';
 
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
@@ -513,6 +514,10 @@ const Onboarding = () => {
               <span>Getting Started</span>
               <span>Mastering ElevenLabs</span>
             </div>
+          </div>
+          
+          <div className="mb-6 text-center">
+            <ModelsDialog />
           </div>
           
           <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
