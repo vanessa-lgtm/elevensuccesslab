@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -13,6 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import ModelsDialog from '@/components/ModelsDialog';
 import KeyActionsSection from '@/components/onboarding/KeyActionsSection';
 import ResourcesSection from '@/components/onboarding/ResourcesSection';
+import { mediaKeyActionSteps, conversationalAIKeyActionSteps } from '@/components/onboarding/constants';
 
 const mediaIndustries = [
   'localization', 'broadcasting', 'streaming', 'film', 
