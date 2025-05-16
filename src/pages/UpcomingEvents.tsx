@@ -10,66 +10,48 @@ const UpcomingEvents = () => {
   const events = [
     {
       id: 1,
-      dates: 'April 6-9',
-      title: 'NAB Show',
-      description: 'Join us in Las Vegas to explore AI Audio applications in Media & Entertainment.',
-      location: 'Las Vegas',
-      ctaText: 'Register here',
-      ctaLink: 'https://nabshow.com/2024/elevenlabs/'
+      dates: 'May 14',
+      title: 'GCP Benelux',
+      description: 'Learn how to scale your generative AI stack with ElevenLabs on Google Cloud.',
+      location: 'Benelux',
+      ctaText: 'Meet us here',
+      ctaLink: 'https://r.contact.elevenlabs.io/mk/cl/f/sh/28xHLtxYQ52kJ9bDSob5PkBuK2Rm7DCbpu/d3NQuFiVd_jT'
     },
     {
       id: 2,
-      dates: 'April 9',
-      title: 'Dublin Event',
-      description: 'Connect with the Irish AI community and participate in an Agentic AI workshop.',
-      location: 'Dublin',
-      ctaText: 'RSVP here',
-      ctaLink: 'https://lu.ma/mt7sshl6?utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email&utm_source=brevo'
+      dates: 'May 14',
+      title: 'AI Developer Meetup Tokyo',
+      description: 'Meet the local AI builder community with ElevenLabs, Cloudflare, and Supabase.',
+      location: 'Tokyo',
+      ctaText: 'Join here',
+      ctaLink: 'https://r.contact.elevenlabs.io/mk/cl/f/sh/28xHLtxYQ53GTkGMELnhwDKUkwjdhA2hGw/rOW9kpub3lLX'
     },
     {
       id: 3,
-      dates: 'April 9-11',
-      title: 'Google Cloud Next',
-      description: 'Learn how to build with ElevenLabs on Google Cloud.',
-      location: 'Online',
-      ctaText: 'Sign up here',
-      ctaLink: 'https://cloud.withgoogle.com/next'
+      dates: 'May 15',
+      title: 'CEE Impact Conference',
+      description: 'Discuss emerging AI trends in Central and Eastern Europe.',
+      location: 'Central & Eastern Europe',
+      ctaText: 'Meet us here',
+      ctaLink: 'https://impactcee.com/?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email'
     },
     {
       id: 4,
-      dates: 'April 17',
-      title: 'Documentation Agents Webinar',
-      description: 'Learn how to integrate Conversational AI into your documentation.',
-      location: 'Online',
-      ctaText: 'Join here',
-      ctaLink: 'https://app.livestorm.co/elevenlabs/elevenlabs-launch-an-ai-voice-agent-on-your-support-docs?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email'
+      dates: 'May 29',
+      title: 'Dublin Tech Summit',
+      description: 'See how ElevenLabs is powering voice-first applications in enterprise and media.',
+      location: 'Dublin',
+      ctaText: 'Event site here',
+      ctaLink: 'https://dublintechsummit.tech/?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email'
     },
     {
       id: 5,
-      dates: 'April 24',
-      title: 'Artist and the Machine - NYC',
-      description: 'Join us at the AI & Creativity Summit to see tech demos from Gen AI artists.',
-      location: 'New York City',
-      ctaText: 'Get tickets here',
-      ctaLink: 'https://www.theartist.ai/'
-    },
-    {
-      id: 6,
-      dates: 'April 25',
-      title: 'Customer Support Agents Webinar',
-      description: 'Learn how to create effective customer support agents with AI.',
-      location: 'Online',
-      ctaText: 'Register here',
-      ctaLink: 'https://app.livestorm.co/elevenlabs/how-to-build-your-own-support-agent-elevenlabs-convai-series?utm_source=brevo&utm_campaign=March%20Monthly%20Product%20Updates%20Newsletter%20-%20Tech%20Enterprise&utm_medium=email'
-    },
-    {
-      id: 7,
-      dates: 'April 25',
-      title: 'Getting Started with ElevenLabs: Onboarding Webinar',
-      description: 'Learn the basics of getting started with ElevenLabs.',
-      location: 'Online',
-      ctaText: 'Register here',
-      ctaLink: 'https://app.livestorm.co/elevenlabs/getting-started-with-elevenlabs'
+      dates: 'June 9-13',
+      title: 'London Tech Week',
+      description: 'The GTM and CS teams will be at London Tech Week. See how ElevenLabs is powering voice-first applications in enterprise and media.',
+      location: 'London',
+      ctaText: 'Event site here',
+      ctaLink: 'https://londontechweek.com/'
     }
   ];
 
