@@ -11,18 +11,10 @@ import {
 import { CardContent } from '@/components/ui/card';
 import { Check, ChevronDown, ChevronRight, LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-export interface KeyActionStep {
-  id: string;
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  steps: string[];
-  link: string;
-}
+import { KeyActionStepType } from './constants';
 
 interface KeyActionItemProps {
-  step: KeyActionStep;
+  step: KeyActionStepType;
   isCompleted: boolean;
   onToggle: (id: string) => void;
 }

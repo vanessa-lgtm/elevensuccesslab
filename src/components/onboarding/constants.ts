@@ -1,11 +1,24 @@
 
 import { Code, MicVocal, MessageCircle, Phone, Globe, Headset, Film, BookOpen, Shield, Music, Download } from 'lucide-react';
-import { KeyActionStep } from './KeyActionItem';
-import { Resource } from './ResourceCard';
+import type { LucideIcon } from 'lucide-react';
 
-// Create icon references instead of JSX elements
-// We'll render these components in the respective components that use the data
-export const mediaKeyActionSteps: KeyActionStep[] = [
+export interface KeyActionStepType {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  steps: string[];
+  link: string;
+}
+
+export interface ResourceType {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  link: string;
+}
+
+export const mediaKeyActionSteps: KeyActionStepType[] = [
   {
     id: 'api-request',
     title: 'Make Your First API Request',
@@ -80,7 +93,7 @@ export const mediaKeyActionSteps: KeyActionStep[] = [
   }
 ];
 
-export const conversationalAIKeyActionSteps: KeyActionStep[] = [
+export const conversationalAIKeyActionSteps: KeyActionStepType[] = [
   {
     id: 'api-request',
     title: 'Make Your First API Request',
@@ -167,7 +180,7 @@ export const conversationalAIKeyActionSteps: KeyActionStep[] = [
   }
 ];
 
-export const mediaResources: Resource[] = [
+export const mediaResources: ResourceType[] = [
   {
     title: 'Product Guide',
     description: 'Comprehensive guide for implementing ElevenLabs in media production workflows.',
@@ -206,7 +219,7 @@ export const mediaResources: Resource[] = [
   }
 ];
 
-export const conversationalAIResources: Resource[] = [
+export const conversationalAIResources: ResourceType[] = [
   {
     title: 'Conversational AI Implementation Guide',
     description: 'Comprehensive guide for implementing voice-based conversational AI systems.',

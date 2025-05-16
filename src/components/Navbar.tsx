@@ -44,8 +44,12 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center">
-          <Link to="/" className="text-primary font-display font-bold text-2xl">
-            SuccessLab
+          <Link to="/" className="text-primary font-display font-bold">
+            <img 
+              src="/lovable-uploads/b0cec8f7-a12d-4769-80ff-963e4efb119c.png" 
+              alt="SuccessLab" 
+              className="h-8"
+            />
           </Link>
         </div>
 

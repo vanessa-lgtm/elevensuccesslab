@@ -3,16 +3,10 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { LucideIcon } from 'lucide-react';
-
-export interface Resource {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  link: string;
-}
+import { ResourceType } from './constants';
 
 interface ResourceCardProps {
-  resource: Resource;
+  resource: ResourceType;
 }
 
 const ResourceCard = ({ resource }: ResourceCardProps) => {
